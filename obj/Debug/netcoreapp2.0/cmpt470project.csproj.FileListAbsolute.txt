@@ -1,0 +1,10 @@
+/home/ubuntu/workspace/c470/cmpt470project/bin/Debug/netcoreapp2.0/cmpt470project.deps.json
+/home/ubuntu/workspace/c470/cmpt470project/bin/Debug/netcoreapp2.0/cmpt470project.runtimeconfig.json
+/home/ubuntu/workspace/c470/cmpt470project/bin/Debug/netcoreapp2.0/cmpt470project.runtimeconfig.dev.json
+/home/ubuntu/workspace/c470/cmpt470project/bin/Debug/netcoreapp2.0/cmpt470project.dll
+/home/ubuntu/workspace/c470/cmpt470project/bin/Debug/netcoreapp2.0/cmpt470project.pdb
+/home/ubuntu/workspace/c470/cmpt470project/obj/Debug/netcoreapp2.0/cmpt470project.csproj.CoreCompileInputs.cache
+/home/ubuntu/workspace/c470/cmpt470project/obj/Debug/netcoreapp2.0/cmpt470project.AssemblyInfoInputs.cache
+/home/ubuntu/workspace/c470/cmpt470project/obj/Debug/netcoreapp2.0/cmpt470project.AssemblyInfo.cs
+/home/ubuntu/workspace/c470/cmpt470project/obj/Debug/netcoreapp2.0/cmpt470project.dll
+/home/ubuntu/workspace/c470/cmpt470project/obj/Debug/netcoreapp2.0/cmpt470project.pdb
