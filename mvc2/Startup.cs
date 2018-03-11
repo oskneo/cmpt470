@@ -39,6 +39,16 @@ namespace mvc2
             services.AddMvc();
             
         }
+        
+        
+        private void createrole(){   
+            //ApplicationDbContext context = new ApplicationDbContext();   
+   
+            // var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));   
+            //var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));   
+   
+        } 
+        
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
@@ -56,6 +66,9 @@ namespace mvc2
             app.UseStaticFiles();
 
             app.UseAuthentication();
+            
+            //createrole();
+            
 
             app.UseMvc(routes =>
             {
