@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Globalization;
+using System.Web;
 
 namespace mvc2.Models.AccountViewModels
 {
     public class RegisterViewModel
     {
+        
         [Required]
         [EmailAddress]
         [Display(Name = "Email")]
@@ -27,5 +30,9 @@ namespace mvc2.Models.AccountViewModels
         [Display(Name = "Confirm password")]
         [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+        
+        // [Required]
+        [Display(Name = "The key to apply admin")]   
+        public string RoleKey { get; set; } 
     }
 }

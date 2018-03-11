@@ -24,10 +24,12 @@ namespace mvc2.Controllers
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IEmailSender _emailSender;
         private readonly ILogger _logger;
+        private readonly RoleManager<IdentityRole> _roleManager;
 
         public AccountController(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
+            RoleManager<IdentityRole> roleManager,
             IEmailSender emailSender,
             ILogger<AccountController> logger)
         {
@@ -35,6 +37,10 @@ namespace mvc2.Controllers
             _signInManager = signInManager;
             _emailSender = emailSender;
             _logger = logger;
+            _roleManager = roleManager;
+            
+            
+            
         }
 
         [TempData]
@@ -203,12 +209,15 @@ namespace mvc2.Controllers
         {
             return View();
         }
+        
+        
 
         [HttpGet]
         [AllowAnonymous]
         public IActionResult Register(string returnUrl = null)
         {
             ViewData["ReturnUrl"] = returnUrl;
+            
             return View();
         }
 
@@ -222,6 +231,16 @@ namespace mvc2.Controllers
             {
                 var user = new ApplicationUser { UserName = model.UserName, Email = model.Email };
                 var result = await _userManager.CreateAsync(user, model.Password);
+                
+                if ( !await _roleManager.RoleExistsAsync("Admin"))
+                {
+                    await _roleManager.CreateAsync(new IdentityRole("Admin"));
+                }
+                if ( !await _roleManager.RoleExistsAsync("Member"))
+                {
+                    await _roleManager.CreateAsync(new IdentityRole("Member"));
+                }
+                
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");
@@ -231,6 +250,16 @@ namespace mvc2.Controllers
                     await _emailSender.SendEmailConfirmationAsync(model.Email, callbackUrl);
 
                     await _signInManager.SignInAsync(user, isPersistent: false);
+                    
+                    if(model.RoleKey=="000000"){
+                        await _userManager.AddToRoleAsync(user, "Admin");  
+                    }
+                    else{
+                        await _userManager.AddToRoleAsync(user, "Member"); 
+                    }
+                    
+                    
+                    
                     _logger.LogInformation("User created a new account with password.");
                     return RedirectToLocal(returnUrl);
                 }

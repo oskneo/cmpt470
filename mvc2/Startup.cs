@@ -38,10 +38,26 @@ namespace mvc2
 
             services.AddMvc();
             
+            // var serviceProvider = services.BuildServiceProvider();
+            // var rolemanager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+            // if ( !rolemanager.RoleExists("Admin"))
+            // {
+            // //   rolemanager.Create(new IdentityRole("Admin"));
+            //     var role = new Microsoft.AspNet.Identity.EntityFramework.IdentityRole();   
+            //     role.Name = "Admin";   
+            //     rolemanager.Create(role);   
+   
+            // }
+            // if ( !await rolemanager.RoleExistsAsync("Member"))
+            // {
+            //   await rolemanager.CreateAsync(new IdentityRole("Member"));
+            // }
+            
         }
         
         
-        private void createrole(){   
+        private void createrole(){  
+            
             //ApplicationDbContext context = new ApplicationDbContext();   
    
             // var roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context));   
