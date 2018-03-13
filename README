@@ -14,13 +14,38 @@ Asp.net Web Page
 Asp.net MVC5(Model, View, Controller) Framework:
 ·        Account System (Implemented by the framework)
 ·        Improved account system
-·        Custom role for account and restricted page for specific role.
+·        Custom role for account and admin page for admin role.
+·        By entering the key of admin role "000000", user can register as an admin. 
 ·        Razor syntax(view)
 ·        The communication between server and client(controller)
 ·        Database initiate and migration(model)
 ·        The page to add data and show data
 Asp.net MVC with React
 Asp.net Signal IR
+
+Deplyment:
+Our deployment only can show one type of model at the same time.
+And it is not a hot workstation.
+
+It is deployed to c9.io.
+Username: osk666@gmail.com
+Password: Cmpt470team16
+Workstation: blank
+
+Steps to deploy a specific framework:
+
+Asp.net Web Page:
+1.Go to /workspace/c470/cmpt470project/RazorWebpages
+2.Enter command "dotnet run"
+MVC5:
+1.Go to /workspace/c470/cmpt470project/mvc2
+2.Enter command "dotnet run"
+Asp.net MVC with React:
+1.Go to /workspace/c470/cmpt470project/mvc5
+2.Enter command "dotnet run"
+Asp.net Signal IR:
+1.Go to /workspace/c470/cmpt470project/mvc_SIGNALR_DEMO
+2.Enter command "dotnet run"
  
  
 PS: Our deployment only can show one type of model at the same time.
