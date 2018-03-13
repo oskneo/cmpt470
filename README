@@ -34,6 +34,10 @@ Workstation: blank
 
 Steps to deploy a specific framework:
 
+Start service:
+1.Enter command "sudo service nginx restart"
+2.Enter command "sudo service mysql restart"
+
 Asp.net Web Page:
 1.Go to /workspace/c470/cmpt470project/RazorWebpages
 2.Enter command "dotnet run"
