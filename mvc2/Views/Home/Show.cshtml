@@ -1,0 +1,30 @@
+@using System.Collections.Generic;
+@model List<mvc2.Models.HomeViewModels.DataModel>
+
+<div>
+    <table border="3">
+        <tr>
+            <td width="80px" height="50px">Id</td>
+            <td width="80px" height="50px">FirstName</td>
+            <td width="80px" height="50px">LastName</td>
+            <td width="80px" height="50px">Age</td>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LastName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Age)
+                </td>
+            </tr>
+        }
+    </table>
+</div>

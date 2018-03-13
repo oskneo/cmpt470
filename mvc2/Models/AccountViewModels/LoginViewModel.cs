@@ -8,9 +8,13 @@ namespace mvc2.Models.AccountViewModels
 {
     public class LoginViewModel
     {
+        // [Required]
+        // [EmailAddress]
+        // public string Email { get; set; }
+        
         [Required]
-        [EmailAddress]
-        public string Email { get; set; }
+        [Display(Name = "UserName")]
+        public string UserName { get; set; }
 
         [Required]
         [DataType(DataType.Password)]

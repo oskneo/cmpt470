@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using mvc2.Models;
+using mvc2.Models.HomeViewModels;
 
 namespace mvc2.Data
 {
@@ -14,6 +15,8 @@ namespace mvc2.Data
             : base(options)
         {
         }
+        
+        public DbSet<DataModel> emp{ get; set;}
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

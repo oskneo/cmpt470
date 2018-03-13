@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using mvc2.Models;
+using mvc2.Models.AdminViewModels;
 using mvc2.Services;
 
 namespace mvc2.Controllers
@@ -57,8 +58,17 @@ namespace mvc2.Controllers
                 ViewData["Message"] = "You are an Admin.";
             }
             else{
+                // ViewData["Message"] = "You are a user.";
                 return RedirectToAction("Index","Home");
             }
+            
+            
+            // AdminViewModel na = new AdminViewModel
+            // {
+            //     Email = "aaa@sfu.ca",
+            //     UserName = "aaa"
+            // };
+            ViewData["dataTransfer"]="aaa";
             
             
             //ApplicationUser user = System.Web.HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>().FindById(System.Web.HttpContext.Current.User.Identity.GetUserId());
