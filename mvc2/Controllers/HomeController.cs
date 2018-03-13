@@ -54,7 +54,7 @@ namespace mvc2.Controllers
                     Age = model.Age
                 });
                 db.SaveChanges();
-                return RedirectToAction("Index","Home");
+                return RedirectToAction("Add","Home");
             }
             
             return View(model);

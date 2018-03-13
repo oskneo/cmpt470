@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
@@ -68,7 +68,7 @@ namespace mvc2.Controllers
             //     Email = "aaa@sfu.ca",
             //     UserName = "aaa"
             // };
-            ViewData["dataTransfer"]="aaa";
+            ViewData["dataTransfer"]="It is the page of Admin.";
             
             
             //ApplicationUser user = System.Web.HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>().FindById(System.Web.HttpContext.Current.User.Identity.GetUserId());
