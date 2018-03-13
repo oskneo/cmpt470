@@ -1,0 +1,27 @@
+CMPT 470
+Team16
+Demonstration of ASP.net
+Readme
+Member: Francesco Zhang, Daniel Peng, Agassi
+
+Introduction:
+	
+	ASP.NET is an open source web development framework designed by Microsoft in 1992 to create dynamic web pages.  The version we are using is Asp.net Core 2.14. It can be used to implement with many frontend libraries and different types of database. We will not demonstrate all of them. Here is a list of development models and functions we will demonstrate.
+
+Models and Functions:
+
+Asp.net Web Page
+Asp.net MVC5(Model, View, Controller) Framework:
+·        Account System (Implemented by the framework)
+·        Improved account system
+·        Custom role for account and restricted page for specific role.
+·        Razor syntax(view)
+·        The communication between server and client(controller)
+·        Database initiate and migration(model)
+·        The page to add data and show data
+Asp.net MVC with React
+Asp.net Signal IR
+ 
+ 
+PS: Our deployment only can show one type of framework at the same time.
+
