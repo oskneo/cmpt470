@@ -13378,11 +13378,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/ubuntu/workspace/c470/cmpt470project/mvc2/mvc2.csproj",
+      "projectUniqueName": "/home/ubuntu/workspace/c470/cmpt470project/mvc_SIGNALR_DEMO/mvc2.csproj",
       "projectName": "mvc2",
-      "projectPath": "/home/ubuntu/workspace/c470/cmpt470project/mvc2/mvc2.csproj",
+      "projectPath": "/home/ubuntu/workspace/c470/cmpt470project/mvc_SIGNALR_DEMO/mvc2.csproj",
       "packagesPath": "/home/ubuntu/.nuget/packages/",
-      "outputPath": "/home/ubuntu/workspace/c470/cmpt470project/mvc2/obj/",
+      "outputPath": "/home/ubuntu/workspace/c470/cmpt470project/mvc_SIGNALR_DEMO/obj/",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "/usr/share/dotnet/sdk/NuGetFallbackFolder"
