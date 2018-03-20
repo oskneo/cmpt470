@@ -27,7 +27,7 @@ namespace FinalProject
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddSignalR();
+            
             
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseMySql(Configuration.GetConnectionString("MySQLConnection")));
@@ -40,23 +40,38 @@ namespace FinalProject
             services.AddTransient<IEmailSender, EmailSender>();
 
             services.AddMvc();
+
+            services.AddSignalR();
             
             
         }
         
         
         
-        private async void createrole(IApplicationBuilder app){
+        private async Task createrole(IApplicationBuilder app){
             using (var serviceScope = app.ApplicationServices.CreateScope())
             {
-                var _rolemanager = serviceScope.ServiceProvider.GetService<RoleManager<IdentityRole>>();
+                var services = serviceScope.ServiceProvider;
+                var db = services.GetService<ApplicationDbContext>();
+                if(db.Database.GetPendingMigrations().Any()){
+                    await db.Database.MigrateAsync();
+                    var _rolemanager = serviceScope.ServiceProvider.GetService<RoleManager<IdentityRole>>();
                 
-                if(!await _rolemanager.RoleExistsAsync("Admin")){
-                    await _rolemanager.CreateAsync(new IdentityRole("Admin"));
+                    if(!await _rolemanager.RoleExistsAsync("Admin")){
+                        await _rolemanager.CreateAsync(new IdentityRole("Admin"));
+                    }
+                    if(!await _rolemanager.RoleExistsAsync("Student")){
+                        await _rolemanager.CreateAsync(new IdentityRole("Student"));
+                    }
                 }
-                if(!await _rolemanager.RoleExistsAsync("Student")){
-                    await _rolemanager.CreateAsync(new IdentityRole("Student"));
-                }
+                // var _rolemanager = serviceScope.ServiceProvider.GetService<RoleManager<IdentityRole>>();
+                
+                // if(!await _rolemanager.RoleExistsAsync("Admin")){
+                //     await _rolemanager.CreateAsync(new IdentityRole("Admin"));
+                // }
+                // if(!await _rolemanager.RoleExistsAsync("Student")){
+                //     await _rolemanager.CreateAsync(new IdentityRole("Student"));
+                // }
             }
             
             
@@ -80,12 +95,13 @@ namespace FinalProject
             app.UseStaticFiles();
 
             app.UseAuthentication();
+            app.UseWebSockets();
             
             app.UseSignalR(routes =>
             {
                 routes.MapHub<LiveHelpHub>("livehelphub");
             });
-            createrole(app);
+            createrole(app).Wait();
 
             app.UseMvc(routes =>
             {

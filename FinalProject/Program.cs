@@ -14,7 +14,23 @@ namespace FinalProject
     {
         public static void Main(string[] args)
         {
-            BuildWebHost(args).Run();
+            var host = BuildWebHost(args);
+
+
+
+            // using (var scope = host.ApplicationServices.CreateScope())
+            // {
+                // var db = serviceScope.ServiceProvider.GetRequiredService<WebMarksDbContext>();
+                // var _rolemanager = serviceScope.ServiceProvider.GetService<RoleManager<IdentityRole>>();
+                
+                // if(!await _rolemanager.RoleExistsAsync("Admin")){
+                //     await _rolemanager.CreateAsync(new IdentityRole("Admin"));
+                // }
+                // if(!await _rolemanager.RoleExistsAsync("Student")){
+                //     await _rolemanager.CreateAsync(new IdentityRole("Student"));
+                // }
+            // }
+            host.Run();
         }
 
         public static IWebHost BuildWebHost(string[] args) =>

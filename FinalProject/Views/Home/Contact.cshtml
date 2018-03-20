@@ -24,7 +24,7 @@ Message: <input type="text" id="message" />
 <ul id="liveHelp"></ul>
 
 @section scripts {
-    <script src="~/js/signalr.js"></script>
+    <script src="~/js/signalr-client-1.0.0-alpha2-final.js"></script>
     <script>
         // var liveHelp = $.connection.LiveHelpHub;
         // liveHelp.client.showMessage = function (username, message) {
@@ -76,15 +76,29 @@ Message: <input type="text" id="message" />
         //   });
         
         
-    let connection = new signalR.HubConnection('/chat');
-
-    connection.on('send', data => {
-        console.log(data);
+    let transportType = signalR.TransportType.WebSockets;
+    let http = new signalR.HttpConnection(`http://${document.location.host}/livehelphub`, { transport: transportType });
+    let connection = new signalR.HubConnection(http);
+    connection.start();
+ 
+    connection.on('Send', (name, message) => {
+        appendLine(message, name);    
     });
-
-    connection.start()
-        .then(() => connection.invoke('send', 'Hello'));
-        
-        
+ 
+    document.getElementById('send').addEventListener('click', event => {
+        let message = document.getElementById('message').value;
+        let name = document.getElementById('username').value;
+        document.getElementById('message').value = '';
+        document.getElementById('username').value = '';
+ 
+        connection.invoke('Send', name, message);   
+        event.preventDefault();
+    });
+ 
+    function appendLine(line, name) {
+        let li = document.createElement('li');
+        li.innerText = name + ":" + line;
+        document.getElementById('liveHelp').appendChild(li);
+    };
     </script>
 }
