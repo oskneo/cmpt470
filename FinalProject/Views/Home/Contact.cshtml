@@ -77,7 +77,7 @@ Message: <input type="text" id="message" />
         
         
     let transportType = signalR.TransportType.WebSockets;
-    let http = new signalR.HttpConnection(`http://${document.location.host}/livehelphub`, { transport: transportType });
+    let http = new signalR.HttpConnection(`http://${document.location.host}/lhh/livehelphub`, { transport: transportType });
     let connection = new signalR.HubConnection(http);
     connection.start();
  

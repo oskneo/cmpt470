@@ -99,7 +99,7 @@ namespace FinalProject
             
             app.UseSignalR(routes =>
             {
-                routes.MapHub<LiveHelpHub>("livehelphub");
+                routes.MapHub<LiveHelpHub>("lhh/livehelphub");
             });
             createrole(app).Wait();
 
