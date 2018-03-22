@@ -1,27 +1,17 @@
-﻿@using Microsoft.AspNetCore.Identity
+@using Microsoft.AspNetCore.Identity
 @using FinalProject.Models
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
-
 @{
     ViewData["Title"] = "Contact";
 }
 <h2>@ViewData["Title"]</h2>
 <h3>@ViewData["Message"]</h3>
 
-<address>
-    One Microsoft Way<br />
-    Redmond, WA 98052-6399<br />
-    <abbr title="Phone">P:</abbr>
-    425.555.0100
-</address>
 
-<address>
-    <strong>Support:</strong> <a href="mailto:Support@example.com">Support@example.com</a><br />
-    <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
-</address>
 
 <div id="messageinput">
+<br>
 <h2>Live Help</h2>
 @if (SignInManager.IsSignedIn(User))
 {
@@ -33,64 +23,17 @@ else
 
 }
 Message: <input type="text" id="message" /> 
-</div>
+</div id="">
 <input type="button" id="send" value="Send" />
 <div id="instantmessage">
 <ul id="liveHelp"></ul>
 </div>
 
+<div id="MessageBox"></div>
 @section scripts {
     <script src="~/js/signalr-client-1.0.0-alpha2-final.js"></script>
     <script>
-        // var liveHelp = $.connection.LiveHelpHub;
-        // liveHelp.client.showMessage = function (username, message) {
-        //     $('#liveHelp').append('<li>' + username + ': ' + message + '</li>');
-        // };
-        
-        
-        // // var liveHelp = $.hubConnection();
-        // // var contosoChatHubProxy = liveHelp.createHubProxy('chat');
-        // // contosoChatHubProxy.on('addContosoChatMessageToPage', function(name, message) {
-        // //     console.log(name + ' ' + message);
-        // // });
-
-        // $.connection.hub.start().done(function () {
-        //     $('#send').click(function () {
-        //         liveHelp.server.sendMessage($('#username').val(), $('#message').val());
-        //         $('#message').val('');
-        //     });
-        // });
-        
-        
-        
-        
-        // var transport = signalR.TransportType.WebSockets;
-        // var connection = new signalR.HubConnection('/chat');
-        // var messageInput = document.getElementById('message');
-        // var name = document.getElementById('username');
-        // var button = document.getElementById("send");
-        // connection.on('broadcastMessage', (name, message) => {
-        //     var liElement = document.createElement('li');
-        //     liElement.innerHTML = '<strong>' + name + '</strong>:&nbsp;&nbsp;' + message;
-        //     document.getElementById('liveHelp').appendChild(liElement);
-        // });
-        
-        
-        // button.addEventListener("click", event => {
-        //     connection.invoke('send',  messageInput.value);
-        //     messageInput.value = '';
-        //     //messageInput.focus();
-        //     name.value = '';
-        //     //name.focus();
-        // });
-        // connection.start();
-        
-        // connection.start()
-        //   .then(() => {
-        //       connection.invoke('send', 'Hello', 'ok');
-        //       console.log("aaa");
-        //   });
-        
+    
         
     let transportType = signalR.TransportType.WebSockets;
     let http = new signalR.HttpConnection(`http://${document.location.host}/lhh/livehelphub`, { transport: transportType });
@@ -132,4 +75,7 @@ Message: <input type="text" id="message" />
         document.getElementById('layoutmessage').innerText="Message from " + name + ":" + line;
     };
     </script>
+}
+@section Styles {
+    <link href="@Url.Content("~/css/contact.css")" rel="stylesheet" type="text/css" />
 }

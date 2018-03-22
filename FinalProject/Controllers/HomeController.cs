@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -11,6 +11,21 @@ namespace FinalProject.Controllers
     public class HomeController : Controller
     {
         public IActionResult Index()
+        {
+            return View();
+        }
+        
+        public IActionResult Course()
+        {
+            return View();
+        }
+        
+        public IActionResult Event()
+        {
+            return View();
+        }
+        
+        public IActionResult Question()
         {
             return View();
         }
