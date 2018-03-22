@@ -57,6 +57,10 @@ Asp.net Signal IR:
 Steps for running the final project server:
 1.Go to /workspace/c470/cmpt470project/FinalProject
 2.Enter command "dotnet run"
+
+Steps for setting up database in your virtual machine:
+1. mysql -u root -p
+2. GRANT ALL PRIVILEGES ON *.* TO 'team16'@'localhost' IDENTIFIED BY 'password';
  
  Steps for setting up in your virtual machine:
 1. curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.gpg
