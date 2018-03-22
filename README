@@ -61,6 +61,8 @@ Steps for running the final project server:
 Steps for setting up database in your virtual machine:
 1. mysql -u root -p
 2. GRANT ALL PRIVILEGES ON *.* TO 'team16'@'localhost' IDENTIFIED BY 'password';
+3. quit
+4. sudo service mysql restart
  
  Steps for setting up in your virtual machine:
 1. curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.gpg
