@@ -1,0 +1,44 @@
+@using System.Collections.Generic;
+@model List<FinalProject.Models.CourseViewModels.CourseModel>
+<br>
+<br>
+<br>
+<div>
+    <table border="3">
+        <tr>
+            <td width="80px" height="50px">Year</td>
+            <td width="80px" height="50px">Semester</td>
+            <td width="80px" height="50px">Department</td>
+            <td width="80px" height="50px">CourseNumber</td>
+            <td width="80px" height="50px">Session</td>
+            <td width="80px" height="50px">Instructor</td>
+            <td width="80px" height="50px">Description</td>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Year)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Semester)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Department)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CourseNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Session)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Instructor)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+            </tr>
+        }
+    </table>
+</div>

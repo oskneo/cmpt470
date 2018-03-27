@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using FinalProject.Models;
+using FinalProject.Models.CourseViewModels;
 
 namespace FinalProject.Data
 {
@@ -14,6 +15,9 @@ namespace FinalProject.Data
             : base(options)
         {
         }
+
+        public DbSet<CourseModel> Courses { get; set; }
+        public DbSet<StudentCourse> StudentCourses { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

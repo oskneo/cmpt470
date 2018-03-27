@@ -11,5 +11,7 @@ namespace FinalProject.Models
     public class ApplicationUser : IdentityUser
     {
         public virtual StudentCourse StudentCourse { get; set; }
+        public string StudentId { get; set; }
     }
+    
 }

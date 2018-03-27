@@ -7,23 +7,31 @@ using System.Globalization;
 using System.Web;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
+using FinalProject.Models;
 
 namespace FinalProject.Models.CourseViewModels
 {
     public class StudentCourse
     {
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public uint StudentCourseId { get; set; }
+
         [ForeignKey("Courses")]
-        public uint CourseID { get; set; }
+        public uint CourseId { get; set; }
+
+        public virtual CourseModel Courses { get; set; }
         
-        [Key, ForeignKey("ApplicationUser")]
+        [ForeignKey("UserId")]
         public virtual ApplicationUser ApplicationUser { get; set; }
+
+        
         
     }
     
-    public class StudentCourseDBContext : DbContext
-    {
-        public DbSet<StudentCourse> StudentCourses { get; set; }
-    }
+    // public class StudentCourseDBContext : DbContext
+    // {
+        
+    // }
     
 }

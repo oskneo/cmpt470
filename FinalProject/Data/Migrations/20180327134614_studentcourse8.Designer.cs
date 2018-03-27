@@ -11,9 +11,10 @@ using System;
 namespace FinalProject.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180327134614_studentcourse8")]
+    partial class studentcourse8
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -52,8 +53,6 @@ namespace FinalProject.Data.Migrations
                     b.Property<bool>("PhoneNumberConfirmed");
 
                     b.Property<string>("SecurityStamp");
-
-                    b.Property<string>("StudentId");
 
                     b.Property<bool>("TwoFactorEnabled");
 
@@ -103,13 +102,13 @@ namespace FinalProject.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<uint>("CourseId");
+                    b.Property<uint>("CourseID");
 
                     b.Property<string>("UserId");
 
                     b.HasKey("StudentCourseId");
 
-                    b.HasIndex("CourseId");
+                    b.HasIndex("CourseID");
 
                     b.HasIndex("UserId")
                         .IsUnique();
@@ -228,7 +227,7 @@ namespace FinalProject.Data.Migrations
                 {
                     b.HasOne("FinalProject.Models.CourseViewModels.CourseModel", "Courses")
                         .WithMany()
-                        .HasForeignKey("CourseId")
+                        .HasForeignKey("CourseID")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("FinalProject.Models.ApplicationUser", "ApplicationUser")

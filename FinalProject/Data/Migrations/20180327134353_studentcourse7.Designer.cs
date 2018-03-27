@@ -11,9 +11,10 @@ using System;
 namespace FinalProject.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180327134353_studentcourse7")]
+    partial class studentcourse7
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -53,7 +54,7 @@ namespace FinalProject.Data.Migrations
 
                     b.Property<string>("SecurityStamp");
 
-                    b.Property<string>("StudentId");
+                    b.Property<uint?>("StudentCourseId");
 
                     b.Property<bool>("TwoFactorEnabled");
 
@@ -68,6 +69,8 @@ namespace FinalProject.Data.Migrations
                     b.HasIndex("NormalizedUserName")
                         .IsUnique()
                         .HasName("UserNameIndex");
+
+                    b.HasIndex("StudentCourseId");
 
                     b.ToTable("AspNetUsers");
                 });
@@ -103,16 +106,11 @@ namespace FinalProject.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<uint>("CourseId");
-
-                    b.Property<string>("UserId");
+                    b.Property<uint>("CourseID");
 
                     b.HasKey("StudentCourseId");
 
-                    b.HasIndex("CourseId");
-
-                    b.HasIndex("UserId")
-                        .IsUnique();
+                    b.HasIndex("CourseID");
 
                     b.ToTable("StudentCourses");
                 });
@@ -224,16 +222,19 @@ namespace FinalProject.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("FinalProject.Models.ApplicationUser", b =>
+                {
+                    b.HasOne("FinalProject.Models.CourseViewModels.StudentCourse", "StudentCourse")
+                        .WithMany()
+                        .HasForeignKey("StudentCourseId");
+                });
+
             modelBuilder.Entity("FinalProject.Models.CourseViewModels.StudentCourse", b =>
                 {
                     b.HasOne("FinalProject.Models.CourseViewModels.CourseModel", "Courses")
                         .WithMany()
-                        .HasForeignKey("CourseId")
+                        .HasForeignKey("CourseID")
                         .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("FinalProject.Models.ApplicationUser", "ApplicationUser")
-                        .WithOne("StudentCourse")
-                        .HasForeignKey("FinalProject.Models.CourseViewModels.StudentCourse", "UserId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
