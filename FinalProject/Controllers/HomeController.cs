@@ -30,7 +30,7 @@ namespace FinalProject.Controllers
             return View();
         }
 
-        public IActionResult About()
+        public IActionResult Files()
         {
             ViewData["Message"] = "Your application description page.";
 
@@ -48,5 +48,6 @@ namespace FinalProject.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+        
     }
 }

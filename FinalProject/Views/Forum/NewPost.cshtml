@@ -1,0 +1,18 @@
+<h2>@ViewData["Title"]</h2>
+<H4>@ViewData["Message"]</H4>
+
+<form action="" method="post">
+    <fieldset>
+        
+        <label for="Title">Title:</label><br>
+        <input type="text" name="Title"/><br>
+        
+        <label for="Message">Message:</label><br>
+        <textarea rows="4" cols="50" name="comment" form="usrform">Enter text here...</textarea>
+        <br>
+        
+        <input type="submit" />
+        <button><a asp-area="" asp-controller="Forum" asp-action="Index">Back</a></button>
+        
+    <fieldset>
+</form>
