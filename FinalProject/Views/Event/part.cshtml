@@ -1,12 +1,11 @@
 @using System.Collections.Generic;
-@model List<FinalProject.Models.CourseViewModels.CourseModel>
+@model List<FinalProject.Models.EventViewModels.EventModel>
 <br>
 <br>
 <br>
 <div>
     <table border="3">
         <tr>
-            <td width="80px" height="50px">Enroll</td>
             <td width="80px" height="50px">Year</td>
             <td width="80px" height="50px">Semester</td>
             <td width="80px" height="50px">Department</td>
@@ -18,15 +17,7 @@
         @foreach (var item in Model)
         {
             <tr>
-                <td>
-                    @Html.ActionLink("Add","Enroll", new { CourseId = item.CourseId },new {
-                        data_ajax="true",
-                        data_ajax_method="POST",
-                        data_ajax_mode="replace",
-                        data_ajax_update="Enrolled",
-                        @class="btn btn-danger"
-                    })
-                </td>
+                
                 <td>
                     @Html.DisplayFor(modelItem => item.Year)
                 </td>
@@ -52,9 +43,3 @@
         }
     </table>
 </div>
-<div>@ViewData["Message"]</div>
-<br>
-<br>
-<br>
-
-<div id="Enrolled"></div>

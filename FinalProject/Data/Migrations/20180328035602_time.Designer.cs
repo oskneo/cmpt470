@@ -11,9 +11,10 @@ using System;
 namespace FinalProject.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180328035602_time")]
+    partial class time
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -192,31 +193,6 @@ namespace FinalProject.Data.Migrations
                     b.ToTable("Files");
                 });
 
-            modelBuilder.Entity("FinalProject.Models.QuestionViewModels.AnswerModel", b =>
-                {
-                    b.Property<uint>("AnswerId")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<uint>("QId");
-
-                    b.Property<uint>("RefAId");
-
-                    b.Property<string>("Reply");
-
-                    b.Property<DateTime>("Time");
-
-                    b.Property<string>("UserId");
-
-                    b.HasKey("AnswerId");
-
-                    b.HasIndex("QId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Answers");
-                });
-
             modelBuilder.Entity("FinalProject.Models.QuestionViewModels.QuestionModel", b =>
                 {
                     b.Property<uint>("QId")
@@ -377,18 +353,6 @@ namespace FinalProject.Data.Migrations
 
             modelBuilder.Entity("FinalProject.Models.FileViewModels.FileModel", b =>
                 {
-                    b.HasOne("FinalProject.Models.ApplicationUser", "ApplicationUser")
-                        .WithMany()
-                        .HasForeignKey("UserId");
-                });
-
-            modelBuilder.Entity("FinalProject.Models.QuestionViewModels.AnswerModel", b =>
-                {
-                    b.HasOne("FinalProject.Models.QuestionViewModels.QuestionModel", "Questions")
-                        .WithMany()
-                        .HasForeignKey("QId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
                     b.HasOne("FinalProject.Models.ApplicationUser", "ApplicationUser")
                         .WithMany()
                         .HasForeignKey("UserId");

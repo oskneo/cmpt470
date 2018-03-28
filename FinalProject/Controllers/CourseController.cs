@@ -45,7 +45,8 @@ namespace FinalProject.Controllers
                     Session = model.Session
                 });
                 db.SaveChanges();
-                return RedirectToAction("AddCourse","Course");
+                ViewData["Message"]="Added!";
+                return View();
             }
             
             return View(model);
@@ -67,8 +68,7 @@ namespace FinalProject.Controllers
 
         private Task<ApplicationUser> GetCurrentUserAsync() => _userManager.GetUserAsync(HttpContext.User);
 
-        [HttpPost]
-        public async Task<IActionResult> EnrollCourse(CourseModel model, string returnUrl = null){
+        public async Task<IActionResult> Enroll(CourseModel model, string returnUrl = null){
 
             // var course = from crs in db.Courses where crs.CourseId == model.CourseId select crs;
             // CourseModel crs = course[0];
@@ -77,7 +77,7 @@ namespace FinalProject.Controllers
             var check=db.StudentCourses.SingleOrDefault(l=> l.CourseId==model.CourseId && l.ApplicationUser==us);
             if(check!=null){
                 ViewData["Message"]="Duplicate Enrollment!";
-                return View();
+                return RedirectToAction("EnrollCourse","Course");
             }
 
             

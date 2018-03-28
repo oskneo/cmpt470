@@ -22,6 +22,7 @@ namespace FinalProject.Data
         public DbSet<CourseModel> Courses { get; set; }
         public DbSet<StudentCourse> StudentCourses { get; set; }
         public DbSet<QuestionModel> Questions { get; set; }
+        public DbSet<AnswerModel> Answers { get; set; }
         public DbSet<EventModel> Events { get; set; }
         public DbSet<StudentEvent> StudentEvents { get; set; }
         public DbSet<FileModel> Files { get; set; }

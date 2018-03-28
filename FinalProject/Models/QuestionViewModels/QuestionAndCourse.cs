@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -12,19 +12,24 @@ using FinalProject.Models.CourseViewModels;
 
 namespace FinalProject.Models.QuestionViewModels
 {
-    public class AnswerModel
+    public class QuestionAndCourse
     {
+        
+
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public uint AnswerId { get; set; }
+        public uint QId { get; set; }
         
-        [Display(Name = "Reply")]
-        public string Reply { get; set; }
+        [Required]
+        [Display(Name = "Title")]
+        public string Title { get; set; }
+        
+        [Required]
+        [Display(Name = "Description")]
+        public string Description { get; set; }
         
         
-        // [DataType(DataType.Date)]
-        // [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}")]
-        // public DateTime Date { get; set; }
+        
         
         
         [DataType(DataType.Time)]
@@ -32,23 +37,28 @@ namespace FinalProject.Models.QuestionViewModels
         public DateTime Time { get; set; }
         
 
-        
         [ForeignKey("UserId")]
         public virtual ApplicationUser ApplicationUser { get; set; }
 
+        [Required]
+        [Display(Name = "Courses")]
+        [ForeignKey("Courses")]
+        public uint CourseId { get; set; }
 
-        [ForeignKey("QId")]
-        public uint QId { get; set; }
+        public virtual CourseModel Courses { get; set; }
 
-        public virtual QuestionModel Questions { get; set; }
+        public List<FinalProject.Models.CourseViewModels.CourseModel> CourseList { get; set; }
 
-        public uint RefAId { get; set; }
-
-        public AnswerModel(){
-            Reply="";
+        public QuestionAndCourse(){
+            Title="";
+            Description="";
         }
         
     }
     
     
 }
+
+
+
+

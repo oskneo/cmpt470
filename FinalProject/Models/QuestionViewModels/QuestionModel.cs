@@ -27,9 +27,6 @@ namespace FinalProject.Models.QuestionViewModels
         public string Description { get; set; }
         
         
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}")]
-        public DateTime Date { get; set; }
         
         
         
@@ -42,6 +39,7 @@ namespace FinalProject.Models.QuestionViewModels
         public virtual ApplicationUser ApplicationUser { get; set; }
 
         [Required]
+        [Display(Name = "Courses")]
         [ForeignKey("Courses")]
         public uint CourseId { get; set; }
 

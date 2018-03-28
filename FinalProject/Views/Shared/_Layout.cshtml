@@ -39,9 +39,15 @@
                     else{
                         <li><a asp-area="" asp-controller="Course" asp-action="CoursePage">Course</a></li>
                     }
+                    @if (SignInManager.IsSignedIn(User)) {
+                        <li><a asp-area="" asp-controller="Question" asp-action="AskQuestion">Question</a></li>
+                    }
+                    else{
+                        <li><a asp-area="" asp-controller="Home" asp-action="Question">Question</a></li>
+                    }
                     
-                    <li><a asp-area="" asp-controller="Home" asp-action="Question">Question</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="Event">Event</a></li>
+                    
+                    <li><a asp-area="" asp-controller="Event" asp-action="ChooseEvent">Event</a></li>
                     <li><a asp-area="" asp-controller="Home" asp-action="Files">Files</a></li>
                     <li><a asp-area="" asp-controller="Forum" asp-action="Index">Forum</a></li>
                     @if (User.IsInRole("Admin")) {
