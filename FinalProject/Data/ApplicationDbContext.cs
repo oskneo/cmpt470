@@ -6,6 +6,9 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using FinalProject.Models;
 using FinalProject.Models.CourseViewModels;
+using FinalProject.Models.QuestionViewModels;
+using FinalProject.Models.EventViewModels;
+using FinalProject.Models.FileViewModels;
 
 namespace FinalProject.Data
 {
@@ -18,6 +21,10 @@ namespace FinalProject.Data
 
         public DbSet<CourseModel> Courses { get; set; }
         public DbSet<StudentCourse> StudentCourses { get; set; }
+        public DbSet<QuestionModel> Questions { get; set; }
+        public DbSet<EventModel> Events { get; set; }
+        public DbSet<StudentEvent> StudentEvents { get; set; }
+        public DbSet<FileModel> Files { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

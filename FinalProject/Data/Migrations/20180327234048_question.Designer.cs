@@ -11,9 +11,10 @@ using System;
 namespace FinalProject.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180327234048_question")]
+    partial class question
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -117,81 +118,6 @@ namespace FinalProject.Data.Migrations
                     b.ToTable("StudentCourses");
                 });
 
-            modelBuilder.Entity("FinalProject.Models.EventViewModels.EventModel", b =>
-                {
-                    b.Property<uint>("EventId")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<DateTime>("Date");
-
-                    b.Property<string>("Description")
-                        .IsRequired();
-
-                    b.Property<string>("Location")
-                        .IsRequired();
-
-                    b.Property<int>("NumberOfSeats");
-
-                    b.Property<DateTime>("Time");
-
-                    b.Property<string>("Title")
-                        .IsRequired();
-
-                    b.HasKey("EventId");
-
-                    b.ToTable("Events");
-                });
-
-            modelBuilder.Entity("FinalProject.Models.EventViewModels.StudentEvent", b =>
-                {
-                    b.Property<uint>("StudentEventId")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<uint>("EventId");
-
-                    b.Property<string>("UserId");
-
-                    b.HasKey("StudentEventId");
-
-                    b.HasIndex("EventId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("StudentEvents");
-                });
-
-            modelBuilder.Entity("FinalProject.Models.FileViewModels.FileModel", b =>
-                {
-                    b.Property<uint>("FileId")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<DateTime>("Date");
-
-                    b.Property<string>("Description")
-                        .IsRequired();
-
-                    b.Property<byte[]>("File")
-                        .IsRequired();
-
-                    b.Property<string>("FileName")
-                        .IsRequired();
-
-                    b.Property<int>("Size");
-
-                    b.Property<DateTime>("Time");
-
-                    b.Property<string>("UserId");
-
-                    b.HasKey("FileId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Files");
-                });
-
             modelBuilder.Entity("FinalProject.Models.QuestionViewModels.QuestionModel", b =>
                 {
                     b.Property<uint>("QId")
@@ -202,13 +128,11 @@ namespace FinalProject.Data.Migrations
 
                     b.Property<DateTime>("Date");
 
-                    b.Property<string>("Description")
-                        .IsRequired();
+                    b.Property<string>("Description");
 
                     b.Property<DateTime>("Time");
 
-                    b.Property<string>("Title")
-                        .IsRequired();
+                    b.Property<string>("Title");
 
                     b.Property<string>("UserId");
 
@@ -338,25 +262,6 @@ namespace FinalProject.Data.Migrations
                     b.HasOne("FinalProject.Models.ApplicationUser", "ApplicationUser")
                         .WithOne("StudentCourse")
                         .HasForeignKey("FinalProject.Models.CourseViewModels.StudentCourse", "UserId");
-                });
-
-            modelBuilder.Entity("FinalProject.Models.EventViewModels.StudentEvent", b =>
-                {
-                    b.HasOne("FinalProject.Models.EventViewModels.EventModel", "Events")
-                        .WithMany()
-                        .HasForeignKey("EventId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("FinalProject.Models.ApplicationUser", "ApplicationUser")
-                        .WithMany()
-                        .HasForeignKey("UserId");
-                });
-
-            modelBuilder.Entity("FinalProject.Models.FileViewModels.FileModel", b =>
-                {
-                    b.HasOne("FinalProject.Models.ApplicationUser", "ApplicationUser")
-                        .WithMany()
-                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("FinalProject.Models.QuestionViewModels.QuestionModel", b =>

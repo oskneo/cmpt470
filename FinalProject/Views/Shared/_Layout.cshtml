@@ -1,3 +1,4 @@
+@inject SignInManager<ApplicationUser> SignInManager
 <!DOCTYPE html>
 <html>
 <head>
@@ -32,7 +33,13 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
-                    <li><a asp-area="" asp-controller="Home" asp-action="Course">Course</a></li>
+                    @if (SignInManager.IsSignedIn(User)) {
+                        <li><a asp-area="" asp-controller="Course" asp-action="EnrollCourse">Course</a></li>
+                    }
+                    else{
+                        <li><a asp-area="" asp-controller="Course" asp-action="CoursePage">Course</a></li>
+                    }
+                    
                     <li><a asp-area="" asp-controller="Home" asp-action="Question">Question</a></li>
                     <li><a asp-area="" asp-controller="Home" asp-action="Event">Event</a></li>
                     <li><a asp-area="" asp-controller="Home" asp-action="Files">Files</a></li>
