@@ -41,4 +41,26 @@
         </form>
     </div>
 </div>
+<div><button  id="ac" >Add Course from SFU API</button></div>
 <h3>@ViewData["Message"]</h3>
+<div id="show"></div>
+
+@section js{
+    <script type="text/javascript" src="~/js/addcourse.js"></script>
+    <script type="text/javascript" src="~/lib/jquery/dist/jquery.js"></script>
+    <script>
+        $(document).ready(function(){
+            $("#ac").click(function(){
+                $.getJSON("http://www.sfu.ca/bin/wcm/course-outlines", function(result){
+                    $.each(result, function(i, field){
+                    $("#show").append(field.value + " ");
+            });
+        });
+        
+    });
+});
+        
+        
+        
+    </script>
+}
