@@ -32,7 +32,12 @@ end
 cookbook_file "ntp.conf" do
   path "/etc/ntp.conf"
 end
-execute 'ntp_restart' do
+cookbook_file "example.com" do
+  path "/etc/nginx/sites-available/example.com"
+end
+execute 'restart' do
   command 'service ntp restart'
+  command 'sudo ln -s /etc/nginx/sites-available/example.com /etc/nginx/sites-enabled/example.com'
+  command 'service nginx restart'
 end
 
