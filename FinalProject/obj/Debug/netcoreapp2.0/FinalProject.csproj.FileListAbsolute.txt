@@ -22,3 +22,15 @@
 /home/osk666/Public/sfu/c295/CMPT470_Project/FinalProject/obj/Debug/netcoreapp2.0/FinalProject.AssemblyInfo.cs
 /home/osk666/Public/sfu/c295/CMPT470_Project/FinalProject/obj/Debug/netcoreapp2.0/FinalProject.dll
 /home/osk666/Public/sfu/c295/CMPT470_Project/FinalProject/obj/Debug/netcoreapp2.0/FinalProject.pdb
+/home/ubuntu/project/FinalProject/bin/Debug/netcoreapp2.0/app.db
+/home/ubuntu/project/FinalProject/bin/Debug/netcoreapp2.0/FinalProject.deps.json
+/home/ubuntu/project/FinalProject/bin/Debug/netcoreapp2.0/FinalProject.runtimeconfig.json
+/home/ubuntu/project/FinalProject/bin/Debug/netcoreapp2.0/FinalProject.runtimeconfig.dev.json
+/home/ubuntu/project/FinalProject/bin/Debug/netcoreapp2.0/FinalProject.dll
+/home/ubuntu/project/FinalProject/bin/Debug/netcoreapp2.0/FinalProject.pdb
+/home/ubuntu/project/FinalProject/obj/Debug/netcoreapp2.0/FinalProject.csproj.CoreCompileInputs.cache
+/home/ubuntu/project/FinalProject/obj/Debug/netcoreapp2.0/UserSecretsAssemblyInfo.cs
+/home/ubuntu/project/FinalProject/obj/Debug/netcoreapp2.0/FinalProject.AssemblyInfoInputs.cache
+/home/ubuntu/project/FinalProject/obj/Debug/netcoreapp2.0/FinalProject.AssemblyInfo.cs
+/home/ubuntu/project/FinalProject/obj/Debug/netcoreapp2.0/FinalProject.dll
+/home/ubuntu/project/FinalProject/obj/Debug/netcoreapp2.0/FinalProject.pdb
