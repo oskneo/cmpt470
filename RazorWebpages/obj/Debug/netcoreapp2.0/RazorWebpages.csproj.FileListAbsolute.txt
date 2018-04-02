@@ -1,0 +1,10 @@
+/home/ubuntu/workspace/c470/cmpt470project/RazorWebpages/bin/Debug/netcoreapp2.0/RazorWebpages.deps.json
+/home/ubuntu/workspace/c470/cmpt470project/RazorWebpages/bin/Debug/netcoreapp2.0/RazorWebpages.runtimeconfig.json
+/home/ubuntu/workspace/c470/cmpt470project/RazorWebpages/bin/Debug/netcoreapp2.0/RazorWebpages.runtimeconfig.dev.json
+/home/ubuntu/workspace/c470/cmpt470project/RazorWebpages/bin/Debug/netcoreapp2.0/RazorWebpages.dll
+/home/ubuntu/workspace/c470/cmpt470project/RazorWebpages/bin/Debug/netcoreapp2.0/RazorWebpages.pdb
+/home/ubuntu/workspace/c470/cmpt470project/RazorWebpages/obj/Debug/netcoreapp2.0/RazorWebpages.csproj.CoreCompileInputs.cache
+/home/ubuntu/workspace/c470/cmpt470project/RazorWebpages/obj/Debug/netcoreapp2.0/RazorWebpages.AssemblyInfoInputs.cache
+/home/ubuntu/workspace/c470/cmpt470project/RazorWebpages/obj/Debug/netcoreapp2.0/RazorWebpages.AssemblyInfo.cs
+/home/ubuntu/workspace/c470/cmpt470project/RazorWebpages/obj/Debug/netcoreapp2.0/RazorWebpages.dll
+/home/ubuntu/workspace/c470/cmpt470project/RazorWebpages/obj/Debug/netcoreapp2.0/RazorWebpages.pdb

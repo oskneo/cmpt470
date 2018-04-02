@@ -1,0 +1,93 @@
+@model FinalProject.Models.QuestionViewModels.QuestionAnswer
+@using System.Linq;
+@using FinalProject.Models.QuestionViewModels;
+@using System.Text;
+@{
+    ViewData["Title"] = "Question";
+    var lst = Model.Answers;
+    var qn = Model.ApplicationUser.UserName;
+    var ls = from k in lst where k.QId==Model.QId && k.RefAId==0 select k;
+}
+<h2>@ViewData["Title"]</h2>
+
+
+
+@functions {
+    public string show(uint tAId, ApplicationUser us, string reply){
+        var ar = from i in Model.Answers where i.RefAId == tAId select i;
+        StringBuilder ht = new StringBuilder();
+        ht.Append("<div><div><p><b>");
+        ht.Append(us.UserName);
+        ht.Append("</b><br></p></div><div><p>");
+        ht.Append(reply);
+        ht.Append("<br></p></div><div><p>");
+        ht.Append("<a href=\"../Question/ReplyTo?AId=");
+        ht.Append(tAId);
+        ht.Append("&QId=");
+        ht.Append(Model.QId);
+        ht.Append("\" >Reply</a>");
+        ht.Append("</p></div>");
+        
+            if (ar.ToList<AnswerModel>().Count > 0){
+                foreach (var item in ar.ToList<AnswerModel>()) {
+
+                    ht.Append(show(item.AnswerId, item.ApplicationUser, item.Reply));
+                }
+            }
+        
+        ht.Append("</div>");
+        return ht.ToString();
+    }
+}
+
+
+
+
+
+
+
+
+<div class="row">
+
+            <hr />
+            <div>
+                <div>
+                    <div>
+                        <p>
+                            <b>@qn</b>
+                            <br>
+                        </p>
+                    </div>
+                    <div>
+                        <p>
+                            @Model.QuestionTitle
+                            <br>
+                        </p>
+                    </div>
+                    <div>
+                        <p>
+                            @Model.QuestionContent
+                            <br>
+                        </p>
+                    </div>
+                    <div>
+                        @Html.ActionLink("Reply", "ReplyTo", new { AId=0, QId=Model.QId })
+                    </div>
+
+                </div>
+                @foreach(var it in ls.ToList<AnswerModel>()){
+                <div>
+                    @Html.Raw(show(it.AnswerId, it.ApplicationUser, it.Reply))
+                    
+
+                </div>
+                }
+                
+            </div>
+            
+            
+            
+</div>
+@section Styles {
+    <link href="@Url.Content("~/css/QuestionAnswer.css")" rel="stylesheet" type="text/css" />
+}

@@ -1,0 +1,80 @@
+CMPT 470
+Team16
+
+Demonstration of ASP.net
+
+Readme
+Member: Francesco Zhang, Daniel Peng, Agassi
+
+Asp.net MVC5(Model, View, Controller) Framework:
+·        Account System (Implemented by the framework)
+·        Improved account system
+·        Custom role for account and admin page for admin role.
+·        By entering the key of admin role "000000", user can register as an admin. 
+·        Razor syntax(view)
+·        The communication between server and client(controller)
+·        Database initiate and migration(model)
+·        The page to add data and show data
+Asp.net MVC with React
+Asp.net Signal IR
+
+Simple API for two-way client/server communication
+The live chat function present in the contact page
+Open two same web page.
+User1 input the user name and type in the message in one page
+The message will display on both client side web page and its send time too
+The user2 can type message and sent to user1’s webpage
+
+Deplyment:
+Our deployment only can show one type of model at the same time.
+And it is not a hot workstation.
+
+It is deployed to c9.io.
+Deployment URL:http://blank-osk666.c9users.io/
+Username: osk666@gmail.com
+Password: Cmpt470team16
+Workstation: blank
+
+Steps to deploy a specific model:
+
+Start service:
+1.Enter command "sudo service nginx restart"
+2.Enter command "sudo service mysql restart"
+
+Asp.net Web Page:
+1.Go to /workspace/c470/cmpt470project/RazorWebpages
+2.Enter command "dotnet run"
+MVC5:
+1.Go to /workspace/c470/cmpt470project/mvc2
+2.Enter command "dotnet run"
+Asp.net MVC with React:
+1.Go to /workspace/c470/cmpt470project/mvc5
+2.Enter command "dotnet run"
+Asp.net Signal IR:
+1.Go to /workspace/c470/cmpt470project/mvc_SIGNALR_DEMO
+2.Enter command "dotnet run"
+
+Steps for running the final project server:
+1.Go to /workspace/c470/cmpt470project/FinalProject
+2.Enter command "dotnet run"
+
+Steps for setting up database in your virtual machine:
+1. mysql -u root -p
+2. GRANT ALL PRIVILEGES ON *.* TO 'team16'@'localhost' IDENTIFIED BY 'password';
+3. quit
+4. sudo service mysql restart
+ 
+ Steps for setting up in your virtual machine:
+1. curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.gpg
+2. sudo mv microsoft.gpg /etc/apt/trusted.gpg.d/microsoft.gpg
+3. sudo sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/microsoft-ubuntu-xenial-prod xenial main" > /etc/apt/sources.list.d/dotnetdev.list'
+4. sudo apt-get install apt-transport-https
+5. sudo apt-get update
+6. sudo apt-get install dotnet-sdk-2.1.4
+7. git clone git@csil-git1.cs.surrey.sfu.ca:yuzhip/CMPT470_Project.git
+8. cd FinalProject
+9. dotnet restore
+10. dotnet ef database update
+11. dotnet run
+ 
+PS: Our deployment only can show one type of model at the same time.

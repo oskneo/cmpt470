@@ -1,0 +1,120 @@
+@using Microsoft.AspNetCore.Identity
+@using FinalProject.Models
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+@{
+    ViewData["Title"] = "Messaging";
+}
+
+<h2>Live Help</h2>
+@if (SignInManager.IsSignedIn(User))
+{
+    <div id="nameinput" hidden>Username: <input type="text" id="username" value="@UserManager.GetUserName(User)"/></div>
+}
+else
+{
+    <div id="nameinput">Username: <input type="text" id="username" value=""/></div>
+
+}
+Message: <input type="text" id="message" /> 
+</div>
+<input type="button" id="send" value="Send" />
+<div id="instantmessage">
+<ul id="liveHelp"></ul>
+</div>
+
+@section scripts {
+    <script src="~/js/signalr-client-1.0.0-alpha2-final.js"></script>
+    <script>
+        // var liveHelp = $.connection.LiveHelpHub;
+        // liveHelp.client.showMessage = function (username, message) {
+        //     $('#liveHelp').append('<li>' + username + ': ' + message + '</li>');
+        // };
+        
+        
+        // // var liveHelp = $.hubConnection();
+        // // var contosoChatHubProxy = liveHelp.createHubProxy('chat');
+        // // contosoChatHubProxy.on('addContosoChatMessageToPage', function(name, message) {
+        // //     console.log(name + ' ' + message);
+        // // });
+
+        // $.connection.hub.start().done(function () {
+        //     $('#send').click(function () {
+        //         liveHelp.server.sendMessage($('#username').val(), $('#message').val());
+        //         $('#message').val('');
+        //     });
+        // });
+        
+        
+        
+        
+        // var transport = signalR.TransportType.WebSockets;
+        // var connection = new signalR.HubConnection('/chat');
+        // var messageInput = document.getElementById('message');
+        // var name = document.getElementById('username');
+        // var button = document.getElementById("send");
+        // connection.on('broadcastMessage', (name, message) => {
+        //     var liElement = document.createElement('li');
+        //     liElement.innerHTML = '<strong>' + name + '</strong>:&nbsp;&nbsp;' + message;
+        //     document.getElementById('liveHelp').appendChild(liElement);
+        // });
+        
+        
+        // button.addEventListener("click", event => {
+        //     connection.invoke('send',  messageInput.value);
+        //     messageInput.value = '';
+        //     //messageInput.focus();
+        //     name.value = '';
+        //     //name.focus();
+        // });
+        // connection.start();
+        
+        // connection.start()
+        //   .then(() => {
+        //       connection.invoke('send', 'Hello', 'ok');
+        //       console.log("aaa");
+        //   });
+        
+        
+    let transportType = signalR.TransportType.WebSockets;
+    let http = new signalR.HttpConnection(`http://${document.location.host}/lhh/livehelphub`, { transport: transportType });
+    let connection = new signalR.HubConnection(http);
+    connection.start();
+ 
+    connection.on('Send', (name, message) => {
+        if (name==""){
+            name="Anonymous";
+        }
+        appendLine(message, name);    
+    });
+ 
+    document.getElementById('send').addEventListener('click', event => {
+        let message = document.getElementById('message').value;
+        let name = document.getElementById('username').value;
+        document.getElementById('message').value = '';
+        
+ 
+        connection.invoke('Send', name, message);   
+        event.preventDefault();
+    });
+    
+    $("#message").keyup(function(event) {
+        if (event.keyCode === 13) {
+            $("#send").click();
+        }
+    });
+    $("#username").keyup(function(event) {
+        if (event.keyCode === 13) {
+            $("#send").click();
+        }
+    });
+ 
+    function appendLine(line, name) {
+        let li = document.createElement('li');
+        li.innerText = name + ":" + line;
+        document.getElementById('liveHelp').appendChild(li);
+        document.getElementById('layoutmessage').innerText="Message from " + name + ":" + line;
+    };
+    </script>
+}

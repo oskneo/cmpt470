@@ -1,0 +1,17 @@
+/home/ubuntu/workspace/c470/cmpt470project/mvc2/bin/Debug/netcoreapp2.0/app.db
+/home/ubuntu/workspace/c470/cmpt470project/mvc2/bin/Debug/netcoreapp2.0/mvc2.deps.json
+/home/ubuntu/workspace/c470/cmpt470project/mvc2/bin/Debug/netcoreapp2.0/mvc2.runtimeconfig.json
+/home/ubuntu/workspace/c470/cmpt470project/mvc2/bin/Debug/netcoreapp2.0/mvc2.runtimeconfig.dev.json
+/home/ubuntu/workspace/c470/cmpt470project/mvc2/bin/Debug/netcoreapp2.0/mvc2.dll
+/home/ubuntu/workspace/c470/cmpt470project/mvc2/bin/Debug/netcoreapp2.0/mvc2.pdb
+/home/ubuntu/workspace/c470/cmpt470project/mvc2/obj/Debug/netcoreapp2.0/mvc2.csproj.CoreCompileInputs.cache
+/home/ubuntu/workspace/c470/cmpt470project/mvc2/obj/Debug/netcoreapp2.0/UserSecretsAssemblyInfo.cs
+/home/ubuntu/workspace/c470/cmpt470project/mvc2/obj/Debug/netcoreapp2.0/mvc2.AssemblyInfoInputs.cache
+/home/ubuntu/workspace/c470/cmpt470project/mvc2/obj/Debug/netcoreapp2.0/mvc2.AssemblyInfo.cs
+/home/ubuntu/workspace/c470/cmpt470project/mvc2/obj/Debug/netcoreapp2.0/mvc2.dll
+/home/ubuntu/workspace/c470/cmpt470project/mvc2/obj/Debug/netcoreapp2.0/mvc2.pdb
+/home/ubuntu/workspace/c470/cmpt470project/mvc_SIGNALR_DEMO/obj/Debug/netcoreapp2.0/mvc2.csproj.CoreCompileInputs.cache
+/home/ubuntu/workspace/c470/cmpt470project/mvc_SIGNALR_DEMO/obj/Debug/netcoreapp2.0/UserSecretsAssemblyInfo.cs
+/home/ubuntu/workspace/c470/cmpt470project/mvc_SIGNALR_DEMO/obj/Debug/netcoreapp2.0/mvc2.AssemblyInfoInputs.cache
+/home/ubuntu/workspace/c470/cmpt470project/mvc_SIGNALR_DEMO/obj/Debug/netcoreapp2.0/mvc2.AssemblyInfo.cs
+/home/ubuntu/workspace/c470/cmpt470project/mvc_SIGNALR_DEMO/obj/Debug/netcoreapp2.0/mvc2.pdb

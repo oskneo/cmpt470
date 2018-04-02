@@ -1,0 +1,63 @@
+@using System.Collections.Generic;
+@model List<FinalProject.Models.EventViewModels.EventModel>
+@inject SignInManager<ApplicationUser> SignInManager
+<br>
+<br>
+<br>
+<div>
+    <table border="3">
+        <tr>
+            @if (SignInManager.IsSignedIn(User)) {
+                <td width="80px" height="50px">AddEvent</td>
+            }            
+            <td width="80px" height="50px">Title</td>
+            <td width="80px" height="50px">Description</td>
+            <td width="80px" height="50px">Date</td>
+            <td width="80px" height="50px">Time</td>
+            <td width="80px" height="50px">Location</td>
+            <td width="80px" height="50px">NumberOfSeats</td>
+            
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                @if (SignInManager.IsSignedIn(User)) {
+                    <td>
+                    @Html.ActionLink("Add","ChooseEvent", new { EventId = item.EventId },new {
+                        data_ajax="true",
+                        data_ajax_method="POST",
+                        data_ajax_mode="replace",
+                        data_ajax_update="Enrolled",
+                        @class="btn btn-danger"
+                    })
+                    </td>
+                }   
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Date)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Time)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Location)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NumberOfSeats)
+                </td>
+                
+            </tr>
+        }
+    </table>
+</div>
+<div>@ViewData["Message"]</div>
+<br>
+<br>
+<br>
+
+<div id="Enrolled"></div>
