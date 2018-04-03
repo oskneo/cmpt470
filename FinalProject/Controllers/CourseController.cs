@@ -181,6 +181,15 @@ namespace FinalProject.Controllers
             return View(nl);
         }
         [HttpPost]
+        public IActionResult toGroup(GroupModel model,string returnUrl = null){
+            
+            
+            
+            
+            
+            return PartialView("Group",model);
+        }
+        [HttpPost]
         public async Task<IActionResult> CreateGroup(GroupModel model){
             var mus = await GetCurrentUserAsync();
             var newmodel = 
