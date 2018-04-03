@@ -5,13 +5,15 @@
 @foreach (var item in Model){
     <div class="card">
         <div class ="card-header">
-            <h5>@Html.DisplayFor(modelItem => item.Department) @Html.DisplayFor(modelItem => item.CourseNumber) @Html.DisplayFor(modelItem => item.Session) <a href="#" class="btn-small btn-primary float-right" style="display:inline;">Go somewhere</a></h5>
+            <h5>
+                @Html.DisplayFor(modelItem => item.Department) @Html.DisplayFor(modelItem => item.CourseNumber) @Html.DisplayFor(modelItem => item.Session) 
+                <a href="#" class="btn btn-primary btn-sm float-right" style="display:inline;">Enroll</a>
+            </h5>
         </div>
       
       <div class="card-body">
         <h5 class="card-title">@Html.DisplayFor(modelItem => item.Semester) @Html.DisplayFor(modelItem => item.Instructor)</h5>
         <p class="card-text">@Html.DisplayFor(modelItem => item.Description)</p>
-        <a href="#" class="btn btn-primary">Go somewhere</a>
       </div>
     </div>
     <br>
