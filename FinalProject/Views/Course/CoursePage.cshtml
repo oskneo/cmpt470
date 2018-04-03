@@ -5,7 +5,7 @@
 @foreach (var item in Model){
     <div class="card">
         <div class ="card-header">
-            <h5>@Html.DisplayFor(modelItem => item.Department) @Html.DisplayFor(modelItem => item.CourseNumber) @Html.DisplayFor(modelItem => item.Session)</h5>
+            <h5>@Html.DisplayFor(modelItem => item.Department) @Html.DisplayFor(modelItem => item.CourseNumber) @Html.DisplayFor(modelItem => item.Session) <a href="#" class="btn-small btn-primary float-right" style="display:inline;">Go somewhere</a></h5>
         </div>
       
       <div class="card-body">
