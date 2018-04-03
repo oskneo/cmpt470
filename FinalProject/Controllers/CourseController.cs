@@ -53,7 +53,7 @@ namespace FinalProject.Controllers
             
         }
         
-        public IActionResult CoursePage(string returnUrl = null){
+        public IActionResult CourseList(string returnUrl = null){
             
             var model = db.Courses.ToList();
             return View(model);
@@ -102,10 +102,10 @@ namespace FinalProject.Controllers
             List<CourseModel> _model=data.ToList<CourseModel>();
 
             // return PartialView("part",_model);
-            return RedirectToAction("part","Course");
+            return RedirectToAction("myCourses","Course");
         }
 
-        public async Task<IActionResult> part(string returnUrl = null){
+        public async Task<IActionResult> myCourses(string returnUrl = null){
             var us = await GetCurrentUserAsync();
             var data = from sc in db.StudentCourses join s in db.Courses on sc.CourseId equals s.CourseId where sc.ApplicationUser == us select new CourseModel {
                 CourseId=s.CourseId,
@@ -119,6 +119,25 @@ namespace FinalProject.Controllers
             };
             List<CourseModel> _model=data.ToList<CourseModel>();
             return View(_model);
+        }
+        
+        public IActionResult CoursePage(CourseModel model,string returnUrl = null){
+            
+            return View(model);
+        }
+        
+        public IActionResult courseInfo(CourseModel model,string returnUrl = null){
+            // var newmodel= from sc in db.Courses where sc.CourseId == model.CourseId select sc;
+            // var crs=newmodel.ToList<CourseModel>().SingleOrDefault();
+            
+            return View(model);
+        }
+        
+        public IActionResult toCourseInfo(CourseModel model,string returnUrl = null){
+            var newmodel= from sc in db.Courses where sc.CourseId == model.CourseId select sc;
+            var crs=newmodel.ToList<CourseModel>().SingleOrDefault();
+            
+            return PartialView("courseInfo",crs);
         }
 
 

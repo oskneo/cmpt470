@@ -43,6 +43,24 @@
 </div>
 <div><button  id="ac" >Add Course from SFU API</button></div>
 <h3>@ViewData["Message"]</h3>
+
+<form>
+    <select name="year" id="year" style="width:150px">
+        
+    </select>
+    <select name="term" id="term" style="width:150px">
+        
+    </select>
+    <select name="department" id="department" style="width:150px">
+        
+    </select>
+    <select name="courseNumber" id="courseNumber" style="width:150px">
+        
+    </select>
+    <select name="session" id="session" style="width:150px">
+        
+    </select>
+</form>
 <div id="show"></div>
 
 @section js{
@@ -50,20 +68,223 @@
     <script type="text/javascript" src="~/lib/jquery/dist/jquery.js"></script>
     <script>
         var url="http://www.sfu.ca/bin/wcm/course-outlines";
-        var urln="";
-        function showdata(){
+        var newdata = {
+                        year:   2015,
+                        term:   "fall",
+                        department: "als",
+                        courseNumber:   601,
+                        Session:  "g100"
+                    };
+        var ndt={};
+        var jsonstr="";
+        function showdata(dt){
+            var urln=url;
+            if(!(typeof dt == 'undefined' || typeof dt.Year == 'undefined')){
+                urln+="?";
+                urln+=dt.Year;
+                if(typeof dt.Semester != 'undefined'){
+                    urln+="/";
+                    urln+=dt.Semester;
+                    if(typeof dt.Department != 'undefined'){
+                        urln+="/";
+                        urln+=dt.Department;
+                        if(typeof dt.CourseNumber != 'undefined'){
+                            urln+="/";
+                            urln+=dt.CourseNumber;
+                            if(typeof dt.Session != 'undefined'){
+                                urln+="/";
+                                urln+=dt.Session;
+                                console.log(urln);
+                            }
+                        }
+                    }
+                }
+            }
+            
+            
+            
+            return urln;
+        }
+        function buildcoursejson(obj){
+            console.log(obj);
+            var str=obj.info.outlinePath.split("/");
+            var newobj={};
+            newobj.Year=parseInt(str[0]);
+            newobj.Semester=str[1];
+            newobj.Department=str[2];
+            newobj.CourseNumber=str[3];
+            newobj.Session=str[4];
+            newobj.Description=obj.info.description;
+            if(typeof obj.instructor != 'undefined'){
+                newobj.Instructor=obj.instructor[0].name;
+            }
+                
+            // console.log(newobj);
+            // console.log(JSON.stringify(newobj));
+            
+            // return JSON.stringify(newobj);
+            return newobj;
+            
             
         }
+        
+        function ac(jsn){
+            $.ajax({
+                        type:"POST",
+                        url: "AddCourse",
+                        data: jsn,
+                        success: function(){
+                            console.log("AddCourse!");
+                        }
+            });
+        }
+        
+        
+        
+        function ld(fieldn,ndata,method){
+            
+            $.ajax({
+                        dataType: "json",
+                        url: showdata(ndata),
+                        success: function(result){
+                            if(method=="get"){
+                                ac(buildcoursejson(result));
+                                // jsonstr= buildcoursejson(result);
+                            }
+                            else if(method=="list"){
+                                $.each(result, function(i, field){
+                                    switch(fieldn){
+                                        case "#year":
+                                            ndata.Year=field.value;
+                                            ld("#term",ndata,"list");
+                                            break;
+                                        case "#term":
+                                            ndata.Semester=field.value;
+                                            ld("#department",ndata,"list");
+                                            break;
+                                        case "#department":
+                                            ndata.Department=field.value;
+                                            ld("#courseNumber",ndata,"list");
+                                            break;
+                                        case "#courseNumber":
+                                            ndata.CourseNumber=field.value;
+                                            ld("#session",ndata,"list");
+                                            break;
+                                        case "#session":
+                                            ndata.Session=field.value;
+                                            ld("#session",ndata,"get");
+                                            break;
+                                    };
+                            
+                    
+                                });
+                            } 
+                            else{
+                                $(fieldn).empty();
+                                $.each(result, function(i, field){
+                                    var ne=document.createElement( "option" );
+                                    ne.innerHTML=field.value;
+                                    ne.value=field.value;
+                                    $(fieldn).append(ne);
+                            
+                    
+                                });
+                                $(fieldn).prop("selectedIndex", -1);
+                            }
+                            
+                        }
+            });
+            
+        }
+        
+        
+        function listd(ndata,method){
+            
+            
+            if(!(typeof ndata == 'undefined' || typeof ndata.Year == 'undefined')){
+                if(typeof ndata.Semester == 'undefined'){
+                    
+                    ld("#term",ndata,method);
+                }
+                else{
+                    if(typeof ndata.Department == 'undefined'){
+                        ld("#department",ndata,method);
+                    }
+                    else{
+                        if(typeof ndata.CourseNumber == 'undefined'){
+                            ld("#courseNumber",ndata,method);
+                        }
+                        else{
+                            if(typeof ndata.Session == 'undefined'){
+                                ld("#session",ndata,method);
+                            }
+                            else{
+                                ld("#session",ndata,"get");
+                            }
+                            
+                        }
+                    }
+                    
+                }
+                
+            }
+            else{
+                ld("#year",ndata,method);
+            }
+        }
+        
         $(document).ready(function(){
+            
+            listd({},"");
+            $("#year").change(function(){
+                
+                ndt.Year=$("#year").val();
+                listd(ndt,"");
+            });
+            $("#term").change(function(){
+                
+                ndt.Semester=$("#term").val();
+                listd(ndt,"");
+            });
+            $("#department").change(function(){
+                
+                ndt.Department=$("#department").val();
+                listd(ndt,"");
+            });
+            $("#courseNumber").change(function(){
+                
+                ndt.CourseNumber=$("#courseNumber").val();
+                listd(ndt,"");
+            });
+            $("#session").change(function(){
+                
+                ndt.Session=$("#session").val();
+                //ld("get",ndt);
+                // console.log(jsonstr);
+            });
+            
+            
+            
             $("#ac").click(function(){
-                $.getJSON(url, function(result){
-                    $.each(result, function(i, field){
-                    $("#show").append(field.value + " ");
+                
+                $.ajax({
+                    dataType: "json",
+                    url: showdata(newdata),
+                    success: function(result){
+                        // console.log(result);
+                        // console.log(buildcoursejson(result));
+                        // $.each(result, function(i, field){
+                        //     $("#show").append(field.value + " ");
+                    
+                        // });
+                        // ac("aaaa");
+                        // ld("",ndt,"get");
+                        listd(ndt,"list");
+                    }
+                });
+        
             });
         });
-        
-    });
-});
         
         
         

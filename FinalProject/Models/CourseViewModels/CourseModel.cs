@@ -23,7 +23,7 @@ namespace FinalProject.Models.CourseViewModels
         public string Department { get; set; }
         
         [Display(Name = "CourseNumber")]
-        public uint CourseNumber { get; set; }
+        public string CourseNumber { get; set; }
         
         [Display(Name = "Session")]
         public string Session { get; set; }

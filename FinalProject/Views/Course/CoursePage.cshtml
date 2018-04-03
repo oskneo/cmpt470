@@ -1,65 +1,40 @@
 @using System.Collections.Generic;
-@model List<FinalProject.Models.CourseViewModels.CourseModel>
+@model FinalProject.Models.CourseViewModels.CourseModel
 @inject SignInManager<ApplicationUser> SignInManager
 
-@foreach (var item in Model){
-    <div class="card">
-        <div class ="card-header">
-            <h5>
-                @Html.DisplayFor(modelItem => item.Department) @Html.DisplayFor(modelItem => item.CourseNumber) @Html.DisplayFor(modelItem => item.Session) 
-                <a href="#" class="btn btn-primary btn-sm float-right" style="display:inline;">Enroll</a>
-            </h5>
-        </div>
-      
-      <div class="card-body">
-        <h5 class="card-title">@Html.DisplayFor(modelItem => item.Semester) @Html.DisplayFor(modelItem => item.Instructor)</h5>
-        <p class="card-text">@Html.DisplayFor(modelItem => item.Description)</p>
-      </div>
-    </div>
-    <br>
-}
+<div class="container">
+    <h2>Course Page</h2>
 
-    @*
-<div class="container bg-light">
-    
-    <table border="3">
-        <tr>
-            <td width="80px" height="50px">Year</td>
-            <td width="80px" height="50px">Semester</td>
-            <td width="80px" height="50px">Department</td>
-            <td width="80px" height="50px">CourseNumber</td>
-            <td width="80px" height="50px">Session</td>
-            <td width="80px" height="50px">Instructor</td>
-            <td width="80px" height="50px">Description</td>
-        </tr>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Year)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Semester)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Department)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CourseNumber)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Session)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Instructor)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Description)
-                </td>
-            </tr>
-        }
+<br>
+
+<div id="courseBar" style="float:left">
+    <table border="2px">
+        <tr><td><button id="Info">Info</button></td></tr>
+        <tr><td><button id="Questions">Questions</button></td></tr>
+        <tr><td>@Html.ActionLink("Question","AskQuestion","Question")</td></tr>
     </table>
-
+</div>
+<div id="courseContent"  style="float:center" ></div>
+    @*await Html.PartialAsync("courseInfo", Model)*@
 </div>
 
-    *@
+
+@section js{
+    <script type="text/javascript" src="~/lib/jquery/dist/jquery.js"></script>
+    <script>
+        $(document).ready(function(){
+            $('#courseContent').load('@Url.Action("toCourseInfo", "Course")', { CourseId: @Model.CourseId });
+            $('#Info').click(function() {
+                $('#courseContent').load('@Url.Action("toCourseInfo", "Course")', { CourseId: @Model.CourseId });
+            });
+            $('#Questions').click(function() {
+                $('#courseContent').load('@Url.Action("toAsk", "Question")', { CourseId: @Model.CourseId });
+            });
+        });
+        
+        
+        
+    </script>
+
+
+}

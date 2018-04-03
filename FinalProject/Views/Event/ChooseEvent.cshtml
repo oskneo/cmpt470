@@ -1,6 +1,32 @@
 @using System.Collections.Generic;
 @model List<FinalProject.Models.EventViewModels.EventModel>
 @inject SignInManager<ApplicationUser> SignInManager
+
+<div class="container">
+    <h2>Event List</h2>
+
+<br>
+@foreach (var item in Model){
+    <div class="card">
+        <div class ="card-header">
+            <h5>@Html.DisplayFor(modelItem => item.Title) on @Html.DisplayFor(modelItem => item.Date) at @Html.DisplayFor(modelItem => item.Time)
+                <a href="#" class="btn btn-primary btn-sm float-right" style="display:inline;">Join Event</a>
+            </h5>
+            <h6 class="card-subtitle mb-2 text-muted">Location: @Html.DisplayFor(modelItem => item.Location)</h6>
+            <h6 class="card-subtitle mb-2 text-muted">
+                Seats Available: @Html.DisplayFor(modelItem => item.NumberOfSeats)
+            </h6>
+        </div>
+        <div class="card-body">
+            <p class="card-text"> @Html.DisplayFor(modelItem => item.Description)</p>
+        </div>
+    </div>
+    <br>
+}
+
+</div>
+
+@*
 <div>
     <table border="3">
         <tr>
@@ -51,4 +77,6 @@
             </tr>
         }
     </table>
+   
 </div>
+ *@

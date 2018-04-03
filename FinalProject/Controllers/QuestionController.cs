@@ -26,6 +26,21 @@ namespace FinalProject.Controllers
         
         private Task<ApplicationUser> GetCurrentUserAsync() => _userManager.GetUserAsync(HttpContext.User);
         
+        public IActionResult Ask(CourseAndQuestions model,string returnUrl = null){
+            
+            return View(model);
+        }
+        [HttpPost]
+        public IActionResult toAsk(CourseAndQuestions model,string returnUrl = null){
+            var QL=from ql in db.Questions where ql.CourseId == model.CourseId select ql;
+            var newmodel=new CourseAndQuestions{
+                CourseId=model.CourseId,
+                QuestionList=QL.ToList<QuestionModel>()
+            };
+            
+            return PartialView("Ask",newmodel);
+        }
+        
         [HttpGet]
         public async Task<IActionResult> AskQuestion(string returnUrl = null){
             var us = await GetCurrentUserAsync();
@@ -58,6 +73,7 @@ namespace FinalProject.Controllers
             return View(model);
             
         }
+        
         [HttpGet]
         public async Task<IActionResult> QuestionPage(QuestionAnswer model, string returnUrl = null){
             // QuestionAnswer model=new QuestionAnswer();

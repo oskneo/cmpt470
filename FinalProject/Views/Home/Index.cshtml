@@ -1,17 +1,81 @@
 @{
-    ViewData["Title"] = "StudyMates";
+    ViewData["Title"] = "STUDYMATES";
 }
-<div class="container bg-light"> 
-    <h2>@ViewData["Title"]</h2>
-    <h3>@ViewData["Message"]</h3>
+
+<style>
+    img {
+        width: 110px;
+        display: block;
+    }
     
-    <h3>You are not alone</h3>
-    <p>Welcome to StudyMates, this website design for students in the same class to help each other on academy</p>
+</style>
+
+
+<div class="container bg-light"> 
+    <h2 class="text-center">@ViewData["Title"]</h2>
+    <h3 class="text-center">@ViewData["Message"]</h3>
+    
+    <h3 class="text-center">You are not alone</h3>
+    
+    <br>
+    
+    <p class="text-center">Welcome to StudyMates, this website design for students in the same class to help each other on academy.</p>
+    
+    
+    <h2 class="text-center mt-5">Available Feature</h2>
+    
+    <section class="container text-center " id="feature">
+        
+        <div class="row my-5">
+            <article class="col-sm-6 col-md-4 my-1" >
+                <img src="images/discussion.png" class="mx-auto mb-1">
+                <h3>Discussion Forum</h3>
+                <p>Leave messages and Post Questions that can be left as reference for yourself and peers</p>
+            </article>
+            
+            <article class="col-sm-6 col-md-4 my-1">
+                <img src="images/group.png" class="mx-auto mb-1">
+                <h3>Study Groups</h3>
+                <p>Create and join study groups.Create study sessions specific to the group or open to the public. </p>
+            </article>
+            
+            <article class="col-sm-6 col-md-4 my-1">
+                <img src="images/calendar.png" class="mx-auto mb-1">
+                <h3>Study Sessions</h3>
+                <p>Create and join a study session. Can set a time and location for students to join and study</p>
+            </article>
+
+            <article class="col-sm-6 col-md-4 my-1">
+                <img src="images/quiz.png" class="mx-auto mb-1">
+                <h3>Create Quizz</h3>
+                <p>Share and design quizzes for courses to help test your knowledge and quiz your classmates</p>
+            </article>
+            
+            <article class="col-sm-6 col-md-4 my-1">
+                <img src="images/file.png" class="mx-auto mb-1">
+                <h3>File Upload Center</h3>
+                <p>Easy and quick way to share notes or documents with your classmates. Able to upload images, documents and pdfs.</p>
+            </article>
+            
+            <article class="col-sm-6 col-md-4 my-1">
+                <img src="images/chat.png" class="mx-auto mb-1">
+                <h3>Real Time Chat</h3>
+                <p>Real time chat application between group members and classmates</p>
+            </article>
+        </div>
+        
+    </section>
+    
+    <!-- 
+    
+    
     <p>We are trying to increase the interaction between students in the same class.</p>
     <p>With this site you might doing the following things</p>
     <p>If you miss your class and looking for lecture note you can go to the course page and find your course and post a request there, and your classmates can respond you and submit the note with the comment</p>
     <p>Set up a event like study meetup for cmpt 123 final at SFU libery in Event page.</p>
     <p>Ask homework or assignment question on question page.</p>
     <p>Share information and chat with other classmates online live in Message page</p>
+    
+    -->
 
 </div>

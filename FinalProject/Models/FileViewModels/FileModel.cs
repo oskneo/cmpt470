@@ -47,6 +47,10 @@ namespace FinalProject.Models.FileViewModels
         [ForeignKey("UserId")]
         public virtual ApplicationUser ApplicationUser { get; set; }
         
+        public uint AnswerId { get; set; }
+        
+        public uint CourseId { get; set; }
+        
         
     }
     

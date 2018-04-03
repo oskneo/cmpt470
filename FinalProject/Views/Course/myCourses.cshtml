@@ -43,3 +43,25 @@
         }
     </table>
 </div>
+
+<div class="container">
+    <h2>Course List</h2>
+
+<br>
+@foreach (var item in Model){
+    <div class="card">
+        <div class ="card-header">
+            <h5>
+                @Html.DisplayFor(modelItem => item.Department) @Html.DisplayFor(modelItem => item.CourseNumber) @Html.DisplayFor(modelItem => item.Session) (@Html.DisplayFor(modelItem => item.Semester))
+                
+                @Html.ActionLink("Enter","CoursePage", item,new { @class="btn btn-primary btn-sm float-right", @style="display:inline;"   })
+                <h6 class="card-subtitle mb-2 text-muted">Instructor : @Html.DisplayFor(modelItem => item.Instructor)</h6>
+            </h5>
+        </div>
+        <div class="card-body">
+            <p class="card-text">@Html.DisplayFor(modelItem => item.Description)</p>
+        </div>
+    </div>
+    <br>
+}
+</div>

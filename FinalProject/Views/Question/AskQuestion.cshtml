@@ -1,13 +1,13 @@
 @model FinalProject.Models.QuestionViewModels.QuestionAndCourse
 @{
-    ViewData["Title"] = "Add Course";
+    ViewData["Title"] = "Ask Question";
 }
 <h2>@ViewData["Title"]</h2>
 
 <div class="row">
     <div class="col-md-4">
         <form asp-route-returnUrl="@ViewData["ReturnUrl"]" method="post">
-            <h4>Add Event</h4>
+            <h4>Ask Question</h4>
             <hr />
             <div class="form-group">
                 <label asp-for="Title"></label>
