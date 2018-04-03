@@ -1,9 +1,25 @@
 @using System.Collections.Generic;
 @model List<FinalProject.Models.CourseViewModels.CourseModel>
-<br>
-<br>
-<br>
-<div>
+@inject SignInManager<ApplicationUser> SignInManager
+
+@foreach (var item in Model){
+    <div class="card">
+        <div class ="card-header">
+            <h5>@Html.DisplayFor(modelItem => item.Department) @Html.DisplayFor(modelItem => item.CourseNumber) @Html.DisplayFor(modelItem => item.Session)</h5>
+        </div>
+      
+      <div class="card-body">
+        <h5 class="card-title">@Html.DisplayFor(modelItem => item.Semester) @Html.DisplayFor(modelItem => item.Instructor)</h5>
+        <p class="card-text">@Html.DisplayFor(modelItem => item.Description)</p>
+        <a href="#" class="btn btn-primary">Go somewhere</a>
+      </div>
+    </div>
+    <br>
+}
+
+    @*
+<div class="container bg-light">
+    
     <table border="3">
         <tr>
             <td width="80px" height="50px">Year</td>
@@ -41,4 +57,7 @@
             </tr>
         }
     </table>
+
 </div>
+
+    *@

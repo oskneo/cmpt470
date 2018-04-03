@@ -49,9 +49,14 @@
     <script type="text/javascript" src="~/js/addcourse.js"></script>
     <script type="text/javascript" src="~/lib/jquery/dist/jquery.js"></script>
     <script>
+        var url="http://www.sfu.ca/bin/wcm/course-outlines";
+        var urln="";
+        function showdata(){
+            
+        }
         $(document).ready(function(){
             $("#ac").click(function(){
-                $.getJSON("http://www.sfu.ca/bin/wcm/course-outlines", function(result){
+                $.getJSON(url, function(result){
                     $.each(result, function(i, field){
                     $("#show").append(field.value + " ");
             });
