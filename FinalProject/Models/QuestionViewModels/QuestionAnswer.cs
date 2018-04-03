@@ -36,6 +36,8 @@ namespace FinalProject.Models.QuestionViewModels
         // [ForeignKey("QId")]
         public uint QId { get; set; }
 
+        public DateTime Time { get; set; }
+
         // public virtual QuestionModel Questions { get; set; }
 
         public string QuestionTitle { get; set; }

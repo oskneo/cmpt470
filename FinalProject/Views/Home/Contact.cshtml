@@ -1,3 +1,4 @@
+@model FinalProject.Models.CourseViewModels.CourseModel
 @using Microsoft.AspNetCore.Identity
 @using FinalProject.Models
 @inject SignInManager<ApplicationUser> SignInManager
@@ -32,50 +33,10 @@ Message: <input type="text" id="message" />
 <div id="MessageBox"></div>
 @section scripts {
     <script src="~/js/signalr-client-1.0.0-alpha2-final.js"></script>
+    <script src="~/js/contact.js"></script>
     <script>
-    
-        
-    let transportType = signalR.TransportType.WebSockets;
-    let http = new signalR.HttpConnection(`http://${document.location.host}/lhh/livehelphub`, { transport: transportType });
-    let connection = new signalR.HubConnection(http);
-    connection.start();
- 
-    connection.on('Send', (name, message) => {
-        if (name==""){
-            name="Anonymous";
-        }
-        appendLine(message, name);    
-    });
- 
-    document.getElementById('send').addEventListener('click', event => {
-        let message = document.getElementById('message').value;
-        let name = document.getElementById('username').value;
-        document.getElementById('message').value = '';
-        
- 
-        connection.invoke('Send', name, message);   
-        event.preventDefault();
-    });
-    
-    $("#message").keyup(function(event) {
-        if (event.keyCode === 13) {
-            $("#send").click();
-        }
-    });
-    $("#username").keyup(function(event) {
-        if (event.keyCode === 13) {
-            $("#send").click();
-        }
-    });
- 
-    function appendLine(line, name) {
-        let li = document.createElement('li');
-        li.innerText = name + ":" + line;
-        document.getElementById('liveHelp').appendChild(li);
-        document.getElementById('layoutmessage').innerText="Message from " + name + ":" + line;
-    };
+
+    addE();
     </script>
-}
-@section Styles {
-    <link href="@Url.Content("~/css/contact.css")" rel="stylesheet" type="text/css" />
+    
 }

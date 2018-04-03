@@ -85,6 +85,7 @@ namespace FinalProject.Controllers
             var fe=fa.ToList<QuestionModel>().FirstOrDefault();
             model.QuestionTitle=fe.Title;
             model.QuestionContent=fe.Description;
+            model.Time=fe.Time;
 
             // var data = from sc in db.StudentCourses join s in db.Courses on sc.CourseId equals s.CourseId where sc.ApplicationUser == us select new CourseModel {
             //     Department = s.Department + s.CourseNumber, 

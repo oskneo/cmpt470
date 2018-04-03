@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -11,19 +11,16 @@ using FinalProject.Models;
 
 namespace FinalProject.Models.CourseViewModels
 {
-    public class StudentCourse
+    public class GroupModel
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public uint StudentCourseId { get; set; }
-
-        [ForeignKey("Courses")]
-        public uint CourseId { get; set; }
-
-        public virtual CourseModel Courses { get; set; }
         
-        [ForeignKey("UserId")]
+
+        public uint CourseId { get; set; }
         public virtual ApplicationUser ApplicationUser { get; set; }
+        
+        // public virtual List<ApplicationUser> ApplicationUsers { get; set; }
+
+        public List<StudentCourse> StudentCourses { get; set; }
 
         public uint GroupNumber { get; set; }
 

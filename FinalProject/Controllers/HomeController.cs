@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using FinalProject.Models;
+using FinalProject.Models.CourseViewModels;
 
 namespace FinalProject.Controllers
 {
@@ -42,6 +43,12 @@ namespace FinalProject.Controllers
             ViewData["Message"] = "Your contact page.";
 
             return View();
+        }
+        public IActionResult toContact(CourseModel model)
+        {
+            ViewData["Message"] = "Your contact page.";
+
+            return PartialView("Contact");
         }
 
         public IActionResult Error()

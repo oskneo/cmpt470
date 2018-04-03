@@ -11,16 +11,20 @@
     <table border="2px">
         <tr><td><button id="Info">Info</button></td></tr>
         <tr><td><button id="Questions">Questions</button></td></tr>
+        <tr><td><button id="Chat">Chat</button></td></tr>
+        <tr><td><button id="Group">Group</button></td></tr>
         <tr><td>@Html.ActionLink("Question","AskQuestion","Question")</td></tr>
     </table>
 </div>
-<div id="courseContent"  style="float:center" ></div>
+<div id="courseContent"  style="float:right;width: 700px" ></div>
     @*await Html.PartialAsync("courseInfo", Model)*@
 </div>
 
 
 @section js{
     <script type="text/javascript" src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/js/signalr-client-1.0.0-alpha2-final.js"></script>
+    <script src="~/js/contact.js"></script>
     <script>
         $(document).ready(function(){
             $('#courseContent').load('@Url.Action("toCourseInfo", "Course")', { CourseId: @Model.CourseId });
@@ -29,6 +33,13 @@
             });
             $('#Questions').click(function() {
                 $('#courseContent').load('@Url.Action("toAsk", "Question")', { CourseId: @Model.CourseId });
+            });
+            $('#Chat').click(function() {
+                $('#courseContent').load('@Url.Action("toContact", "Home")', { CourseId: @Model.CourseId });
+                wt();
+            });
+            $('#Group').click(function() {
+                $('#courseContent').load('@Url.Action("toGroup", "Course")', { CourseId: @Model.CourseId });
             });
         });
         

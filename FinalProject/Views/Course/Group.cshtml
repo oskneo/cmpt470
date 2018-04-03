@@ -1,0 +1,78 @@
+@model FinalProject.Models.CourseViewModels.GroupModel
+
+@{
+    var students=Model.StudentCourses;
+}
+<div>
+    <table border="3">
+        <tr>
+            <td>
+                @if (Model.GroupNumber!=0){
+                    <p>Group @Model.GroupNumber</p>
+                    <button id="Create" hidden>Create</button>
+                }
+                else{
+                    <p>No group created!</p><button id="Create">Create</button>
+                }
+            </td>
+        </tr>
+    </table>
+</div>
+
+<div>
+    <table border="3">
+        <tr>
+            <td width="80px" height="50px">Add To Group</td>
+            <td width="80px" height="50px">UserName</td>
+            <td width="80px" height="50px">StudentId</td>
+            <td width="80px" height="50px">Email</td>
+            <td width="80px" height="50px">GroupNumber</td>
+        </tr>
+        @foreach (var item in students)
+        {
+            <tr>
+                <td>
+                    @Html.ActionLink("Add","AddToGroup", new { 
+                        CourseId = Model.CourseId, 
+                        UserId=item.ApplicationUser
+                     },new {
+                        
+                        @class="btn btn-danger"
+                    })
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ApplicationUser.UserName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ApplicationUser.StudentId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ApplicationUser.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GroupNumber)
+                </td>
+            </tr>
+        }
+    </table>
+</div>
+
+@section js{
+    <script type="text/javascript" src="~/lib/jquery/dist/jquery.js"></script>
+    <script>
+        $(document).ready(function(){
+            $("#Create").click(function(){
+                $.ajax({
+                    type:"POST",
+                    url: "CreateGroup",
+                    data: {
+                        CourseId:@Model.CourseId
+                    },
+                    success: function(){
+                        console.log("CreateGroup!");
+                    }
+                });
+            });
+        });
+    </script>
+}

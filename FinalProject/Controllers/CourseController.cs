@@ -84,12 +84,17 @@ namespace FinalProject.Controllers
 
             StudentCourse scs = new StudentCourse{
                 CourseId = model.CourseId,
-                ApplicationUser = us
+                ApplicationUser = us,
+                GroupNumber = 0
             };
             db.StudentCourses.Add(scs);
             db.SaveChanges();
 
-            var data = from sc in db.StudentCourses join s in db.Courses on sc.CourseId equals s.CourseId where sc.ApplicationUser == us select new CourseModel {
+            var data = 
+                from sc in db.StudentCourses 
+                join s in db.Courses on sc.CourseId equals s.CourseId 
+                where sc.ApplicationUser == us 
+                select new CourseModel {
                 CourseId=s.CourseId,
                 Year=s.Year,
                 Semester=s.Semester,
@@ -107,7 +112,11 @@ namespace FinalProject.Controllers
 
         public async Task<IActionResult> myCourses(string returnUrl = null){
             var us = await GetCurrentUserAsync();
-            var data = from sc in db.StudentCourses join s in db.Courses on sc.CourseId equals s.CourseId where sc.ApplicationUser == us select new CourseModel {
+            var data = 
+                from sc in db.StudentCourses 
+                join s in db.Courses on sc.CourseId equals s.CourseId 
+                where sc.ApplicationUser == us 
+                select new CourseModel {
                 CourseId=s.CourseId,
                 Year=s.Year,
                 Semester=s.Semester,
@@ -134,10 +143,56 @@ namespace FinalProject.Controllers
         }
         
         public IActionResult toCourseInfo(CourseModel model,string returnUrl = null){
-            var newmodel= from sc in db.Courses where sc.CourseId == model.CourseId select sc;
+            var newmodel= 
+                from sc in db.Courses 
+                where sc.CourseId == model.CourseId 
+                select sc;
             var crs=newmodel.ToList<CourseModel>().SingleOrDefault();
             
             return PartialView("courseInfo",crs);
+        }
+
+        public async Task<IActionResult> Group(GroupModel model,string returnUrl = null){
+            var newmodel = 
+                from us in db.Users 
+                join sc in db.StudentCourses on us.Id equals sc.ApplicationUser.Id 
+                where sc.CourseId == model.CourseId 
+                select sc;
+            var mus = await GetCurrentUserAsync();
+            var mymodel = 
+                from md in newmodel 
+                where md.ApplicationUser == mus && md.GroupNumber != 0 
+                select md;
+            var ap = mymodel.SingleOrDefault();
+            uint gn=0;
+            if (ap!=null){
+                gn=ap.GroupNumber;
+            } 
+            var dt=newmodel.ToList();
+            GroupModel nl=new GroupModel {
+                CourseId=model.CourseId,
+                StudentCourses=dt,
+                GroupNumber=gn
+            };
+            
+            
+            
+            
+            return View(nl);
+        }
+        [HttpPost]
+        public async Task<IActionResult> CreateGroup(GroupModel model){
+            var mus = await GetCurrentUserAsync();
+            var newmodel = 
+                from sc in db.StudentCourses 
+                where sc.CourseId == model.CourseId 
+                select sc;
+            var max=newmodel.OrderByDescending(i=>i.GroupNumber).FirstOrDefault();
+            max.GroupNumber+=1;
+            db.SaveChanges();
+
+
+            return View("Group");
         }
 
 

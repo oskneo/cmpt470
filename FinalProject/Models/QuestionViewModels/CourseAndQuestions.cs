@@ -18,7 +18,6 @@ namespace FinalProject.Models.QuestionViewModels
 
        
 
-        public uint CourseId { get; set; }
 
 
         public List<FinalProject.Models.QuestionViewModels.QuestionModel> QuestionList { get; set; }
@@ -27,6 +26,36 @@ namespace FinalProject.Models.QuestionViewModels
         //     // Title="";
         //     // Description="";
         // }
+        
+        [Required]
+        [Display(Name = "Title")]
+        public string Title { get; set; }
+        
+        [Required]
+        [Display(Name = "Description")]
+        public string Description { get; set; }
+
+        // [DataType(DataType.Time)]
+        [DisplayFormat(DataFormatString = "{yyyy 0:HH:mm}")]
+        public DateTime? Time { get; set; }
+        
+        
+        
+        
+        
+        public uint CourseId { get; set; }
+
+
+
+        public CourseAndQuestions(){
+            Title="";
+            Description="";
+        }
+
+
+
+
+
         
     }
     
