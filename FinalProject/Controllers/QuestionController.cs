@@ -56,9 +56,11 @@ namespace FinalProject.Controllers
         public async Task<IActionResult> AskQuestion(QuestionModel model, string returnUrl = null)
         {
             var us = await GetCurrentUserAsync();
+            QuestionAnswer _model=new QuestionAnswer();
+            QuestionModel qt;
             if (ModelState.IsValid)
             {
-                QuestionModel qt=new QuestionModel{
+                qt=new QuestionModel{
                     CourseId = model.CourseId, 
                     Time = DateTime.Now,
                     Title = model.Title,
@@ -67,10 +69,23 @@ namespace FinalProject.Controllers
                 };
                 db.Questions.Add(qt);
                 db.SaveChanges();
-                return RedirectToAction("QuestionPage","Question", new { QId = qt.QId });
+                _model.Time=qt.Time;
+                _model.QId=qt.QId;
+                
             }
+            //return RedirectToAction("QuestionPage","Question", new { QId = qt.QId });
             
-            return View(model);
+            //return View(model);
+            
+
+            _model.Answers=db.Answers.ToList<AnswerModel>();
+            _model.ApplicationUser=us;
+            
+
+            _model.QuestionTitle=model.Title;
+            _model.QuestionContent=model.Description;
+            
+            return PartialView("QuestionPage",_model);
             
         }
         
@@ -173,6 +188,7 @@ namespace FinalProject.Controllers
             
             _model.Answers=db.Answers.ToList<AnswerModel>();
             _model.ApplicationUser=us;
+            _model.QId=model.QId;
 
             var fa= from i in db.Questions where i.QId == model.QId select i;
             var fe=fa.ToList<QuestionModel>().FirstOrDefault();

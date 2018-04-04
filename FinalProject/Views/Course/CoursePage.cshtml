@@ -158,6 +158,21 @@
                     });
                     rpfn();
                 });
+
+
+                $('#askb').on("click",function(e) {
+                    
+                    
+                    e.preventDefault();
+                    
+                    //console.log(str);
+                    $('#courseContent').load('@Url.Action("AskQuestion", "Question")', { 
+                        CourseId: $("#CourseId").val(),  
+                        Title:$("#Title").val(),
+                        Description:$("#Description").val()
+                    });
+                    qnfn();
+                });
             }
             else{
                 setTimeout(qnfn,200);

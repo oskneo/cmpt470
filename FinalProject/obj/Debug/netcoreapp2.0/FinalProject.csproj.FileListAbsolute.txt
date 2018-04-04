@@ -34,3 +34,15 @@
 /home/ubuntu/project/FinalProject/obj/Debug/netcoreapp2.0/FinalProject.AssemblyInfo.cs
 /home/ubuntu/project/FinalProject/obj/Debug/netcoreapp2.0/FinalProject.dll
 /home/ubuntu/project/FinalProject/obj/Debug/netcoreapp2.0/FinalProject.pdb
+/home/osk666/Public/sfu/c4702/CMPT470_Project/FinalProject/bin/Debug/netcoreapp2.0/app.db
+/home/osk666/Public/sfu/c4702/CMPT470_Project/FinalProject/bin/Debug/netcoreapp2.0/FinalProject.deps.json
+/home/osk666/Public/sfu/c4702/CMPT470_Project/FinalProject/bin/Debug/netcoreapp2.0/FinalProject.runtimeconfig.json
+/home/osk666/Public/sfu/c4702/CMPT470_Project/FinalProject/bin/Debug/netcoreapp2.0/FinalProject.runtimeconfig.dev.json
+/home/osk666/Public/sfu/c4702/CMPT470_Project/FinalProject/bin/Debug/netcoreapp2.0/FinalProject.dll
+/home/osk666/Public/sfu/c4702/CMPT470_Project/FinalProject/bin/Debug/netcoreapp2.0/FinalProject.pdb
+/home/osk666/Public/sfu/c4702/CMPT470_Project/FinalProject/obj/Debug/netcoreapp2.0/FinalProject.csproj.CoreCompileInputs.cache
+/home/osk666/Public/sfu/c4702/CMPT470_Project/FinalProject/obj/Debug/netcoreapp2.0/UserSecretsAssemblyInfo.cs
+/home/osk666/Public/sfu/c4702/CMPT470_Project/FinalProject/obj/Debug/netcoreapp2.0/FinalProject.AssemblyInfoInputs.cache
+/home/osk666/Public/sfu/c4702/CMPT470_Project/FinalProject/obj/Debug/netcoreapp2.0/FinalProject.AssemblyInfo.cs
+/home/osk666/Public/sfu/c4702/CMPT470_Project/FinalProject/obj/Debug/netcoreapp2.0/FinalProject.dll
+/home/osk666/Public/sfu/c4702/CMPT470_Project/FinalProject/obj/Debug/netcoreapp2.0/FinalProject.pdb
