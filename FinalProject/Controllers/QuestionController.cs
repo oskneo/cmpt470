@@ -75,17 +75,25 @@ namespace FinalProject.Controllers
         }
         
         [HttpGet]
-        public async Task<IActionResult> QuestionPage(QuestionAnswer model, string returnUrl = null){
+        public IActionResult QuestionPage(QuestionAnswer model, string returnUrl = null){
             // QuestionAnswer model=new QuestionAnswer();
-            model.Answers=db.Answers.ToList<AnswerModel>();
-            var us = await GetCurrentUserAsync();
-            model.ApplicationUser=us;
+            
+            
+            
+            
+            // model.Answers=db.Answers.ToList<AnswerModel>();
+            // var us = await GetCurrentUserAsync();
+            // model.ApplicationUser=us;
 
-            var fa= from i in db.Questions where i.QId == model.QId select i;
-            var fe=fa.ToList<QuestionModel>().FirstOrDefault();
-            model.QuestionTitle=fe.Title;
-            model.QuestionContent=fe.Description;
-            model.Time=fe.Time;
+            // var fa= from i in db.Questions where i.QId == model.QId select i;
+            // var fe=fa.ToList<QuestionModel>().FirstOrDefault();
+            // model.QuestionTitle=fe.Title;
+            // model.QuestionContent=fe.Description;
+            // model.Time=fe.Time;
+
+
+
+
 
             // var data = from sc in db.StudentCourses join s in db.Courses on sc.CourseId equals s.CourseId where sc.ApplicationUser == us select new CourseModel {
             //     Department = s.Department + s.CourseNumber, 
@@ -95,16 +103,43 @@ namespace FinalProject.Controllers
             // _model.CourseList=data.ToList<CourseModel>();
             return View(model);
         }
+        
+        [HttpPost]
+        public async Task<IActionResult> toQuestionPage(QuestionAnswer model, string returnUrl = null){
+            
+            model.Answers=db.Answers.ToList<AnswerModel>();
+            var us = await GetCurrentUserAsync();
+            model.ApplicationUser=us;
 
-        [HttpGet]
-        public async Task<IActionResult> ReplyTo(QuestionAnswer model, string returnUrl = null){
+            var fa= from i in db.Questions where i.QId == model.QId select i;
+            var fe=fa.ToList<QuestionModel>().FirstOrDefault();
+            model.QuestionTitle=fe.Title;
+            model.QuestionContent=fe.Description;
+            model.Time=fe.Time;
+            return PartialView("QuestionPage",model);
+        }
+        
+        
+        [HttpPost]
+        public async Task<IActionResult> toReplyTo(QuestionAnswer model, string returnUrl = null){
             
             var us = await GetCurrentUserAsync();
             AnswerModel am=new AnswerModel();
             am.RefAId=model.AId;
             am.QId=model.QId;
             am.ApplicationUser=us;
-            return View(am);
+            return PartialView("ReplyTo",am);
+        }
+
+        [HttpGet]
+        public IActionResult ReplyTo(QuestionAnswer model, string returnUrl = null){
+            
+            // var us = await GetCurrentUserAsync();
+            // AnswerModel am=new AnswerModel();
+            // am.RefAId=model.AId;
+            // am.QId=model.QId;
+            // am.ApplicationUser=us;
+            return View(model);
         }
 
         [HttpPost]
@@ -128,16 +163,31 @@ namespace FinalProject.Controllers
                 };
                 db.Answers.Add(qt);
                 db.SaveChanges();
-                return RedirectToAction("QuestionPage","Question", new { QId = qt.QId });
+                //return RedirectToAction("QuestionPage","Question", new { QId = qt.QId });
             }
+            
+            
+            
+            
+            QuestionAnswer _model=new QuestionAnswer();
+            
+            _model.Answers=db.Answers.ToList<AnswerModel>();
+            _model.ApplicationUser=us;
+
+            var fa= from i in db.Questions where i.QId == model.QId select i;
+            var fe=fa.ToList<QuestionModel>().FirstOrDefault();
+            _model.QuestionTitle=fe.Title;
+            _model.QuestionContent=fe.Description;
+            //_model.Time=fe.Time;
+            return PartialView("QuestionPage",_model);
 
 
 
-            AnswerModel am=new AnswerModel();
-            am.RefAId=model.AnswerId;
-            am.QId=model.QId;
-            am.ApplicationUser=us;
-            return View(am);
+            // AnswerModel am=new AnswerModel();
+            // am.RefAId=model.AnswerId;
+            // am.QId=model.QId;
+            // am.ApplicationUser=us;
+            // return (am);
         }
         
 

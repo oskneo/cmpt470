@@ -6,15 +6,14 @@
 }
 
 
-<div class="card">
-        <div class ="card-header">
-            <h5>
-                @Html.DisplayFor(modelItem => item.Department) @Html.DisplayFor(modelItem => item.CourseNumber) @Html.DisplayFor(modelItem => item.Session) (@Html.DisplayFor(modelItem => item.Semester))
-                
-                <h6 class="card-subtitle mb-2 text-muted">Instructor : @Html.DisplayFor(modelItem => item.Instructor)</h6>
-            </h5>
-        </div>
-        <div class="card-body">
-            <p class="card-text">@Html.DisplayFor(modelItem => item.Description)</p>
-        </div>
+
+<div class ="card-header">
+    <h5>
+        @Html.DisplayFor(modelItem => item.Department) @Html.DisplayFor(modelItem => item.CourseNumber) @Html.DisplayFor(modelItem => item.Session) (@Html.DisplayFor(modelItem => item.Semester))
+        
+        <h6 class="card-subtitle mb-2 text-muted">Instructor : @Html.DisplayFor(modelItem => item.Instructor)</h6>
+    </h5>
+</div>
+<div class="card-body">
+    <p class="card-text">@Html.DisplayFor(modelItem => item.Description)</p>
 </div>

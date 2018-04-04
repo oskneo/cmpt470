@@ -9,8 +9,10 @@
 @foreach (var item in Model){
     <div class="card">
         <div class ="card-header">
+            
             <h5>
-                @Html.DisplayFor(modelItem => item.Department) @Html.DisplayFor(modelItem => item.CourseNumber) @Html.DisplayFor(modelItem => item.Session) (@Html.DisplayFor(modelItem => item.Semester))
+               
+            <a style="text-transform: uppercase"> @Html.DisplayFor(modelItem => item.Department)</a><a> @Html.DisplayFor(modelItem => item.CourseNumber) @Html.DisplayFor(modelItem => item.Session) (@Html.DisplayFor(modelItem => item.Semester))</a>
                 
                 @Html.ActionLink("Enroll","Enroll", new { CourseId = item.CourseId },new { @class="btn btn-primary btn-sm float-right", @style="display:inline;"   })
                 <h6 class="card-subtitle mb-2 text-muted">Instructor : @Html.DisplayFor(modelItem => item.Instructor)</h6>

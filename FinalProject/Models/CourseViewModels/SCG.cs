@@ -11,24 +11,14 @@ using FinalProject.Models;
 
 namespace FinalProject.Models.CourseViewModels
 {
-    public class GroupModel
+    public class SCG
     {
         
 
-        public uint CourseId { get; set; }
         public virtual ApplicationUser ApplicationUser { get; set; }
         
-        public virtual List<ApplicationUser> GroupMembers { get; set; }
-
-        public List<SCG> StudentCourses { get; set; }
 
         public uint GroupNumber { get; set; }
-
-        public string userid { get; set; }
-
-        public GroupModel(){
-            GroupNumber=0;
-        }
 
         
         

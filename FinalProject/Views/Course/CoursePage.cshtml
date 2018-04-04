@@ -3,10 +3,24 @@
 @inject SignInManager<ApplicationUser> SignInManager
 
 <div class="container">
-    <h2>Course Page</h2>
-
+    <h2>COURSE NAME</h2>
+</div>
 <br>
+<div class="container">
+   <div class="nav nav-pills flex-column float-left" id="v-pills-tab" role="tablist" style="width:150px; padding-right:10px;">
+        <a class="nav-link active nl" asp-controller="Course" asp-action="Question" aria-selected="true" id="Info">Info</a>
+        <a class="nav-link nl" asp-controller="Home" asp-action="Question" aria-selected="false" id="Questions">Questions</a>
+        <a class="nav-link nl" asp-controller="Home" asp-action="Question" aria-selected="false" id="Chat">Chat</a>
+        <a class="nav-link nl" asp-controller="Course" asp-action="Group" aria-selected="false" id="Group">Group</a>
+    </div>
+    <div class="card flex"  id="courseContent">
+    @await Html.PartialAsync("courseInfo", Model)
+    </div>
+    <br>
+</div>
 
+
+@*
 <div id="courseBar" style="float:left">
     <table border="2px">
         <tr><td><button id="Info">Info</button></td></tr>
@@ -16,32 +30,164 @@
         <tr><td>@Html.ActionLink("Question","AskQuestion","Question")</td></tr>
     </table>
 </div>
-<div id="courseContent"  style="float:right;width: 700px" ></div>
-    @*await Html.PartialAsync("courseInfo", Model)*@
-</div>
 
+*@
 
 @section js{
+
     <script type="text/javascript" src="~/lib/jquery/dist/jquery.js"></script>
     <script src="~/js/signalr-client-1.0.0-alpha2-final.js"></script>
     <script src="~/js/contact.js"></script>
     <script>
         $(document).ready(function(){
             $('#courseContent').load('@Url.Action("toCourseInfo", "Course")', { CourseId: @Model.CourseId });
-            $('#Info').click(function() {
+            $('#Info').click(function(e) {
+                e.preventDefault();
+                
+                $('.nl').attr('aria-selected', 'false');
+                $('.nl').attr('class', 'nav-link nl');
+                $(this).attr('class', 'nav-link active nl');
+                $(this).attr('aria-selected', 'true');
                 $('#courseContent').load('@Url.Action("toCourseInfo", "Course")', { CourseId: @Model.CourseId });
             });
-            $('#Questions').click(function() {
+            $('#Questions').on("click",function(e) {
+                e.preventDefault();
+                 
+                $('.nl').attr('aria-selected', 'false');
+                $('.nl').attr('class', 'nav-link nl');
+                $(this).attr('class', 'nav-link active nl');
+                $(this).attr('aria-selected', 'true');
+                
                 $('#courseContent').load('@Url.Action("toAsk", "Question")', { CourseId: @Model.CourseId });
+                qnfn();
             });
-            $('#Chat').click(function() {
+            $('#Chat').click(function(e) {
+                e.preventDefault();
+                $('.nl').attr('aria-selected', 'false');
+                $('.nl').attr('class', 'nav-link nl');
+                $(this).attr('class', 'nav-link active nl');
+                $(this).attr('aria-selected', 'true');
                 $('#courseContent').load('@Url.Action("toContact", "Home")', { CourseId: @Model.CourseId });
                 wt();
             });
-            $('#Group').click(function() {
+            $('#Group').click(function(e) {
+                e.preventDefault();
+                $('.nl').attr('aria-selected', 'false');
+                $('.nl').attr('class', 'nav-link nl');
+                $(this).attr('class', 'nav-link active nl');
+                $(this).attr('aria-selected', 'true');
                 $('#courseContent').load('@Url.Action("toGroup", "Course")', { CourseId: @Model.CourseId });
+                groupfn();
             });
+            
         });
+
+
+        function spl(url){
+            var str=url.split('&').join('=').split('=');
+            return str;
+        }
+        
+        function rpto(){
+            if($('#repb').length){
+                
+                $('#repb').on("click",function(e) {
+                    
+                    
+                    e.preventDefault();
+                    
+                    var url=$(this).data("Reply");
+                    //var str=spl(url);
+                    console.log(url);
+                    $('#courseContent').load('@Url.Action("ReplyTo", "Question")', { 
+                        QId: $("#QId").val(), 
+                        RefAId:$("#RefAId").val(), 
+                        Reply:$("#Reply").val()
+                    });
+                });
+            }
+            else{
+                setTimeout(rpto,200);
+            }
+        }
+        
+        
+        function rpfn(){
+            if($('.toR').length){
+                
+                $('.toR').on("click",function(e) {
+                    
+                    
+                    e.preventDefault();
+                    
+                    var url=$(this).attr("href");
+                    var str=spl(url);
+                    console.log(str);
+                    $('#courseContent').load('@Url.Action("toReplyTo", "Question")', { 
+                        CourseId: str[7], 
+                        QId:str[1], 
+                        Title:str[3],
+                        Description:str[5]
+                    });
+                    rpto();
+                });
+            }
+            else{
+                setTimeout(rpfn,200);
+            }
+        }
+        
+        
+        
+        function qnfn(){
+            if($('.enterqn').length){
+                
+                $('.enterqn').on("click",function(e) {
+                    
+                    
+                    e.preventDefault();
+                    
+                    var url=$(this).attr("href");
+                    var str=spl(url);
+                    //console.log(str);
+                    $('#courseContent').load('@Url.Action("toQuestionPage", "Question")', { 
+                        CourseId: str[7], 
+                        QId:str[1], 
+                        Title:str[3],
+                        Description:str[5]
+                    });
+                    rpfn();
+                });
+            }
+            else{
+                setTimeout(qnfn,200);
+            }
+        }
+
+
+        function groupfn(){
+            if($('#Create').length){
+                $('#Create').click(function() {
+                    $('#courseContent').load('@Url.Action("CreateGroup", "Course")', { CourseId: @Model.CourseId });
+                });
+                
+                $('.AddToGroup').on("click",function(e) {
+                    
+                    
+                    e.preventDefault();
+                    var url=$(this).attr("href");
+                    var str=spl(url);
+                    //console.log(str);
+                    if(str[5]=="0"){
+                        $(this).hide();
+                    }
+                    $('#courseContent').load('@Url.Action("AddToGroup", "Course")', { CourseId: str[1], userid:str[3], GroupNumber:str[5] });
+                });
+            }
+            else{
+                setTimeout(groupfn,200);
+            }
+        }
         
         
         

@@ -1,0 +1,109 @@
+@model FinalProject.Models.CourseViewModels.GroupModel
+
+@{
+    var students=Model.StudentCourses;
+}
+
+
+<div class="container">
+    <h2>COURSE NAME</h2>
+</div>
+<br>
+
+<div class="container">
+   <div class="nav nav-pills flex-column float-left" id="v-pills-tab" role="tablist" style="width:150px; padding-right:10px;">
+        <a class="nav-link active" asp-controller="Home" asp-action="Question" aria-selected="true" id="Info">Info</a>
+        <a class="nav-link" asp-controller="Home" asp-action="Question" aria-selected="false" id="Questions">Questions</a>
+        <a class="nav-link" asp-controller="Home" asp-action="Question" aria-selected="false" id="Chat">Chat</a>
+        <a class="nav-link" asp-controller="Course" asp-action="Group" aria-selected="false" id="Group">Group</a>
+    </div>
+    <br>
+</div>
+
+<div class="card flex">
+    <div class ="card-header">
+        <h5>
+           TITLE
+            <h6 class="card-subtitle mb-2 text-muted">SUBTITLE</h6>
+        </h5>
+    </div>
+    <div class="card-body">
+        <p class="card-text">DESCRIPTION</p>
+    </div>
+</div>
+
+
+
+<div>
+    <table border="3">
+        <tr>
+            <td>
+                @if (Model.GroupNumber!=0){
+                    <p>Group @Model.GroupNumber</p>
+                    <button id="Create" hidden>Create</button>
+                }
+                else{
+                    <p>No group created!</p><button id="Create">Create</button>
+                }
+            </td>
+        </tr>
+    </table>
+</div>
+
+<div>
+    <table border="3">
+        <tr>
+            <td width="80px" height="50px">Add To Group</td>
+            <td width="80px" height="50px">UserName</td>
+            <td width="80px" height="50px">StudentId</td>
+            <td width="80px" height="50px">Email</td>
+            <td width="80px" height="50px">GroupNumber</td>
+        </tr>
+        @foreach (var item in students)
+        {
+            <tr>
+                <td>
+                    @Html.ActionLink("Add","AddToGroup", new { 
+                        CourseId = Model.CourseId, 
+                        UserId=item.ApplicationUser
+                     },new {
+                        
+                        @class="btn btn-danger"
+                    })
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ApplicationUser.UserName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ApplicationUser.StudentId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ApplicationUser.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GroupNumber)
+                </td>
+            </tr>
+        }
+    </table>
+</div>
+
+@section js{
+    <script type="text/javascript" src="~/lib/jquery/dist/jquery.js"></script>
+    <script>
+        $(document).ready(function(){
+            $("#Create").click(function(){
+                $.ajax({
+                    type:"POST",
+                    url: "CreateGroup",
+                    data: {
+                        CourseId:@Model.CourseId
+                    },
+                    success: function(){
+                        console.log("CreateGroup!");
+                    }
+                });
+            });
+        });
+    </script>
+}

@@ -21,7 +21,7 @@
         ht.Append("</b><br></p></div><div><p>");
         ht.Append(reply);
         ht.Append("<br></p></div><div><p>");
-        ht.Append("<a href=\"../Question/ReplyTo?AId=");
+        ht.Append("<a class=\"toR\" href=\"../Question/ReplyTo?AId=");
         ht.Append(tAId);
         ht.Append("&QId=");
         ht.Append(Model.QId);
@@ -54,7 +54,7 @@
                 <div>
                     <div>
                         <p>
-                            <b>@qn at @Model.Time.ToString("yyyy/mm/dd  HH:mm")</b>
+                            <b>@qn at @*Model.Time.ToString("yyyy/mm/dd  HH:mm")*@</b>
                             <br>
                         </p>
                     </div>
@@ -71,7 +71,7 @@
                         </p>
                     </div>
                     <div>
-                        @Html.ActionLink("Reply", "ReplyTo", new { AId=0, QId=Model.QId })
+                        @Html.ActionLink("Reply", "ReplyTo", new { AId=0, QId=Model.QId }, new {@class="toR"})
                     </div>
 
                 </div>

@@ -11,9 +11,16 @@
     <div class="card">
         <div class ="card-header">
             <h5>
-                @Html.DisplayFor(modelItem => item.ApplicationUser.UserName) @Html.DisplayFor(modelItem => item.Title) @item.Time.ToString("yyyy/mm/dd  HH:mm")
+                @Html.DisplayFor(modelItem => item.ApplicationUser.UserName) @Html.DisplayFor(modelItem => item.Title) @item.Time.ToString("yyyy-MM-dd_HH:mm")
                 
-                @Html.ActionLink("Enter","QuestionPage", item,new { @class="btn btn-primary btn-sm float-right", @style="display:inline;"   })
+                @Html.ActionLink("Enter","QuestionPage", new {
+                    QId=@item.QId,
+                    Title=@item.Title,
+                    Description=@item.Description,
+                    CourseId=@item.CourseId,
+                    Time=@item.Time.ToString().Replace('/', '~').Replace(' ', '-')
+                
+                },new { @class="btn btn-primary btn-sm float-right enterqn", @style="display:inline;"   })
                 <h6 class="card-subtitle mb-2 text-muted">Question : @Html.DisplayFor(modelItem => item.Description)</h6>
             </h5>
         </div>

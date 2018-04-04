@@ -152,56 +152,121 @@ namespace FinalProject.Controllers
             return PartialView("courseInfo",crs);
         }
 
-        public async Task<IActionResult> Group(GroupModel model,string returnUrl = null){
-            var newmodel = 
-                from us in db.Users 
-                join sc in db.StudentCourses on us.Id equals sc.ApplicationUser.Id 
-                where sc.CourseId == model.CourseId 
-                select sc;
+        public IActionResult Group(GroupModel model,string returnUrl = null){
+            
+            
+            
+            
+            return View(model);
+        }
+        public async void media(GroupModel model, GroupModel nnl){
             var mus = await GetCurrentUserAsync();
             var mymodel = 
-                from md in newmodel 
-                where md.ApplicationUser == mus && md.GroupNumber != 0 
-                select md;
+                from sc in db.StudentCourses 
+                where sc.CourseId == model.CourseId && sc.ApplicationUser == mus && sc.GroupNumber != 0
+                select sc;
             var ap = mymodel.SingleOrDefault();
+
+            var newmodel = 
+                from us in db.Users 
+                join sc in db.StudentCourses on us.Id equals sc.ApplicationUser.Id
+                where sc.CourseId == model.CourseId 
+                select new SCG {
+                    ApplicationUser=us,
+                    GroupNumber=sc.GroupNumber
+                };
+            
+            
+            
             uint gn=0;
             if (ap!=null){
                 gn=ap.GroupNumber;
             } 
+
+            var gm=
+                from us in db.Users 
+                join sc in db.StudentCourses on us.Id equals sc.ApplicationUser.Id
+                where sc.CourseId == model.CourseId && sc.GroupNumber == gn && sc.GroupNumber != 0
+                select us;
             var dt=newmodel.ToList();
-            GroupModel nl=new GroupModel {
-                CourseId=model.CourseId,
-                StudentCourses=dt,
-                GroupNumber=gn
-            };
+
+
+
+            nnl.CourseId=model.CourseId;
+            nnl.StudentCourses=dt;
+            nnl.GroupNumber=gn;
+            nnl.GroupMembers=gm.ToList();
             
-            
-            
-            
-            return View(nl);
+
         }
+
         [HttpPost]
-        public IActionResult toGroup(GroupModel model,string returnUrl = null){
+        public IActionResult toGroup(GroupModel model){
+            GroupModel nl=new GroupModel();
+
+            media(model,nl);
             
             
             
             
             
-            return PartialView("Group",model);
+            return PartialView("Group",nl);
         }
         [HttpPost]
         public async Task<IActionResult> CreateGroup(GroupModel model){
-            var mus = await GetCurrentUserAsync();
-            var newmodel = 
-                from sc in db.StudentCourses 
-                where sc.CourseId == model.CourseId 
-                select sc;
-            var max=newmodel.OrderByDescending(i=>i.GroupNumber).FirstOrDefault();
-            max.GroupNumber+=1;
-            db.SaveChanges();
+            
+            if (ModelState.IsValid)
+            {
+                var mus = await GetCurrentUserAsync();
+                var newmodel = 
+                    from sc in db.StudentCourses 
+                    where sc.CourseId == model.CourseId 
+                    select sc;
+                var max=newmodel.OrderByDescending(i=>i.GroupNumber).FirstOrDefault();
+                var mymodel = 
+                    from sc in newmodel 
+                    where sc.ApplicationUser == mus 
+                    select sc;
+                var me=mymodel.FirstOrDefault();
+                me.GroupNumber = max.GroupNumber + 1;
+                db.SaveChanges();
+            }
+            GroupModel nl=new GroupModel();
+
+            media(model,nl);
 
 
-            return View("Group");
+
+
+            
+
+
+            return PartialView("Group",nl);
+        }
+        [HttpPost]
+        public IActionResult AddToGroup(GroupModel model){
+            
+            if (ModelState.IsValid)
+            {
+                var newmodel = 
+                    from sc in db.StudentCourses 
+                    where sc.CourseId == model.CourseId && model.userid == sc.ApplicationUser.Id
+                    select sc;
+                var max=newmodel.FirstOrDefault();
+                max.GroupNumber = model.GroupNumber;
+                db.SaveChanges();
+            }
+            GroupModel nl=new GroupModel();
+
+            media(model,nl);
+
+
+
+
+            
+
+
+            return PartialView("Group",nl);
         }
 
 

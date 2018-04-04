@@ -1,12 +1,15 @@
 @model FinalProject.Models.CourseViewModels.GroupModel
+@using System.Linq
+@using FinalProject.Models.CourseViewModels
 
 @{
     var students=Model.StudentCourses;
+    
 }
 <div>
     <table border="3">
         <tr>
-            <td>
+            <td colspan="3">
                 @if (Model.GroupNumber!=0){
                     <p>Group @Model.GroupNumber</p>
                     <button id="Create" hidden>Create</button>
@@ -16,9 +19,24 @@
                 }
             </td>
         </tr>
+        <tr>
+            <td>UserName</td>
+            <td>StudentId</td>
+            <td>Email</td>
+        </tr>
+        @if (Model.GroupNumber!=0){
+            @foreach (var it in Model.GroupMembers){
+                <tr>
+                    <td>@it.UserName</td>
+                    <td>@it.StudentId</td>
+                    <td>@it.Email</td>
+                </tr>
+            }
+        }
+        
+
     </table>
 </div>
-
 <div>
     <table border="3">
         <tr>
@@ -32,12 +50,14 @@
         {
             <tr>
                 <td>
-                    @Html.ActionLink("Add","AddToGroup", new { 
+                    @Html.ActionLink("Add","AddTo", new { 
                         CourseId = Model.CourseId, 
-                        UserId=item.ApplicationUser
+                        userid=item.ApplicationUser.Id,
+                        GroupNumber=Model.GroupNumber
                      },new {
                         
-                        @class="btn btn-danger"
+                        @class="btn btn-danger AddToGroup",
+                        data_id=item.ApplicationUser
                     })
                 </td>
                 <td>
@@ -56,23 +76,3 @@
         }
     </table>
 </div>
-
-@section js{
-    <script type="text/javascript" src="~/lib/jquery/dist/jquery.js"></script>
-    <script>
-        $(document).ready(function(){
-            $("#Create").click(function(){
-                $.ajax({
-                    type:"POST",
-                    url: "CreateGroup",
-                    data: {
-                        CourseId:@Model.CourseId
-                    },
-                    success: function(){
-                        console.log("CreateGroup!");
-                    }
-                });
-            });
-        });
-    </script>
-}
