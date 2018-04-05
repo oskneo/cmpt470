@@ -147,7 +147,7 @@ namespace FinalProject.Controllers
         }
 
         [HttpGet]
-        public IActionResult ReplyTo(QuestionAnswer model, string returnUrl = null){
+        public IActionResult ReplyTo(AnswerModel model, string returnUrl = null){
             
             // var us = await GetCurrentUserAsync();
             // AnswerModel am=new AnswerModel();
@@ -158,7 +158,7 @@ namespace FinalProject.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> ReplyTo(AnswerModel model, string returnUrl = null){
+        public async Task<IActionResult> ReplyToQ(AnswerModel model, string returnUrl = null){
             
             var us = await GetCurrentUserAsync();
 

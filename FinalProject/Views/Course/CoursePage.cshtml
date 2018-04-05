@@ -98,16 +98,18 @@
                     
                     var url=$(this).data("Reply");
                     //var str=spl(url);
-                    console.log(url);
-                    $('#courseContent').load('@Url.Action("ReplyTo", "Question")', { 
+                    console.log("rpto");
+                    console.log($("#QId").val());
+                    $('#courseContent').load('@Url.Action("ReplyToQ", "Question")', { 
                         QId: $("#QId").val(), 
                         RefAId:$("#RefAId").val(), 
                         Reply:$("#Reply").val()
                     });
+                    rpfn();
                 });
             }
             else{
-                setTimeout(rpto,200);
+                setTimeout(rpto,50);
             }
         }
         
@@ -122,18 +124,20 @@
                     
                     var url=$(this).attr("href");
                     var str=spl(url);
+                    console.log("rpfn");
                     console.log(str);
                     $('#courseContent').load('@Url.Action("toReplyTo", "Question")', { 
-                        CourseId: str[7], 
-                        QId:str[1], 
-                        Title:str[3],
-                        Description:str[5]
+                        //CourseId: str[7], 
+                        AId:str[1], 
+                        QId:str[3]
+                        //Title:str[3],
+                        //Description:str[5]
                     });
                     rpto();
                 });
             }
             else{
-                setTimeout(rpfn,200);
+                setTimeout(rpfn,50);
             }
         }
         
@@ -149,7 +153,8 @@
                     
                     var url=$(this).attr("href");
                     var str=spl(url);
-                    //console.log(str);
+                    console.log("qnfn-e");
+                    console.log(str);
                     $('#courseContent').load('@Url.Action("toQuestionPage", "Question")', { 
                         CourseId: str[7], 
                         QId:str[1], 
@@ -164,18 +169,18 @@
                     
                     
                     e.preventDefault();
-                    
-                    //console.log(str);
+                    console.log("qnfn-a");
+                    console.log($("#CourseId").val());
                     $('#courseContent').load('@Url.Action("AskQuestion", "Question")', { 
                         CourseId: $("#CourseId").val(),  
                         Title:$("#Title").val(),
                         Description:$("#Description").val()
                     });
-                    qnfn();
+                    rpfn();
                 });
             }
             else{
-                setTimeout(qnfn,200);
+                setTimeout(qnfn,50);
             }
         }
 
@@ -200,7 +205,7 @@
                 });
             }
             else{
-                setTimeout(groupfn,200);
+                setTimeout(groupfn,50);
             }
         }
         
