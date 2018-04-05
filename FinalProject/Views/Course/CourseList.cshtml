@@ -4,6 +4,7 @@
 
 <div class="container">
     <h2>Course List</h2>
+    <h3>@ViewData["Message"]</h3>
 
 <br>
 @foreach (var item in Model){
@@ -13,8 +14,9 @@
             <h5>
                
             <a style="text-transform: uppercase"> @Html.DisplayFor(modelItem => item.Department)</a><a> @Html.DisplayFor(modelItem => item.CourseNumber) @Html.DisplayFor(modelItem => item.Session) (@Html.DisplayFor(modelItem => item.Semester))</a>
-                
+                @if(User.Identity.IsAuthenticated) {
                 @Html.ActionLink("Enroll","Enroll", new { CourseId = item.CourseId },new { @class="btn btn-primary btn-sm float-right", @style="display:inline;"   })
+                }
                 <h6 class="card-subtitle mb-2 text-muted">Instructor : @Html.DisplayFor(modelItem => item.Instructor)</h6>
             </h5>
         </div>

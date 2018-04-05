@@ -25,7 +25,10 @@ namespace FinalProject.Models.EventViewModels
         
         [ForeignKey("UserId")]
         public virtual ApplicationUser ApplicationUser { get; set; }
-
+        
+        public StudentEvent(){
+            EventId=0;
+        }
         
         
     }

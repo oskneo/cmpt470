@@ -44,6 +44,12 @@ namespace FinalProject.Models.EventViewModels
         [Display(Name = "NumberOfSeats")]
         public int NumberOfSeats { get; set; }
         
+        public int OccupiedSeats { get; set; }
+        
+        public EventModel(){
+            Title="";
+        }
+        
         
     }
     

@@ -65,32 +65,48 @@ namespace FinalProject.Controllers
         }
 
         private Task<ApplicationUser> GetCurrentUserAsync() => _userManager.GetUserAsync(HttpContext.User);
-
-        [HttpPost]
-        public async Task<IActionResult> ChooseEvent(EventModel model, string returnUrl = null){
+        
+        
+        // [HttpPost]
+        public async Task<IActionResult> ChooseEventB(EventModel model){
 
             // var Event = from crs in db.Events where crs.EventId == model.EventId select crs;
             // EventModel crs = Event[0];
             
+            
+            var evt=db.Events.SingleOrDefault( e=> e.EventId==model.EventId);
+            if(evt.OccupiedSeats>=evt.NumberOfSeats){
+                TempData["Message"]="The event is full!";
+                // return View();
+                return RedirectToAction("ChooseEvent","Event");
+            }
+            evt.OccupiedSeats+=1;
+            
             var us = await GetCurrentUserAsync();
             var check=db.StudentEvents.SingleOrDefault(l=> l.EventId==model.EventId && l.ApplicationUser==us);
             if(check!=null){
-                ViewData["Message"]="Duplicate Enrollment!";
-                return View();
+                TempData["Message"]="Duplicate Enrollment!";
+                // return View("ChooseEvent");
+                return RedirectToAction("ChooseEvent","Event");
             }
 
             
 
-            StudentEvent scs = new StudentEvent{
-                EventId = model.EventId,
-                ApplicationUser = us
-            };
+            StudentEvent scs = new StudentEvent();
+            scs.EventId = model.EventId;
+            scs.ApplicationUser = us;
+            
             db.StudentEvents.Add(scs);
+            
+            
+            
+            
             db.SaveChanges();
 
 
             // return PartialView("part",_model);
-            return RedirectToAction("part","Event");
+            return RedirectToAction("ChooseEvent","Event");
+            // return View(db.Events.ToList());
         }
 
         public async Task<IActionResult> part(string returnUrl = null){

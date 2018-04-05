@@ -2,19 +2,24 @@
 @model List<FinalProject.Models.EventViewModels.EventModel>
 @inject SignInManager<ApplicationUser> SignInManager
 
+
+
 <div class="container">
     <h2>Event List</h2>
+    <h3>@TempData["Message"]</h3>
 
 <br>
 @foreach (var item in Model){
     <div class="card">
         <div class ="card-header">
             <h5>@Html.DisplayFor(modelItem => item.Title) on @Html.DisplayFor(modelItem => item.Date) at @Html.DisplayFor(modelItem => item.Time)
-                <a href="#" class="btn btn-primary btn-sm float-right" style="display:inline;">Join Event</a>
+                @Html.ActionLink("Join Event","ChooseEventB",new { EventId=item.EventId }, new {@class="btn btn-primary btn-sm float-right"})
+                @*<form action='@Url.Action("ChooseEvent","Event")' method='post' ><input name="EventId" value="@item.EventId" hidden>
+                <button type="submit"  class="btn btn-primary btn-sm float-right" style="display:inline;">Join Event</button></form>*@
             </h5>
             <h6 class="card-subtitle mb-2 text-muted">Location: @Html.DisplayFor(modelItem => item.Location)</h6>
             <h6 class="card-subtitle mb-2 text-muted">
-                Seats Available: @Html.DisplayFor(modelItem => item.NumberOfSeats)
+                Seats Available: @Html.Raw(item.NumberOfSeats-item.OccupiedSeats)/@Html.DisplayFor(modelItem => item.NumberOfSeats)
             </h6>
         </div>
         <div class="card-body">

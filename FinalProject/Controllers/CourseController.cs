@@ -77,7 +77,7 @@ namespace FinalProject.Controllers
             var check=db.StudentCourses.SingleOrDefault(l=> l.CourseId==model.CourseId && l.ApplicationUser==us);
             if(check!=null){
                 ViewData["Message"]="Duplicate Enrollment!";
-                return RedirectToAction("EnrollCourse","Course");
+                return RedirectToAction("CourseList","Course");
             }
 
             
