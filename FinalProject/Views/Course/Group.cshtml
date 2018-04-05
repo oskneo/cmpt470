@@ -31,6 +31,11 @@
                     <td>@it.StudentId</td>
                     <td>@it.Email</td>
                 </tr>
+                @foreach (var it2 in students){
+                    if (it.uid==it2.uid){
+                        it2.uid="";
+                    }
+                }
             }
         }
         
@@ -46,33 +51,35 @@
             <td width="80px" height="50px">Email</td>
             <td width="80px" height="50px">GroupNumber</td>
         </tr>
+        @if (students!=null){
         @foreach (var item in students)
         {
             <tr>
                 <td>
+                    @if (Model.GroupNumber!=0&&item.uid!=""){
                     @Html.ActionLink("Add","AddTo", new { 
                         CourseId = Model.CourseId, 
-                        userid=item.ApplicationUser.Id,
+                        userid=item.uid,
                         GroupNumber=Model.GroupNumber
                      },new {
                         
                         @class="btn btn-danger AddToGroup",
-                        data_id=item.ApplicationUser
-                    })
+                        data_id=item.uid
+                    })}
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.ApplicationUser.UserName)
+                    @Html.DisplayFor(modelItem => item.UserName)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.ApplicationUser.StudentId)
+                    @Html.DisplayFor(modelItem => item.StudentId)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.ApplicationUser.Email)
+                    @Html.DisplayFor(modelItem => item.Email)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.GroupNumber)
                 </td>
             </tr>
-        }
+        }}
     </table>
 </div>

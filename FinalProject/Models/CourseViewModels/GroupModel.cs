@@ -18,7 +18,7 @@ namespace FinalProject.Models.CourseViewModels
         public uint CourseId { get; set; }
         public virtual ApplicationUser ApplicationUser { get; set; }
         
-        public virtual List<ApplicationUser> GroupMembers { get; set; }
+        public List<SCG> GroupMembers { get; set; }
 
         public List<SCG> StudentCourses { get; set; }
 

@@ -15,9 +15,12 @@ namespace FinalProject.Models.CourseViewModels
     {
         
 
-        public virtual ApplicationUser ApplicationUser { get; set; }
+        // public virtual ApplicationUser ApplicationUser { get; set; }
         
-
+        public string uid { get; set;}
+        public string UserName { get; set; }
+        public string Email { get; set; }
+        public string StudentId { get; set; }
         public uint GroupNumber { get; set; }
 
         

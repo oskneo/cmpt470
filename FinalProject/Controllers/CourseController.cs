@@ -159,27 +159,19 @@ namespace FinalProject.Controllers
             
             return View(model);
         }
-        public async void media(GroupModel model, GroupModel nnl){
+        public async Task media(GroupModel model, GroupModel nnl){
             var mus = await GetCurrentUserAsync();
             var mymodel = 
                 from sc in db.StudentCourses 
-                where sc.CourseId == model.CourseId && sc.ApplicationUser == mus && sc.GroupNumber != 0
+                where sc.CourseId == model.CourseId && sc.ApplicationUser == mus 
                 select sc;
-            var ap = mymodel.SingleOrDefault();
+            var ap = mymodel.FirstOrDefault();
 
-            var newmodel = 
-                from us in db.Users 
-                join sc in db.StudentCourses on us.Id equals sc.ApplicationUser.Id
-                where sc.CourseId == model.CourseId 
-                select new SCG {
-                    ApplicationUser=us,
-                    GroupNumber=sc.GroupNumber
-                };
-            
+                      
             
             
             uint gn=0;
-            if (ap!=null){
+            if (ap!=null&&ap.GroupNumber!=0){
                 gn=ap.GroupNumber;
             } 
 
@@ -187,13 +179,32 @@ namespace FinalProject.Controllers
                 from us in db.Users 
                 join sc in db.StudentCourses on us.Id equals sc.ApplicationUser.Id
                 where sc.CourseId == model.CourseId && sc.GroupNumber == gn && sc.GroupNumber != 0
-                select us;
-            var dt=newmodel.ToList();
+                select new SCG {
+                    uid=us.Id,
+                    Email=us.Email,
+                    StudentId=us.StudentId,
+                    UserName=us.UserName
+                };
+
+
+            var scmodel = 
+                from us in db.Users 
+                join sc in db.StudentCourses on us.Id equals sc.ApplicationUser.Id
+                where sc.CourseId == model.CourseId 
+                select new SCG {
+                    uid=us.Id,
+                    Email=us.Email,
+                    StudentId=us.StudentId,
+                    UserName=us.UserName,
+                    GroupNumber=sc.GroupNumber
+                };
+            
+            var scs=scmodel.ToList();
 
 
 
             nnl.CourseId=model.CourseId;
-            nnl.StudentCourses=dt;
+            nnl.StudentCourses=scs;
             nnl.GroupNumber=gn;
             nnl.GroupMembers=gm.ToList();
             
@@ -201,10 +212,10 @@ namespace FinalProject.Controllers
         }
 
         [HttpPost]
-        public IActionResult toGroup(GroupModel model){
+        public async Task<IActionResult> toGroup(GroupModel model){
             GroupModel nl=new GroupModel();
 
-            media(model,nl);
+            await media(model,nl);
             
             
             
@@ -233,7 +244,7 @@ namespace FinalProject.Controllers
             }
             GroupModel nl=new GroupModel();
 
-            media(model,nl);
+            await media(model,nl);
 
 
 
@@ -244,7 +255,7 @@ namespace FinalProject.Controllers
             return PartialView("Group",nl);
         }
         [HttpPost]
-        public IActionResult AddToGroup(GroupModel model){
+        public async Task<IActionResult> AddToGroup(GroupModel model){
             
             if (ModelState.IsValid)
             {
@@ -258,7 +269,7 @@ namespace FinalProject.Controllers
             }
             GroupModel nl=new GroupModel();
 
-            media(model,nl);
+            await media(model,nl);
 
 
 
