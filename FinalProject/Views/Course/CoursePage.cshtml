@@ -100,7 +100,7 @@
                     //var str=spl(url);
                     console.log("rpto");
                     console.log($("#QId").val());
-                    $('#courseContent').load('@Url.Action("ReplyToQ", "Question")', { 
+                    $('#courseContent').load('../Question/ReplyToQ', { 
                         QId: $("#QId").val(), 
                         RefAId:$("#RefAId").val(), 
                         Reply:$("#Reply").val()
@@ -126,7 +126,7 @@
                     var str=spl(url);
                     console.log("rpfn");
                     console.log(str);
-                    $('#courseContent').load('@Url.Action("toReplyTo", "Question")', { 
+                    $('#courseContent').load('../Question/toReplyTo', { 
                         //CourseId: str[7], 
                         AId:str[1], 
                         QId:str[3]
@@ -144,7 +144,7 @@
         
         
         function qnfn(){
-            if($('.enterqn').length){
+            if($('.enterqn').length||$('#askb').length){
                 
                 $('.enterqn').on("click",function(e) {
                     
@@ -155,7 +155,7 @@
                     var str=spl(url);
                     console.log("qnfn-e");
                     console.log(str);
-                    $('#courseContent').load('@Url.Action("toQuestionPage", "Question")', { 
+                    $('#courseContent').load('../Question/toQuestionPage', { 
                         CourseId: str[7], 
                         QId:str[1], 
                         Title:str[3],
@@ -171,12 +171,20 @@
                     e.preventDefault();
                     console.log("qnfn-a");
                     console.log($("#CourseId").val());
-                    $('#courseContent').load('@Url.Action("AskQuestion", "Question")', { 
-                        CourseId: $("#CourseId").val(),  
-                        Title:$("#Title").val(),
-                        Description:$("#Description").val()
-                    });
-                    rpfn();
+                    if($("#Title").val()!=""&&$("#Description").val()!=""){
+                    
+                        $('#courseContent').load('../Question/AskQuestion', { 
+                            CourseId: $("#CourseId").val(),  
+                            Title:$("#Title").val(),
+                            Description:$("#Description").val()
+                        });
+                        rpfn();
+                    }
+                    else{
+                    
+                        alert("Please input question.");
+                    }
+                    
                 });
             }
             else{
@@ -186,9 +194,9 @@
 
 
         function groupfn(){
-            if($('#Create').length){
+            if($('#Create').length||$('.AddToGroup').length){
                 $('#Create').click(function() {
-                    $('#courseContent').load('@Url.Action("CreateGroup", "Course")', { CourseId: @Model.CourseId });
+                    $('#courseContent').load('../Course/CreateGroup', { CourseId: @Model.CourseId });
                 });
                 
                 $('.AddToGroup').on("click",function(e) {
@@ -201,7 +209,7 @@
                     if(str[5]=="0"){
                         $(this).hide();
                     }
-                    $('#courseContent').load('@Url.Action("AddToGroup", "Course")', { CourseId: str[1], userid:str[3], GroupNumber:str[5] });
+                    $('#courseContent').load('../Course/AddToGroup', { CourseId: str[1], userid:str[3], GroupNumber:str[5] });
                 });
             }
             else{
