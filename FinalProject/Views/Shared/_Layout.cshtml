@@ -55,6 +55,10 @@
                 <li class="nav-item">
                     <a class="nav-link" asp-area="" asp-controller="Event" asp-action="ChooseEvent">Event</a>
                 </li>
+                @if(User.Identity.IsAuthenticated) {
+                <li class="nav-item">
+                    <a class="nav-link" asp-area="" asp-controller="Quiz" asp-action="AddQuiz">Quiz</a>
+                </li>}
               
                 @if (User.IsInRole("Admin")) {
                     <li class="nav-item">

@@ -9,6 +9,7 @@ using FinalProject.Models.CourseViewModels;
 using FinalProject.Models.QuestionViewModels;
 using FinalProject.Models.EventViewModels;
 using FinalProject.Models.FileViewModels;
+using FinalProject.Models.QuizViewModels;
 
 namespace FinalProject.Data
 {
@@ -26,6 +27,8 @@ namespace FinalProject.Data
         public DbSet<EventModel> Events { get; set; }
         public DbSet<StudentEvent> StudentEvents { get; set; }
         public DbSet<FileModel> Files { get; set; }
+        public DbSet<QuizModel> Quizs { get; set; }
+        public DbSet<QuizQuestion> QuizQuestions { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

@@ -1,0 +1,42 @@
+@model List<FinalProject.Models.QuizViewModels.QuizQuestion>
+@using FinalProject.Models.QuizViewModels
+
+@{
+    //var qm=TempData["qm"] as QuizModel;
+    var index=0;
+    var cid=TempData["CourseId"];
+    var qid=    TempData["qid"];
+    var title=  TempData["title"];
+    var Description=TempData["Description"];
+}
+
+<div class="container">
+    <h2>Take Quiz</h2>
+    <h3>@title</h3>
+    <h6>@Description</h6>
+
+<br>
+<form action="takequiz" method="post">
+@foreach (var item in Model){
+    <div class="card">
+        <div class ="card-header">
+            <h5>
+                <h4>@item.Question</h4>
+               <asp:RadioButtonList ID="CorrectAnswer" runat="server" >
+                <asp:ListItem Value ="A" Selected ="True">A. @item.AnswerA</asp:ListItem>
+                <asp:ListItem Value ="B">B. @item.AnswerB</asp:ListItem>
+                <asp:ListItem Value ="C">C. @item.AnswerC</asp:ListItem>
+                <asp:ListItem Value ="D">D. @item.AnswerD</asp:ListItem>
+                </asp:RadioButtonList>
+                
+            </h5>
+        </div>
+        <div class="card-body">
+            
+        </div>
+    </div>
+    <br>
+    <input type="submit" value="Submit the quiz!">
+}
+</form>
+</div>

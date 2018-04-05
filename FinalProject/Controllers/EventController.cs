@@ -10,6 +10,7 @@ using FinalProject.Data;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
+using ScheduleEmailClass;
 
 
 namespace FinalProject.Controllers
@@ -102,6 +103,8 @@ namespace FinalProject.Controllers
             
             
             db.SaveChanges();
+            ScheduleEmail send= new ScheduleEmail(db);
+            send.getEvent();
 
 
             // return PartialView("part",_model);

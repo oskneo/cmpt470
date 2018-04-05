@@ -130,9 +130,14 @@ namespace FinalProject.Controllers
             return View(_model);
         }
         
-        public IActionResult CoursePage(CourseModel model,string returnUrl = null){
+        public IActionResult CoursePage(CourseP model,string returnUrl = null){
+            CourseModel _model= new CourseModel{
+                CourseId=model.CourseId
+            };
+            ViewData["CourseId"]=model.CourseId;
+            ViewData["PId"]=model.PId;
             
-            return View(model);
+            return View(_model);
         }
         
         public IActionResult courseInfo(CourseModel model,string returnUrl = null){

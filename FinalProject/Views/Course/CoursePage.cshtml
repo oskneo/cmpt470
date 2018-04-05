@@ -12,8 +12,10 @@
         <a class="nav-link nl" asp-controller="Home" asp-action="Question" aria-selected="false" id="Questions">Questions</a>
         <a class="nav-link nl" asp-controller="Home" asp-action="Question" aria-selected="false" id="Chat">Chat</a>
         <a class="nav-link nl" asp-controller="Course" asp-action="Group" aria-selected="false" id="Group">Group</a>
+        <a class="nav-link nl" asp-controller="Course" asp-action="Group" aria-selected="false" id="Quizs">Quizs</a>
     </div>
     <div class="card flex"  id="courseContent">
+    
     @await Html.PartialAsync("courseInfo", Model)
     </div>
     <br>
@@ -33,14 +35,19 @@
 
 *@
 
+
 @section js{
 
     <script type="text/javascript" src="~/lib/jquery/dist/jquery.js"></script>
     <script src="~/js/signalr-client-1.0.0-alpha2-final.js"></script>
     <script src="~/js/contact.js"></script>
     <script>
+        var PId=@ViewData["PId"];
+        var CourseId=@ViewData["CourseId"];
         $(document).ready(function(){
-            $('#courseContent').load('@Url.Action("toCourseInfo", "Course")', { CourseId: @Model.CourseId });
+            
+            
+            $('#courseContent').load('@Url.Action("toCourseInfo", "Course")', { CourseId: @Model.CourseId,PId:0 });
             $('#Info').click(function(e) {
                 e.preventDefault();
                 
@@ -48,7 +55,7 @@
                 $('.nl').attr('class', 'nav-link nl');
                 $(this).attr('class', 'nav-link active nl');
                 $(this).attr('aria-selected', 'true');
-                $('#courseContent').load('@Url.Action("toCourseInfo", "Course")', { CourseId: @Model.CourseId });
+                $('#courseContent').load('@Url.Action("toCourseInfo", "Course")', { CourseId: @Model.CourseId,PId:0 });
             });
             $('#Questions').on("click",function(e) {
                 e.preventDefault();
@@ -58,7 +65,7 @@
                 $(this).attr('class', 'nav-link active nl');
                 $(this).attr('aria-selected', 'true');
                 
-                $('#courseContent').load('@Url.Action("toAsk", "Question")', { CourseId: @Model.CourseId });
+                $('#courseContent').load('@Url.Action("toAsk", "Question")', { CourseId: @Model.CourseId,PId:1 });
                 qnfn();
             });
             $('#Chat').click(function(e) {
@@ -67,7 +74,7 @@
                 $('.nl').attr('class', 'nav-link nl');
                 $(this).attr('class', 'nav-link active nl');
                 $(this).attr('aria-selected', 'true');
-                $('#courseContent').load('@Url.Action("toContact", "Home")', { CourseId: @Model.CourseId });
+                $('#courseContent').load('@Url.Action("toContact", "Home")', { CourseId: @Model.CourseId,PId:2});
                 wt();
             });
             $('#Group').click(function(e) {
@@ -76,9 +83,37 @@
                 $('.nl').attr('class', 'nav-link nl');
                 $(this).attr('class', 'nav-link active nl');
                 $(this).attr('aria-selected', 'true');
-                $('#courseContent').load('@Url.Action("toGroup", "Course")', { CourseId: @Model.CourseId });
+                $('#courseContent').load('@Url.Action("toGroup", "Course")', { CourseId: @Model.CourseId,PId:3 });
                 groupfn();
             });
+
+            $('#Quizs').click(function(e) {
+                e.preventDefault();
+                $('.nl').attr('aria-selected', 'false');
+                $('.nl').attr('class', 'nav-link nl');
+                $(this).attr('class', 'nav-link active nl');
+                $(this).attr('aria-selected', 'true');
+                $('#courseContent').load('@Url.Action("toQuizs", "Quiz")', { CourseId: @Model.CourseId,PId:4 });
+                qlfn();
+            });
+
+            switch(PId){
+                case 0: 
+                    $('#Info').trigger("click");
+                    break;
+                case 1: 
+                    $('#Questions').trigger("click");
+                    break;
+                case 2: 
+                    $('#Chat').trigger("click");
+                    break;
+                case 3: 
+                    $('#Group').trigger("click");
+                    break;
+                case 4: 
+                    $('#Quizs').trigger("click");
+                    break;
+            }
             
         });
 
@@ -86,6 +121,54 @@
         function spl(url){
             var str=url.split('&').join('=').split('=');
             return str;
+        }
+
+        /*function tqfn(){
+            if($('#submitQuiz').length){
+                
+                $('#submitQuiz').on("click",function(e) {
+                    
+                    
+                    e.preventDefault();
+                    var url=$(this).attr("href");
+                    var str=spl(url);
+                    console.log("qlfn");
+                    //console.log($("#QId").val());
+                    $('#courseContent').load('../Quiz/toTakeQuiz', { 
+                        QuizId:str[1], 
+                        Title:str[3], 
+                        Description:str[5]
+                    });
+                    $('#Quizs').trigger("click");
+                });
+            }
+            else{
+                setTimeout(tqfn,50);
+            }
+        }*/
+
+        function qlfn(){
+            if($('.quizL').length){
+                
+                $('.quizL').on("click",function(e) {
+                    
+                    
+                    e.preventDefault();
+                    var url=$(this).attr("href");
+                    var str=spl(url);
+                    console.log("qlfn");
+                    //console.log($("#QId").val());
+                    $('#courseContent').load('../Quiz/toTakeQuiz', { 
+                        QuizId:str[1], 
+                        Title:str[3], 
+                        Description:str[5]
+                    });
+                    //tqfn();
+                });
+            }
+            else{
+                setTimeout(qlfn,50);
+            }
         }
         
         function rpto(){
@@ -96,7 +179,7 @@
                     
                     e.preventDefault();
                     
-                    var url=$(this).data("Reply");
+                    //var url=$(this).data("Reply");
                     //var str=spl(url);
                     console.log("rpto");
                     console.log($("#QId").val());

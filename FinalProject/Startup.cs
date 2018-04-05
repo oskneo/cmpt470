@@ -12,6 +12,7 @@ using FinalProject.Data;
 using FinalProject.Models;
 using FinalProject.Services;
 using ExploreCalifornia;
+using ScheduleEmailClass;
 
 namespace FinalProject
 {
@@ -45,6 +46,10 @@ namespace FinalProject
             
             
         }
+
+        
+        
+
         
         
         
@@ -64,14 +69,11 @@ namespace FinalProject
                         await _rolemanager.CreateAsync(new IdentityRole("Student"));
                     }
                 }
-                // var _rolemanager = serviceScope.ServiceProvider.GetService<RoleManager<IdentityRole>>();
+                // await ScheduleEmail(db);
+                // await SendEm();
+                ScheduleEmail send= new ScheduleEmail(db);
+                send.getEvent();
                 
-                // if(!await _rolemanager.RoleExistsAsync("Admin")){
-                //     await _rolemanager.CreateAsync(new IdentityRole("Admin"));
-                // }
-                // if(!await _rolemanager.RoleExistsAsync("Student")){
-                //     await _rolemanager.CreateAsync(new IdentityRole("Student"));
-                // }
             }
             
             

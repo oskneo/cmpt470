@@ -1,0 +1,38 @@
+@model FinalProject.Models.QuizViewModels.QuizModel
+@using System.Linq
+@using FinalProject.Models.CourseViewModels
+@{
+    ViewData["Title"] = "Add Quiz";
+    var quiz= ViewData["quiz"] as List<CourseModel>;
+}
+<h2>@ViewData["Title"]</h2>
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-route-returnUrl="@ViewData["ReturnUrl"]" method="post">
+            <hr />
+            <div class="form-group">
+                <label asp-for="Title"></label>
+                <input asp-for="Title" class="form-control" />
+            </div>
+                        <div class="form-group">
+                <label asp-for="Description"></label>
+                <input asp-for="Description" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Date"></label>
+                <input asp-for="Date" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="CourseId"></label>
+                <select asp-for="CourseId" 
+                    asp-items="@(new SelectList(@quiz,"CourseId","Department"))">
+                    <option>Please select one</option>
+                </select>
+                
+            </div>
+            
+            <button type="submit" class="btn btn-default">Push to Database</button>
+        </form>
+    </div>
+</div>
