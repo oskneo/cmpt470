@@ -6,6 +6,11 @@
 @{
     ViewData["Title"] = "Contact";
 }
+<style>
+    ul:empty {
+        display: none;
+    }
+</style>
 
 <div class ="card-header">
     <h5>Live Chat</h5>
@@ -13,8 +18,9 @@
 
 
 <div id="messageinput" class="container-fluid">
-    <div class="container-fluid" style="height:400px;">
-        <ul id="liveHelp"></ul>
+    <div class="container-fluid bg-muted" style="height:400px; overflow-y:scroll; border-radius:10px ">
+        <br>
+        <ul id="liveHelp" class="alert alert-dark list-unstyled" ></ul>
     </div>
     
     
