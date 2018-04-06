@@ -6,80 +6,110 @@
     var students=Model.StudentCourses;
     
 }
-<div>
-    <table border="3">
-        <tr>
-            <td colspan="3">
-                @if (Model.GroupNumber!=0){
-                    <p>Group @Model.GroupNumber</p>
-                    <button id="Create" hidden>Create</button>
-                }
-                else{
-                    <p>No group created!</p><button id="Create">Create</button>
-                }
-            </td>
-        </tr>
-        <tr>
-            <td>UserName</td>
-            <td>StudentId</td>
-            <td>Email</td>
-        </tr>
-        @if (Model.GroupNumber!=0){
-            @foreach (var it in Model.GroupMembers){
-                <tr>
-                    <td>@it.UserName</td>
-                    <td>@it.StudentId</td>
-                    <td>@it.Email</td>
-                </tr>
-                @foreach (var it2 in students){
-                    if (it.uid==it2.uid){
-                        it2.uid="";
-                    }
-                }
-            }
-        }
-        
 
-    </table>
-</div>
-<div>
-    <table border="3">
-        <tr>
-            <td width="80px" height="50px">Add To Group</td>
-            <td width="80px" height="50px">UserName</td>
-            <td width="80px" height="50px">StudentId</td>
-            <td width="80px" height="50px">Email</td>
-            <td width="80px" height="50px">GroupNumber</td>
-        </tr>
-        @if (students!=null){
-        @foreach (var item in students)
-        {
-            <tr>
-                <td>
-                    @if (Model.GroupNumber!=0&&item.uid!=""){
-                    @Html.ActionLink("Add","AddTo", new { 
-                        CourseId = Model.CourseId, 
-                        userid=item.uid,
-                        GroupNumber=Model.GroupNumber
-                     },new {
+<div class="card">
+    <div class ="card-header">
+        <h5>Study Groups</h5>
+    </div>
+    <div class="card-body">
+        @if (Model.GroupNumber!=0){
+            <div class="">
+                <h5 class="card-subtitle mb-2 text-muted" >Members of in your Study Group </h5>
+                <table class="table">
+                  <thead class="thead-light">
+                    <tr>
+                      <th scope="col">UserName</th>
+                      <th scope="col">Student ID</th>
+                      <th scope="col">Email Address</th>
+                    </tr>
+                  </thead>
+                  <tbody>
                         
-                        @class="btn btn-danger AddToGroup",
-                        data_id=item.uid
-                    })}
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.UserName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.StudentId)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Email)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.GroupNumber)
-                </td>
-            </tr>
-        }}
-    </table>
+                        @foreach (var it in Model.GroupMembers){
+                         <tr>
+                              <td>@it.UserName</td>
+                              <td>@it.StudentId</td> 
+                              <td>@it.Email</td>
+                              
+                          </tr>
+                        @foreach (var it2 in students){
+                            if (it.uid==it2.uid){
+                                it2.uid="";
+                            }
+                        }
+                    }
+                  </tbody>
+                </table>
+            </div>
+           
+            <button id="Create" class="btn btn-outline-primary" hidden>Create your own study group</button>
+        }
+        else{
+            <p>There are no groups at the moment.</p>
+            <button id="Create" class="btn btn-outline-primary">Create your own study group</button>
+        }
+    </div>
 </div>
+
+<div class="card">
+    <div class ="card-header">
+        <h5>Invite Other Members to your group</h5>
+    </div>
+    <div class="card-body">
+        @if (Model.GroupNumber!=0){
+            <div class="">
+                <table class="table">
+                  <thead class="thead-light">
+                    <tr>
+                        <th scope="col">Add to Group</th>
+                        <th scope="col">UserName</th>
+                        <th scope="col">Student ID</th>
+                        <th scope="col">Email Address</th>
+                        <th scope="col">GroupNumber</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                        @foreach (var item in students)
+                        {
+                            @if (Model.GroupNumber!=item.GroupNumber){
+                            <tr>
+                                <td>
+                                    @if (Model.GroupNumber!=0&&item.uid!=""){
+                                    @Html.ActionLink("Add","AddTo", new { 
+                                        CourseId = Model.CourseId, 
+                                        userid=item.uid,
+                                        GroupNumber=Model.GroupNumber
+                                     },new {
+                                        
+                                        @class="btn btn-danger AddToGroup",
+                                        data_id=item.uid
+                                    })}
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.UserName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.StudentId)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Email)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.GroupNumber)
+                                </td>
+                            </tr>
+                            }
+                            }
+                  </tbody>
+                </table>
+            </div>
+           
+            <button id="Create" class="btn btn-outline-primary" hidden>Create your own study group</button>
+        }
+        else{
+            <p>There are no groups at the moment.</p>
+            <button id="Create" class="btn btn-outline-primary">Create your own study group</button>
+        }
+    </div>
+</div>
+
