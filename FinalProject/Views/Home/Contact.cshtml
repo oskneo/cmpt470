@@ -1,52 +1,53 @@
-    let transportType = signalR.TransportType.WebSockets;
-    let http = new signalR.HttpConnection(`http://${document.location.host}/lhh/livehelphub`, { transport: transportType });
-    let connection = new signalR.HubConnection(http);
-    connection.start();
- 
-    connection.on('Send', (name, message) => {
-        if (name==""){
-            name="Anonymous";
-        }
-        appendLine(message, name);    
-    });
-
-    function addE(){
-        document.getElementById('send').addEventListener('click', event => {
-            let message = document.getElementById('message').value;
-            let name = document.getElementById('username').value;
-            document.getElementById('message').value = '';
-            
-     
-            connection.invoke('Send', name, message);   
-            event.preventDefault();
-        });
-        
-        $("#message").keyup(function(event) {
-            if (event.keyCode === 13) {
-                $("#send").click();
-            }
-        });
-        $("#username").keyup(function(event) {
-            if (event.keyCode === 13) {
-                $("#send").click();
-            }
-        });
+@model FinalProject.Models.CourseViewModels.CourseModel
+@using Microsoft.AspNetCore.Identity
+@using FinalProject.Models
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+@{
+    ViewData["Title"] = "Contact";
+}
+<style>
+    ul:empty {
+        display: none;
     }
+</style>
 
-    function wt(){
-        if(document.getElementById('send')!=null){
-            addE();
-        }
-        else{
-            setTimeout(wt,100);
-        }
-    }
- 
+<div class ="card-header">
+    <h5>Live Chat</h5>
+</div>
+
+
+<div id="messageinput" class="container-fluid">
+    <div class="container-fluid bg-muted" style="height:400px; overflow-y:scroll; border-radius:10px ">
+        <br>
+        <ul id="liveHelp" class="alert alert-dark list-unstyled" ></ul>
+    </div>
     
- 
-    function appendLine(line, name) {
-        let li = document.createElement('li');
-        document.getElementById('liveHelp').innerHTML += li + name + " : "+'&nbsp'+ line;;
+    
+    <br>
+    @if (SignInManager.IsSignedIn(User))
+    {
+        <div id="nameinput" hidden>Username: <input type="text" id="username" value="@UserManager.GetUserName(User)"/></div>
+    }
+    else
+    {
+        <div id="nameinput">Username: <input type="text" id="username" value=""/></div>
+    
+    }
+<p>
+    <input type="textarea" id="message" class="form-control " aria-label="With textarea" style="width:700px; display:inline;"/> 
+    <input type="button" id="send" value="Send" class="btn btn-outline-primary" style="width:150px; display:inline;"/>
+    </p>
+</div>
+
+
+
+
+@section scripts {
+        <script src="~/js/signalr-client-1.0.0-alpha2-final.js"></script>
+        <script src="~/js/contact.js"></script>
+        <script>
+        addE();
+        </script>
         
-        //document.getElementById('layoutmessage').innerText="Message from " + name + ":" + line;
-    };
+        }
