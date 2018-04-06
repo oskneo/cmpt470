@@ -8,7 +8,32 @@
     var qn = Model.UserName;
     var ls = from k in lst where k.QId==Model.QId && k.RefAId==0 select k;
 }
-<h2>@ViewData["Title"]</h2>
+
+<div class='card'>
+    <div class="card-header">
+        <h5>@Model.QuestionTitle@Html.ActionLink("Reply", "ReplyTo", new { AId=0, QId=Model.QId }, new {@class="toR btn btn-outline-primary float-right", @style="display:inline"})</h5>
+        <h6 class="card-subtitle mb-2 text-muted">@Model.Time.ToString("yyyy/mm/dd  HH:mm") </h6>
+    </div>
+    <div class="card-body">
+        @Model.QuestionContent
+        <div>
+        </div>
+    </div>
+    <div class="container">
+    @foreach(var it in ls.ToList<AnswerModel>()){
+        <div class='card'>
+            <div class="card-header">
+                <h6>At @it.Time, @it.UserName replied</h6>
+            </div>
+            <div class="card-body">
+               @Html.Raw(show(it.AnswerId, it.UserName, it.Reply,it.Time))
+            </div>
+        
+        </div>
+    }   
+    </div>
+        
+</div>
 
 
 
@@ -23,11 +48,11 @@
         ht.Append("</b><br></p></div><div><p>");
         ht.Append(reply);
         ht.Append("<br></p></div><div><p>");
-        ht.Append("<a class=\"toR\" href=\"../Question/ReplyTo?AId=");
+        ht.Append("<button class=\"toR btn btn-outline-primary\" href=\"../Question/ReplyTo?AId=");
         ht.Append(tAId);
         ht.Append("&QId=");
         ht.Append(Model.QId);
-        ht.Append("\" >Reply</a>");
+        ht.Append("\" >Reply</button>");
         ht.Append("</p></div>");
         
             if (ar.ToList<AnswerModel>().Count > 0){
@@ -48,48 +73,6 @@
 
 
 
-
-<div class="row">
-
-            <hr />
-            <div>
-                <div>
-                    <div>
-                        <p>
-                            <b>@qn at @Model.Time.ToString("yyyy/mm/dd  HH:mm")</b>
-                            <br>
-                        </p>
-                    </div>
-                    <div>
-                        <p>
-                            @Model.QuestionTitle
-                            <br>
-                        </p>
-                    </div>
-                    <div>
-                        <p>
-                            @Model.QuestionContent
-                            <br>
-                        </p>
-                    </div>
-                    <div>
-                        @Html.ActionLink("Reply", "ReplyTo", new { AId=0, QId=Model.QId }, new {@class="toR"})
-                    </div>
-
-                </div>
-                @foreach(var it in ls.ToList<AnswerModel>()){
-                <div>
-                    @Html.Raw(show(it.AnswerId, it.UserName, it.Reply,it.Time))
-                    
-
-                </div>
-                }
-                
-            </div>
-            
-            
-            
-</div>
 @section Styles {
     <link href="@Url.Content("~/css/QuestionAnswer.css")" rel="stylesheet" type="text/css" />
 }
