@@ -21,7 +21,7 @@
     </environment>
 </head>
 <body >
-    <div class="container-fluid" style="background-color: #A6192E;">
+    <div class="container" style="background-color: #A6192E;">
         <div class="container" style="color: #ffffff;">
             <br>
             <h2>STUDYMATES</h2>
@@ -42,10 +42,6 @@
                 <li class="nav-item ">
                     <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                 </li>
-                @if(User.Identity.IsAuthenticated) {
-                <li class="nav-item">
-                    <a class="nav-link" asp-area="" asp-controller="Course" asp-action="myCourses">myCourses</a>
-                </li>}
                 <li class="nav-item">
                     <a class="nav-link" asp-area="" asp-controller="Course" asp-action="CourseList">CourseList</a>
                 </li>
