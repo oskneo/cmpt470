@@ -65,7 +65,8 @@ namespace FinalProject.Controllers
                     Time = DateTime.Now,
                     Title = model.Title,
                     Description = model.Description,
-                    ApplicationUser = us
+                    ApplicationUser = us,
+                    UserName=us.UserName
                 };
                 db.Questions.Add(qt);
                 db.SaveChanges();
@@ -79,7 +80,7 @@ namespace FinalProject.Controllers
             
 
             _model.Answers=db.Answers.ToList<AnswerModel>();
-            _model.ApplicationUser=us;
+            _model.UserName=us.UserName;
             
 
             _model.QuestionTitle=model.Title;
@@ -120,11 +121,11 @@ namespace FinalProject.Controllers
         }
         
         [HttpPost]
-        public async Task<IActionResult> toQuestionPage(QuestionAnswer model, string returnUrl = null){
+        public IActionResult toQuestionPage(QuestionAnswer model, string returnUrl = null){
             
             model.Answers=db.Answers.ToList<AnswerModel>();
-            var us = await GetCurrentUserAsync();
-            model.ApplicationUser=us;
+            // var us = await GetCurrentUserAsync();
+            // model.ApplicationUser=us;
 
             var fa= from i in db.Questions where i.QId == model.QId select i;
             var fe=fa.ToList<QuestionModel>().FirstOrDefault();
@@ -136,13 +137,13 @@ namespace FinalProject.Controllers
         
         
         [HttpPost]
-        public async Task<IActionResult> toReplyTo(QuestionAnswer model, string returnUrl = null){
+        public IActionResult toReplyTo(QuestionAnswer model, string returnUrl = null){
             
-            var us = await GetCurrentUserAsync();
+            // var us = await GetCurrentUserAsync();
             AnswerModel am=new AnswerModel();
             am.RefAId=model.AId;
             am.QId=model.QId;
-            am.ApplicationUser=us;
+            // am.UserName=Model.UserName;
             return PartialView("ReplyTo",am);
         }
 
@@ -173,7 +174,7 @@ namespace FinalProject.Controllers
                     Reply=model.Reply,
                     QId = model.QId, 
                     Time = DateTime.Now,
-                    ApplicationUser = us,
+                    UserName = us.UserName,
                     RefAId = model.RefAId
                 };
                 db.Answers.Add(qt);
@@ -187,7 +188,7 @@ namespace FinalProject.Controllers
             QuestionAnswer _model=new QuestionAnswer();
             
             _model.Answers=db.Answers.ToList<AnswerModel>();
-            _model.ApplicationUser=us;
+            _model.UserName=us.UserName;
             _model.QId=model.QId;
 
             var fa= from i in db.Questions where i.QId == model.QId select i;

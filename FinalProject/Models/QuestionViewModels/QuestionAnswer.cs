@@ -28,9 +28,9 @@ namespace FinalProject.Models.QuestionViewModels
         // public DateTime Time { get; set; }
         
 
-        
+        // public virtual ApplicationUser ApplicationUser { get; set; }
         // [ForeignKey("UserId")]
-        public virtual ApplicationUser ApplicationUser { get; set; }
+        public string UserName { get; set; }
 
 
         // [ForeignKey("QId")]
@@ -45,7 +45,7 @@ namespace FinalProject.Models.QuestionViewModels
         public List<FinalProject.Models.QuestionViewModels.AnswerModel> Answers { get; set; }
 
         public QuestionAnswer(){
-            AId=0;
+            UserName="";
         }
         
     }

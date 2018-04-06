@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations.Schema;
 using FinalProject.Models;
 using FinalProject.Models.CourseViewModels;
+using FinalProject.Models.FileViewModels;
 
 namespace FinalProject.Models.QuestionViewModels
 {
@@ -33,8 +34,9 @@ namespace FinalProject.Models.QuestionViewModels
         
 
         
-        [ForeignKey("UserId")]
-        public virtual ApplicationUser ApplicationUser { get; set; }
+        // [ForeignKey("UserId")]
+        // public virtual ApplicationUser ApplicationUser { get; set; }
+        public string UserName{ get; set; }
 
 
         [ForeignKey("QId")]
@@ -43,6 +45,9 @@ namespace FinalProject.Models.QuestionViewModels
         public virtual QuestionModel Questions { get; set; }
 
         public uint RefAId { get; set; }
+
+        public uint FileId { get; set; }
+
 
         public AnswerModel(){
             Reply="";

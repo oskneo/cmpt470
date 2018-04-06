@@ -25,6 +25,8 @@ namespace FinalProject.Models.QuestionViewModels
         [Required]
         [Display(Name = "Description")]
         public string Description { get; set; }
+
+        public string UserName { get; set; }
         
         
         
@@ -44,6 +46,10 @@ namespace FinalProject.Models.QuestionViewModels
         public uint CourseId { get; set; }
 
         public virtual CourseModel Courses { get; set; }
+
+        public QuestionModel(){
+            UserName="";
+        }
         
     }
     

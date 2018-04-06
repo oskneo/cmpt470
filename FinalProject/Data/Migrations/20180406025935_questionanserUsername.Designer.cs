@@ -11,9 +11,10 @@ using System;
 namespace FinalProject.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180406025935_questionanserUsername")]
+    partial class questionanserUsername
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -206,8 +207,6 @@ namespace FinalProject.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<uint>("FileId");
-
                     b.Property<uint>("QId");
 
                     b.Property<uint>("RefAId");
@@ -242,8 +241,6 @@ namespace FinalProject.Data.Migrations
                         .IsRequired();
 
                     b.Property<string>("UserId");
-
-                    b.Property<string>("UserName");
 
                     b.HasKey("QId");
 
