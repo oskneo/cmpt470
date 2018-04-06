@@ -3,54 +3,62 @@
     ViewData["Title"] = "Ask Question";
     var questions=Model.QuestionList;
 }
-<div class="container">
-    <h2>Question List</h2>
 
-<br>
-@foreach (FinalProject.Models.QuestionViewModels.QuestionModel item in questions){
-    <div class="card">
-        <div class ="card-header">
-            <h5>
-                @Html.DisplayFor(modelItem => item.ApplicationUser.UserName) @Html.DisplayFor(modelItem => item.Title) @item.Time.ToString("yyyy-MM-dd_HH:mm")
-                
-                @Html.ActionLink("Enter","QuestionPage", new {
-                    QId=@item.QId,
-                    Title=@item.Title,
-                    Description=@item.Description,
-                    CourseId=@item.CourseId,
-                    Time=@item.Time.ToString().Replace('/', '~').Replace(' ', '-')
-                
-                },new { @class="btn btn-primary btn-sm float-right enterqn", @style="display:inline;"   })
-                <h6 class="card-subtitle mb-2 text-muted">Question : @Html.DisplayFor(modelItem => item.Description)</h6>
-            </h5>
-        </div>
-        <div class="card-body">
-            <p class="card-text">@Html.DisplayFor(modelItem => item.Description)</p>
-        </div>
+
+<div class="card">
+    <div class ="card-header">
+        <h5>Question List</h5>
     </div>
-    <br>
-}
+    <div class="card-body">
+        <br>
+        @foreach (FinalProject.Models.QuestionViewModels.QuestionModel item in questions){
+            <div class="card">
+                <div class ="card-header">
+                    <h5>
+                        @Html.DisplayFor(modelItem => item.ApplicationUser.UserName) @Html.DisplayFor(modelItem => item.Title) @item.Time.ToString("yyyy-MM-dd_HH:mm")
+                        
+                        @Html.ActionLink("Enter","QuestionPage", new {
+                            QId=@item.QId,
+                            Title=@item.Title,
+                            Description=@item.Description,
+                            CourseId=@item.CourseId,
+                            Time=@item.Time.ToString().Replace('/', '~').Replace(' ', '-')
+                        
+                        },new { @class="btn btn-primary btn-sm float-right enterqn", @style="display:inline;"   })
+                        <h6 class="card-subtitle mb-2 text-muted">Question : @Html.DisplayFor(modelItem => item.Description)</h6>
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <p class="card-text">@Html.DisplayFor(modelItem => item.Description)</p>
+                </div>
+            </div>
+            <br>
+        }
+    </div>
 </div>
-
-<h2>@ViewData["Title"]</h2>
-
-<div class="row">
-    <div class="col-md-4">
-        <form action='@Url.Action("AskQuestion", "Question")' method='post'>
-            <input hidden name="CourseId" id="CourseId" value="@Model.CourseId"  >
-            <h4>Ask Question</h4>
-            <hr />
-            <div class="form-group">
-                <label asp-for="Title"></label>
-                <input asp-for="Title" class="form-control" />
+<br>
+<div class="card">
+    <div class ="card-header">
+        <h5>@ViewData["Title"]</h5>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-4">
+                <form action='@Url.Action("AskQuestion", "Question")' method='post'>
+                    <input hidden name="CourseId" id="CourseId" value="@Model.CourseId"  >
+                    <div class="form-group">
+                        <label asp-for="Title"></label>
+                        <input asp-for="Title" class="form-control" />
+                    </div>
+                                <div class="form-group">
+                        <label asp-for="Description"></label>
+                        <input asp-for="Description" class="form-control" />
+                    </div>
+                    
+                    
+                    <button type="submit" class="btn btn-default" id="askb">Ask</button>
+                </form>
             </div>
-                        <div class="form-group">
-                <label asp-for="Description"></label>
-                <input asp-for="Description" class="form-control" />
-            </div>
-            
-            
-            <button type="submit" class="btn btn-default" id="askb">Ask</button>
-        </form>
+        </div>
     </div>
 </div>
