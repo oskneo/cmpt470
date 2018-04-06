@@ -1,80 +1,40 @@
-@model FinalProject.Models.QuizViewModels.QuizQuestion
+@model FinalProject.Models.QuizViewModels.QuizModel
+@using System.Linq
 @using FinalProject.Models.CourseViewModels
 @{
     ViewData["Title"] = "Add Quiz";
     var quiz= ViewData["quiz"] as List<CourseModel>;
 }
-<div class="container col-sm-11" >
-    <h2>@ViewData["Title"]</h2>
-    <h3>Question: @Model.Index</h3>
-    <hr />
 
+<div class="col-md-6 mx-auto">
+    <h2>@ViewData["Title"]</h2>
+
+    <hr />
     <form asp-route-returnUrl="@ViewData["ReturnUrl"]" method="post">
-        <fieldset class="form-group">    
+        <fieldset class="form-group">
+            
             <div class="form-group">
-                <label asp-for="Question" class="form-control-label"></label>
-                <textarea asp-for="Question" class="form-control" rows="3"></textarea>
+                <label class="form-control-label"asp-for="Title"></label>
+                <input class="form-control"asp-for="Title" />
+            </div>
+                        <div class="form-group">
+                <label class="form-control-label"asp-for="Description"></label>
+                <input class="form-control" asp-for="Description" />
             </div>
             <div class="form-group">
-                <label asp-for="AnswerA" class="form-control-label">Answer A</label>
-                <input asp-for="AnswerA" class="form-control" />
+                <label class="form-control-label"asp-for="Date"></label>
+                <input class="form-control"asp-for="Date" />
             </div>
             <div class="form-group">
-                <label asp-for="AnswerB" class="form-control-label">Answer B</label>
-                <input asp-for="AnswerB" class="form-control" />
-            </div>
-            <div class="form-group">
-                <label asp-for="AnswerC" class="form-control-label">Answer C</label>
-                <input asp-for="AnswerC" class="form-control" />
-            </div>
-            <div class="form-group">
-                <label asp-for="AnswerD" class="form-control-label">Answer D</label>
-                <input asp-for="AnswerD" class="form-control" />
-            </div>
-            <div class="form-group">
-                <label asp-for="CorrectAnswer" class="form-control-label">Correct Answer</label>
-                <input asp-for="CorrectAnswer" class="form-control" placeholder="(Input A, B, C, or D)"/>
+                <label class="form-control-label"asp-for="CourseId"></label>
+                <select class="form-control" asp-for="CourseId" 
+                    asp-items="@(new SelectList(@quiz,"CourseId","Department"))">
+                    <option>Please select one</option>
+                </select>
             </div>
             
-            <input hidden name="Finished" value="false">
-            <input hidden name="QuizId" value="@Model.QuizId">
-            <input hidden name="Index" value="@Model.Index">
-            
-            
-            <button type="submit" class="btn btn-primary mt-3">Add next question</button>
-            <button type="submit" class="btn btn-primary float-sm-right mt-3" id="finish">Finish and submit</button>
-            
+            <button type="submit" class="mt-2 btn btn-primary btn-block mx-auto mt-5"> Create Quiz</button>
         </fieldset>
     </form>
-
 </div>
 
-@section js{
-    <script type="text/javascript" src="~/lib/jquery/dist/jquery.js"></script>
-    <script>
-    $(document).ready(function(){
-        $("#finish").click(function(e){
-            //e.preventDefault();
-            $.ajax({
-                url:"AddQuiz",
-                type:"POST",
-                data:{
-                    QuizId:@Model.QuizId,
-                    Index:@Model.Index,
-                    Finished:1,
-                    CorrectAnswer:$("#CorrectAnswer").val(),
-                    AnswerA:$("#AnswerA").val(),
-                    AnswerB:$("#AnswerB").val(),
-                    AnswerC:$("#AnswerC").val(),
-                    AnswerD:$("#AnswerD").val(),
-                    Question:$("#Question").val()
-
-                },
-                success:function(){
-                    console.log("Quiz Added");
-                }
-            });
-        });    
-    });
-    </script>
-}
