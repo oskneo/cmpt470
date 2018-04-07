@@ -42,8 +42,13 @@
     </table>
 </div>
 *@
-<div class="container">
-    <h2>My Enrolled Courses</h2>
+<div class="container">    
+    <h2>My Enrolled Courses 
+        @if(User.Identity.IsAuthenticated) {
+            <a class="btn btn-outline-primary btn-lg ml-sm-auto w-25 float-right" asp-area="" asp-controller="Course" asp-action="CourseList">List of Courses</a>
+        }
+    </h2>
+
 
 <br>
 @foreach (var item in Model){
