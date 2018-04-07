@@ -5,15 +5,17 @@
     ViewData["Title"] = "Quiz Result";
 }
 
-<div class="col-md-6">
-    <h2>@ViewData["Title"]</h2>
-    <h3>@TempData["Message"]</h3>
-    <hr />
-    <p><h3>Your result:</h3>
-    <h5>
-        @TempData["mark"]/@TempData["total"]
-    </h5>
-        
-    </p>
+
+<div class="card">
+    <div class="card-header">
+        <h5>@ViewData["Title"]</h5>
+        <h6>@TempData["Message"]</h6>
+    </div>
+    <div class="card-body">
+        <h5>Your result:</h5>
+        <h6>
+            @TempData["mark"]/@TempData["total"]
+        </h6>
+    </div>
 </div>
 

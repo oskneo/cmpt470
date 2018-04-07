@@ -10,38 +10,37 @@
     var Description=TempData["Description"];
 }
 
-<div class="container">
-    <h2>Take Quiz</h2>
-    <h3>@title</h3>
-    <h6>@Description</h6>
+<div class="card">
+    <div class="card-header">
+        <h5>Take Quiz</h2>
 
-<br>
-<form action="../Quiz/TakeQuiz" method="post">
-@foreach (var item in Model){
-    <div class="card">
-        <div class ="card-header">
-                
-                <h4>@index . @item.Question</h4>
-                @{
-                    index--;
-                }
-                <input  name="[@index].QuizId" value="@item.QuizId" hidden>
-                 <input type="radio" name="[@index].CorrectAnswer" value="A" checked="true">A. @item.AnswerA<br>
-                <input type="radio" name="[@index].CorrectAnswer" value="B">B. @item.AnswerB<br>
-                <input type="radio" name="[@index].CorrectAnswer" value="C">C. @item.AnswerC<br>
-                <input type="radio" name="[@index].CorrectAnswer" value="D">D. @item.AnswerD
-                
-                @{
-                    index+=2;
-                }
-        </div>
-        <div class="card-body">
-            
-        </div>
+
     </div>
-    <br>
-    
-}
-<input type="submit" value="Submit the quiz!" id="SubmitQuiz" class="btn btn-primary mb-3">
-</form>
+    <div class="card-body">
+        <form action="../Quiz/TakeQuiz" method="post">
+            @foreach (var item in Model){
+                <div class="card">
+                    <div class ="card-header">
+                        <h6>@index . @item.Question</h6>
+                            @{
+                                index--;
+                            }
+                    </div>
+                    <div class="card-body">
+                        <input  name="[@index].QuizId" value="@item.QuizId" hidden>
+                        <input type="radio" name="[@index].CorrectAnswer" value="A" checked="true">A. @item.AnswerA<br>
+                        <input type="radio" name="[@index].CorrectAnswer" value="B">B. @item.AnswerB<br>
+                        <input type="radio" name="[@index].CorrectAnswer" value="C">C. @item.AnswerC<br>
+                        <input type="radio" name="[@index].CorrectAnswer" value="D">D. @item.AnswerD
+                        @{
+                            index+=2;
+                        }
+                    </div>
+                </div>
+                <br>
+                
+            }
+            <input type="submit" value="Submit the quiz!" id="SubmitQuiz" class="btn btn-primary mb-3">
+        </form>
+    </div>
 </div>
