@@ -6,12 +6,9 @@
 
 <div class="container">
     <div class="row">
-        <h2 class="col">Event List</h2>
+        <h2 class="col">My Event</h2>
         
-        
-        @if(User.Identity.IsAuthenticated) {
-            <a class="col-5 col-lg-3  btn btn-primary btn-lg ml-sm-auto w-25" asp-area="" asp-controller="" asp-action="">My Event</a>
-        }
+
     </div>
     <div class="row">
         <h3 class="col"> @TempData["Message"]</h3>
@@ -22,9 +19,7 @@
         <div class="card">
             <div class ="card-header">
                 <h3>@Html.DisplayFor(modelItem => item.Title)
-                    @Html.ActionLink("Join Event","ChooseEventB",new { EventId=item.EventId }, new {@class="btn btn-primary btn-sm float-right"})
-                    @*<form action='@Url.Action("ChooseEvent","Event")' method='post' ><input name="EventId" value="@item.EventId" hidden>
-                    <button type="submit"  class="btn btn-primary btn-sm float-right" style="display:inline;">Join Event</button></form>*@
+
                 </h3>
                 <h6 class="card-subtitle mb-2 text-muted">Date: @Html.DisplayFor(modelItem => item.Date)</h6>
                 <h6 class="card-subtitle mb-2 text-muted">Time: @Html.DisplayFor(modelItem => item.Time)</h6>
@@ -40,69 +35,4 @@
         <br>
     }
 
-    <div class="card">
-        <div class ="card-header">
-            <h5>Create New Event</h5>
-        </div>
-        <div class="card-body">
-            <h3>@Html.ActionLink("Add Event","AddEvent","Event")</h3>
-            <a class="col-5 col-lg-3  btn btn-primary btn-lg ml-sm-auto w-25" asp-area="" asp-controller="" asp-action="">Add New Event</a>
-        </div>
-    </div>
-
 </div>
-
-@*
-<div>
-    <table border="3">
-        <tr>
-            @if (SignInManager.IsSignedIn(User)) {
-                <td width="80px" height="50px">AddEvent</td>
-            }            
-            <td width="80px" height="50px">Title</td>
-            <td width="80px" height="50px">Description</td>
-            <td width="80px" height="50px">Date</td>
-            <td width="80px" height="50px">Time</td>
-            <td width="80px" height="50px">Location</td>
-            <td width="80px" height="50px">NumberOfSeats</td>
-            
-        </tr>
-        @foreach (var item in Model)
-        {
-            <tr>
-                @if (SignInManager.IsSignedIn(User)) {
-                    <td>
-                    @Html.ActionLink("Add","ChooseEvent", new { EventId = item.EventId },new {
-                        data_ajax="true",
-                        data_ajax_method="POST",
-                        data_ajax_mode="replace",
-                        data_ajax_update="Enrolled",
-                        @class="btn btn-danger"
-                    })
-                    </td>
-                }   
-                <td>
-                    @Html.DisplayFor(modelItem => item.Title)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Description)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Date)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Time)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Location)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.NumberOfSeats)
-                </td>
-                
-            </tr>
-        }
-    </table>
-   
-</div>
- *@
