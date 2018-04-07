@@ -12,12 +12,11 @@
             new SelectListItem { Selected = false, Text = "D", Value = "D"}
         }, "Value" , "Text", 1);
 }
-<div class="container col-sm-11" >
-    <h2>@ViewData["Title"]</h2>
+<div class="container">
+    <h2>Question: @Model.Index</h2>
     <h3>@TempData["Message"]</h3>
-    <h3>Question: @Model.Index</h3>
-    <hr />
-
+    <br>    
+    
     <form asp-route-returnUrl="@ViewData["ReturnUrl"]" method="post">
         <fieldset class="form-group">    
             <div class="form-group">
@@ -60,6 +59,7 @@
             
         </fieldset>
     </form>
+    <br>
 
 </div>
 
