@@ -65,11 +65,14 @@
             </select>
             <select name="session" id="session" style="width:20%" class="form-control">
             </select>
+            <a  id="ac" class="btn btn-primary d-block mt-3" >Add Course</a>
+            <br>
+            <h2 id="cmsg" hidden>Course added!</h2>
             
-            <button  id="ac" class="btn btn-primary d-block mt-3" >Add Course</button>
         </form>
     </fieldset>
 </div>
+
 
 
 
@@ -146,6 +149,7 @@
                         url: "AddCourse",
                         data: jsn,
                         success: function(){
+                            //document.getElementById("cmsg").style.visibility='visible';
                             console.log("AddCourse!");
                         }
             });
@@ -278,8 +282,13 @@
             
             
             $("#ac").click(function(){
-                
-                $.ajax({
+                //alert("Clicked.");
+                //$("#cmsg").hide();
+                $.when(listd(ndt,"list")).then(function(){
+                    alert("Course Added!");
+                });
+                /*$.ajax({
+                    //type:"POST",
                     dataType: "json",
                     url: showdata(newdata),
                     success: function(result){
@@ -291,9 +300,11 @@
                         // });
                         // ac("aaaa");
                         // ld("",ndt,"get");
+                        console.log("Course Add.");
                         listd(ndt,"list");
+                        console.log("Course Added.");
                     }
-                });
+                });*/
         
             });
         });

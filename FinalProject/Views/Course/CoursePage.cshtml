@@ -14,7 +14,7 @@
         <a class="nav-link nl" asp-controller="Course" asp-action="Group" aria-selected="false" id="Group">Group</a>
         <a class="nav-link nl" asp-controller="Course" asp-action="Group" aria-selected="false" id="Quizs">Quizzes</a>
     </div>
-    <div class="card flex"  id="courseContent">
+    <div class="card flex pt-3 pb-5"  id="courseContent">
         @await Html.PartialAsync("courseInfo", Model)
     </div>
     <br><br><br><br>
@@ -179,18 +179,40 @@
                 
                 $('#repb').on("click",function(e) {
                     
-                    
+                    //var sa=new FormData($("#File")[0]);
                     e.preventDefault();
+                    //var sa=$("form").serializeArray();
+                    
                     
                     //var url=$(this).data("Reply");
                     //var str=spl(url);
                     console.log("rpto");
-                    console.log($("#QId").val());
+                    //console.log($("#QId").val());
+                    //console.log(sa);
+                    //var fileUpload = $("#File").get(0);
+                    //var file = fileUpload.File;
+                    //var data = new FormData();
+
+
+                    jQuery.ajax({
+                        type: 'POST',
+                        url:'../Question/ReplyToQ',
+                        data: new FormData($("#postform")[0]),
+                        processData: false, 
+                        contentType: false, 
+                        success: function(returnval) {
+                            $("#courseContent").html(returnval);
+                            //$('#show1').show();
+                        }
+                    });
+                    /*
                     $('#courseContent').load('../Question/ReplyToQ', { 
                         QId: $("#QId").val(), 
                         RefAId:$("#RefAId").val(), 
                         Reply:$("#Reply").val()
-                    });
+                    }
+                    sa);
+                    */
                     rpfn();
                 });
             }

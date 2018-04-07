@@ -6,8 +6,9 @@
     var quiz= ViewData["quiz"] as List<CourseModel>;
 }
 
-<div class="container">
+<div class="col-md-6 mx-auto">
     <h2>@ViewData["Title"]</h2>
+    <h3>@TempData["Message"]</h3>
     <hr />
     <form asp-route-returnUrl="@ViewData["ReturnUrl"]" method="post">
         <fieldset class="form-group">
@@ -31,10 +32,9 @@
                     <option>Please select one</option>
                 </select>
             </div>
-            <br>        
-            <button type="submit" class="btn btn-primary btn-block "> Create Quiz</button>
+            
+            <button type="submit" class="mt-2 btn btn-primary btn-block mx-auto mt-5"> Create Quiz</button>
         </fieldset>
     </form>
-    <br>
 </div>
 

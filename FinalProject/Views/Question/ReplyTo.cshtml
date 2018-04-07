@@ -1,4 +1,4 @@
-@model FinalProject.Models.QuestionViewModels.AnswerModel
+@model FinalProject.Models.QuestionViewModels.FileReply
 @{
     ViewData["Title"] = "Reply Message";
 }
@@ -8,16 +8,16 @@
     <fieldset class="form-group">
         <h2>@ViewData["Title"]</h2>
         <hr />
-        <form asp-route-returnUrl="@ViewData["ReturnUrl"]" method="post">
+        <form asp-route-returnUrl="@ViewData["ReturnUrl"]" method="post" enctype="multipart/form-data" id="postform">
             
             <div class="form-group">
                 <label asp-for="Reply" class="form-control-label">Message</label>
                 <textarea asp-for="Reply" class="form-control" rows="6"></textarea>
             </div>
-            <div>@*
+            <div>
                 <label for="file">Upload File:</label>  
-                <input type="file" name="file" id="file"/><br><br>  
-            *@
+                <input type="file" name="File" id="File"/><br><br>  
+            
       
             </div>
             <input hidden name="RefAId" id="RefAId" value="@Model.RefAId">

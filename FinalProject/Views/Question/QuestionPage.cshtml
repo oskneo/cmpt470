@@ -2,17 +2,21 @@
 @using System.Linq;
 @using FinalProject.Models.QuestionViewModels;
 @using System.Text;
+@using System.IO;
+@using FinalProject.Models;
 @{
     ViewData["Title"] = "Question";
     var lst = Model.Answers;
     var qn = Model.UserName;
-    var ls = from k in lst where k.QId==Model.QId && k.RefAId==0 select k;
+    var ls = (from k in lst where k.QId==Model.QId && k.RefAId==0 select k).ToList();
+    var link="";
+    var fn="";
 }
 
 <div class='card'>
     <div class="card-header">
         <h5>@Model.QuestionTitle@Html.ActionLink("Reply", "ReplyTo", new { AId=0, QId=Model.QId }, new {@class="toR btn btn-outline-primary float-right", @style="display:inline"})</h5>
-        <h6 class="card-subtitle mb-2 text-muted">@Model.Time.ToString("yyyy/mm/dd  HH:mm") </h6>
+        <h6 class="card-subtitle mb-2 text-muted">@Model.Time.ToString("yyyy/MM/dd  HH:mm") </h6>
     </div>
     <div class="card-body">
         @Model.QuestionContent
@@ -25,8 +29,23 @@
             <div class="card-header">
                 <h6>At @it.Time, @it.UserName replied</h6>
             </div>
+            @{
+                link="";
+                fn="";
+                if (it.FileUploaded==true){
+                    link="../"+it.FilePath;
+                    fn=it.FileName;
+                }
+            }
+            
             <div class="card-body">
-               @Html.Raw(show(it.AnswerId, it.UserName, it.Reply,it.Time))
+               @Html.Raw(show(it.AnswerId, it.UserName, it.Reply,it.Time,link,fn,""))
+
+
+
+
+
+
             </div>
         
         </div>
@@ -38,11 +57,14 @@
 
 
 @functions {
-    public string show(uint tAId, string UserName, string reply,DateTime time){
+    public string show(uint tAId, string UserName, string reply,DateTime time,string path,string fname,string rpname){
         var ar = from i in Model.Answers where i.RefAId == tAId select i;
+        //var link=Directory.GetCurrentDirectory()+it.FilePath;
         StringBuilder ht = new StringBuilder();
         ht.Append("<div><div><p><b>");
         ht.Append(UserName);
+        ht.Append(" replied to ");
+        ht.Append(rpname);
         ht.Append(" at ");
         ht.Append(time);
         ht.Append("</b><br></p></div><div><p>");
@@ -53,12 +75,34 @@
         ht.Append("&QId=");
         ht.Append(Model.QId);
         ht.Append("\" >Reply</button>");
+        if(path!=""){
+            if(fname.EndsWith(".jpg")||fname.EndsWith(".png")||fname.EndsWith(".gif")||fname.EndsWith(".JPG")||fname.EndsWith(".PNG")){
+                ht.Append("<br><img style='width: 100%;height: 100%;object-fit: contain;' src='");
+                ht.Append(path);
+                ht.Append("'>");
+            }
+            ht.Append("<br><a href='");
+            ht.Append(path);
+            ht.Append("'>Link:");
+            ht.Append(fname);
+            ht.Append("</a>");
+        }
         ht.Append("</p></div>");
         
             if (ar.ToList<AnswerModel>().Count > 0){
                 foreach (var item in ar.ToList<AnswerModel>()) {
-
-                    ht.Append(show(item.AnswerId, item.UserName, item.Reply,item.Time));
+                    var link="";
+                    var fn="";
+                    if (item.FileUploaded==true){
+                        link="../"+item.FilePath;
+                        fn=item.FileName;
+                    }
+                    var replyname="";
+                    if(item.RefAId!=0){
+                        replyname=Model.Answers.SingleOrDefault(u=> u.AnswerId==item.RefAId).UserName;
+                    }
+                    
+                    ht.Append(show(item.AnswerId, item.UserName, item.Reply,item.Time,link,fn,replyname));
                 }
             }
         

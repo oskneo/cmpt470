@@ -9,10 +9,11 @@ using Microsoft.EntityFrameworkCore;
 using System.ComponentModel.DataAnnotations.Schema;
 using FinalProject.Models;
 using FinalProject.Models.CourseViewModels;
+using Microsoft.AspNetCore.Http;
 
 namespace FinalProject.Models.QuestionViewModels
 {
-    public class AnswerModel
+    public class FileReply
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -47,6 +48,7 @@ namespace FinalProject.Models.QuestionViewModels
         
         public string FilePath { get; set; }
         public string FileName { get; set; }
+        public IFormFile File { get; set; }
         
         public bool FileUploaded { get; set;}
 
@@ -54,7 +56,7 @@ namespace FinalProject.Models.QuestionViewModels
         // public virtual FileModel Files { get; set; }
 
 
-        public AnswerModel(){
+        public FileReply(){
             Reply="";
             FileUploaded=false;
         }

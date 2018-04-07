@@ -20,8 +20,6 @@
 @foreach (var item in Model){
     <div class="card">
         <div class ="card-header">
-            <h5>
-                
                 
                 <h4>@index . @item.Question</h4>
                 @{
@@ -36,7 +34,6 @@
                 @{
                     index+=2;
                 }
-            </h5>
         </div>
         <div class="card-body">
             
@@ -45,6 +42,6 @@
     <br>
     
 }
-<input type="submit" value="Submit the quiz!" id="SubmitQuiz">
+<input type="submit" value="Submit the quiz!" id="SubmitQuiz" class="btn btn-primary mb-3">
 </form>
 </div>

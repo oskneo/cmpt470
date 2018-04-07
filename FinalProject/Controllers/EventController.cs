@@ -62,6 +62,8 @@ namespace FinalProject.Controllers
         public IActionResult ChooseEvent(string returnUrl = null){
             var model = db.Events.ToList();
             // ViewData["Message"]="Duplicate Enrollment!";
+            ViewData["Users"]=db.Users.ToList();
+            ViewData["SE"]=db.StudentEvents.ToList();
             return View(model);
         }
         

@@ -3,15 +3,19 @@
 @inject SignInManager<ApplicationUser> SignInManager
 
 <div class="container">
-    <div>
-        <h2>Course List
+    <div class="row">
+        <h2 class="col">Course List</h2>
         
         
         @if(User.Identity.IsAuthenticated) {
-            <a class="btn btn-outline-primary btn-lg ml-sm-auto w-25 float-right" asp-area="" asp-controller="Course" asp-action="myCourses">My Courses</a>
+            <a class="col-5 col-lg-3  btn btn-primary btn-lg ml-sm-auto w-25" asp-area="" asp-controller="Course" asp-action="myCourses">My Courses</a>
         }
-        </h2>
     </div>
+    <div class="row">
+        <h3 class="col"> @ViewData["Message"]</h3>
+    </div>
+    
+    
 <br>    
 </div>
 <div class="container">

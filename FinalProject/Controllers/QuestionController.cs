@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Web;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using FinalProject.Models.QuestionViewModels;
@@ -11,6 +12,9 @@ using FinalProject.Data;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
+using System.Net.Http.Headers;
+using Microsoft.AspNetCore.Hosting;
+using System.IO;
 
 
 namespace FinalProject.Controllers
@@ -155,6 +159,7 @@ namespace FinalProject.Controllers
             model.QuestionTitle=fe.Title;
             model.QuestionContent=fe.Description;
             model.Time=fe.Time;
+            // TempData["Users"]=db.Users.ToList();
             return PartialView("QuestionPage",model);
         }
         
@@ -163,7 +168,7 @@ namespace FinalProject.Controllers
         public IActionResult toReplyTo(QuestionAnswer model, string returnUrl = null){
             
             // var us = await GetCurrentUserAsync();
-            AnswerModel am=new AnswerModel();
+            FileReply am=new FileReply();
             am.RefAId=model.AId;
             am.QId=model.QId;
             // am.UserName=Model.UserName;
@@ -182,35 +187,68 @@ namespace FinalProject.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> ReplyToQ(AnswerModel model, string returnUrl = null){
+        public async Task<IActionResult> ReplyToQ(FileReply model, string returnUrl = null){
             
             var us = await GetCurrentUserAsync();
 
-            if (ModelState.IsValid)
-            {
+            if (ModelState.IsValid){
+            // {   Console.WriteLine(model.Reply);
                 AnswerModel qt=new AnswerModel{
                     // Reply=model.Reply,
                     // QId = model.QId, 
                     // Time = DateTime.Now,
                     // ApplicationUser = us,
                     // RefAId = model.RefAId
+                    
                     Reply=model.Reply,
                     QId = model.QId, 
                     Time = DateTime.Now,
                     UserName = us.UserName,
                     RefAId = model.RefAId
                 };
+
+                // var size=model.File.Length;
+                
+                
+                                
+                // static string filePath = IHostingEnvironment.ContentRootPath + "\\wwwroot\\files\\"+ fileName;
+
+                // if (model.File==null){
+                //     Console.WriteLine("Nothing!");
+                // }
+                // model.File.SaveAs(IHostingEnvironment.ContentRootPath + "\\wwwroot\\files\\"+ fileName);
+                if (model.File != null && model.File.Length != 0){
+                    var fileName =  ContentDispositionHeaderValue
+                                .Parse(model.File.ContentDisposition)
+                                .FileName.Trim('"');
+                    var path = Path.Combine(
+                         "files", 
+                        fileName);
+ 
+                    using (var stream = new FileStream(Path.Combine(Directory.GetCurrentDirectory(),"wwwroot/",path), FileMode.Create))
+                    {
+                        await model.File.CopyToAsync(stream);
+                    }
+                    qt.FilePath=path;
+                    qt.FileName=fileName;
+                    qt.FileUploaded=true;
+
+
+                }
+ 
+                
+                
+                
                 db.Answers.Add(qt);
                 db.SaveChanges();
                 //return RedirectToAction("QuestionPage","Question", new { QId = qt.QId });
             }
             
-            
-            
-            
+
+
             QuestionAnswer _model=new QuestionAnswer();
             
-            _model.Answers=db.Answers.ToList<AnswerModel>();
+            _model.Answers=db.Answers.ToList();
             _model.UserName=us.UserName;
             _model.QId=model.QId;
 
