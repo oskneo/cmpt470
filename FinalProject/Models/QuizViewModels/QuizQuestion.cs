@@ -21,7 +21,7 @@ namespace FinalProject.Models.QuizViewModels
         [ForeignKey("Quizs")]
         public uint QuizId { get; set; }
 
-        public virtual CourseModel Quizs { get; set; }
+        public virtual QuizModel Quizs { get; set; }
 
 
         

@@ -3,9 +3,18 @@
 @{
     ViewData["Title"] = "Add Quiz";
     var quiz= ViewData["quiz"] as List<CourseModel>;
+    var selectlist=new SelectList(
+        new List<SelectListItem>
+        {
+            new SelectListItem { Selected = true, Text = "A", Value = "A"},
+            new SelectListItem { Selected = false, Text = "B", Value = "B"},
+            new SelectListItem { Selected = false, Text = "C", Value = "C"},
+            new SelectListItem { Selected = false, Text = "D", Value = "D"}
+        }, "Value" , "Text", 1);
 }
 <div class="container col-sm-11" >
     <h2>@ViewData["Title"]</h2>
+    <h3>@TempData["Message"]</h3>
     <h3>Question: @Model.Index</h3>
     <hr />
 
@@ -33,10 +42,15 @@
             </div>
             <div class="form-group">
                 <label asp-for="CorrectAnswer" class="form-control-label">Correct Answer</label>
-                <input asp-for="CorrectAnswer" class="form-control" placeholder="(Input A, B, C, or D)"/>
+                <select class="form-control"asp-for="CorrectAnswer" 
+                    asp-items="@selectlist">
+                    <option>Please select one</option>
+                </select>
+                @*
+                <input asp-for="CorrectAnswer" class="form-control" placeholder="(Input A, B, C, or D)"/>*@
             </div>
             
-            <input hidden name="Finished" value="false">
+            <input hidden name="Finished" id="Finished" value="false">
             <input hidden name="QuizId" value="@Model.QuizId">
             <input hidden name="Index" value="@Model.Index">
             
@@ -53,15 +67,18 @@
     <script type="text/javascript" src="~/lib/jquery/dist/jquery.js"></script>
     <script>
     $(document).ready(function(){
+        $("#CorrectAnswer").value="A";
         $("#finish").click(function(e){
+            $("#Finished").val(true);
             //e.preventDefault();
+            @*
             $.ajax({
-                url:"AddQuiz",
+                url:"FinishAddingQ",
                 type:"POST",
                 data:{
                     QuizId:@Model.QuizId,
                     Index:@Model.Index,
-                    Finished:1,
+                    Finished:true,
                     CorrectAnswer:$("#CorrectAnswer").val(),
                     AnswerA:$("#AnswerA").val(),
                     AnswerB:$("#AnswerB").val(),
@@ -73,7 +90,7 @@
                 success:function(){
                     console.log("Quiz Added");
                 }
-            });
+            });*@
         });    
     });
     </script>

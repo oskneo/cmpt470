@@ -33,8 +33,6 @@ namespace FinalProject.Controllers
                 Department = s.Department + s.CourseNumber + " " + s.Session, 
                 CourseId = s.CourseId
             };
-            // QuestionAndCourse _model=new QuestionAndCourse();
-            // _model.CourseList=
             ViewData["quiz"]=data.ToList();
             
             return View();
@@ -69,11 +67,16 @@ namespace FinalProject.Controllers
             return View(model);
             
         }
+        
+        [HttpPost]
+        public IActionResult FinishAddingQ(QuizQuestion model){
+            return AddQuizQuestion(model,"");
+        }
 
         [HttpPost]
         public IActionResult AddQuizQuestion(QuizQuestion model, string returnUrl = null)
         {
-            if (ModelState.IsValid && model.Finished==false){
+            if (ModelState.IsValid ){
                 Console.WriteLine("QuizId:"+model.QuizId+"\n");
                 Console.WriteLine("QuizQuestionId:"+model.QuizQuestionId+"\n");
                 Console.WriteLine("Index:"+model.Index+"\n");
@@ -92,9 +95,17 @@ namespace FinalProject.Controllers
                 model.AnswerC="";
                 model.AnswerD="";
                 model.Question="";
-                return RedirectToAction("AddQuizQuestion","Quiz",model);
+                if(model.Finished==false){
+                    TempData["Message"]="A quiz question created!";
+                    return RedirectToAction("AddQuizQuestion","Quiz",model);
+                }
+                else{
+                    TempData["Message"]="Quiz Created!";
+                    return RedirectToAction("AddQuiz","Quiz");
+                }
+                
             }
-            
+            TempData["Message"]="Problem happens!";
             
             return RedirectToAction("AddQuiz","Quiz");
             
@@ -130,20 +141,54 @@ namespace FinalProject.Controllers
             return PartialView("TakeQuiz",QQ);
             
         }
+        
+        public IActionResult DeleteAllQuizzes()
+        {
+            if(ModelState.IsValid){
+                foreach(var i in db.QuizQuestions){
+                    db.QuizQuestions.Remove(i);
+                }
+                foreach(var q in db.Quizs){
+                    db.Quizs.Remove(q);
+                }
+                db.SaveChanges();
+                TempData["Message"]="Delete Succesfully!";
+                return RedirectToAction("Manage","Admin");
+            }
+            
+            TempData["Message"]="Delete Failed!";
+            return RedirectToAction("Manage","Admin");
+            
+        }
 
         [HttpPost]
-        public IActionResult TakeQuiz(QuizModel model)
+        public IActionResult TakeQuiz(List<QuizQuestion> model, string returnUrl = null)
         {
+            // var quizId=model[0]
             
-            // var QQ= 
-            //     (from q in db.Quizs
-            //     join qq in db.QuizQuestions on qq.QuizId equals q.QuizId
-            //     where qq.QuizId == model.QuizId
-            //     select qq).ToList();
+            var QQ= 
+                (from q in db.Quizs
+                join qq in db.QuizQuestions on q.QuizId equals qq.QuizId
+                where qq.QuizId == model[0].QuizId
+                select qq).ToList();
+            int i=0;
+            int mark=0;
+            // TempData["Message"]="msg:"+model[0].QuizId+" ";
+            for(;i<QQ.Count;i++){
+                if(QQ[i].CorrectAnswer==model[i].CorrectAnswer){
+                    mark++;
+                }
+                // TempData["Message"]+="QQ="+QQ[i].CorrectAnswer+"<br>model="+model[i].CorrectAnswer+"<br>";
+            }
+            
             // TempData["CourseId"]=model.CourseId;
             // TempData["qm"]=model;
+            TempData["mark"]=mark;
             
-            return PartialView("TakeQuiz");
+            
+            TempData["total"]=i;
+            
+            return PartialView("QuizResult",new QuizModel{});
             
         }
         

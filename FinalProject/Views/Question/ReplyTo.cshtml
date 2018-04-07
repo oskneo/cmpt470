@@ -3,6 +3,7 @@
     ViewData["Title"] = "Reply Message";
 }
 
+
 <div class="container">
     <fieldset class="form-group">
         <h2>@ViewData["Title"]</h2>
@@ -12,6 +13,12 @@
             <div class="form-group">
                 <label asp-for="Reply" class="form-control-label">Message</label>
                 <textarea asp-for="Reply" class="form-control" rows="6"></textarea>
+            </div>
+            <div>@*
+                <label for="file">Upload File:</label>  
+                <input type="file" name="file" id="file"/><br><br>  
+            *@
+      
             </div>
             <input hidden name="RefAId" id="RefAId" value="@Model.RefAId">
             <input hidden name="QId" id="QId" value="@Model.QId">

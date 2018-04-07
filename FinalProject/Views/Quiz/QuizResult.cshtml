@@ -1,0 +1,19 @@
+@model FinalProject.Models.QuizViewModels.QuizModel
+@using System.Linq
+@using FinalProject.Models.CourseViewModels
+@{
+    ViewData["Title"] = "Quiz Result";
+}
+
+<div class="col-md-6 mx-auto">
+    <h2>@ViewData["Title"]</h2>
+    <h3>@TempData["Message"]</h3>
+    <hr />
+    <p><h3>Your result:</h3>
+    <h5>
+        @TempData["mark"]/@TempData["total"]
+    </h5>
+        
+    </p>
+</div>
+

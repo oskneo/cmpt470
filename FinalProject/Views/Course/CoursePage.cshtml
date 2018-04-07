@@ -3,7 +3,7 @@
 @inject SignInManager<ApplicationUser> SignInManager
 
 <div class="container">
-    <h2>COURSE NAME</h2>
+    <h2>Course Page</h2>
 </div>
 <br>
 <div class="container">
@@ -12,13 +12,12 @@
         <a class="nav-link nl" asp-controller="Home" asp-action="Question" aria-selected="false" id="Questions">Questions</a>
         <a class="nav-link nl" asp-controller="Home" asp-action="Question" aria-selected="false" id="Chat">Chat</a>
         <a class="nav-link nl" asp-controller="Course" asp-action="Group" aria-selected="false" id="Group">Group</a>
-        <a class="nav-link nl" asp-controller="Course" asp-action="Group" aria-selected="false" id="Quizs">Quizs</a>
+        <a class="nav-link nl" asp-controller="Course" asp-action="Group" aria-selected="false" id="Quizs">Quizzes</a>
     </div>
     <div class="card flex"  id="courseContent">
-    
-    @await Html.PartialAsync("courseInfo", Model)
+        @await Html.PartialAsync("courseInfo", Model)
     </div>
-    <br>
+    <br><br><br><br>
 </div>
 
 
@@ -45,6 +44,7 @@
         var PId=@ViewData["PId"];
         var CourseId=@ViewData["CourseId"];
         $(document).ready(function(){
+            
             
             
             $('#courseContent').load('@Url.Action("toCourseInfo", "Course")', { CourseId: @Model.CourseId,PId:0 });
@@ -123,29 +123,32 @@
             return str;
         }
 
-        /*function tqfn(){
-            if($('#submitQuiz').length){
+        function tqfn(){
+            if($('#SubmitQuiz').length){
                 
-                $('#submitQuiz').on("click",function(e) {
+                $('#SubmitQuiz').on("click",function(e) {
                     
                     
-                    e.preventDefault();
-                    var url=$(this).attr("href");
-                    var str=spl(url);
-                    console.log("qlfn");
+                    
+                    //var url=$(this).attr("href");
+                    //var str=spl(url);
+                    console.log("tqfn");
                     //console.log($("#QId").val());
-                    $('#courseContent').load('../Quiz/toTakeQuiz', { 
-                        QuizId:str[1], 
-                        Title:str[3], 
-                        Description:str[5]
-                    });
-                    $('#Quizs').trigger("click");
+                    
+                    //console.log($("form").serializeArray());
+                    e.preventDefault();
+                    
+                    $('#courseContent').load('../Quiz/TakeQuiz',  
+                        $("form").serializeArray()
+                    );
+                    //$('#Quizs').trigger("click");
+                    
                 });
             }
             else{
                 setTimeout(tqfn,50);
             }
-        }*/
+        }
 
         function qlfn(){
             if($('.quizL').length){
@@ -163,7 +166,7 @@
                         Title:str[3], 
                         Description:str[5]
                     });
-                    //tqfn();
+                    tqfn();
                 });
             }
             else{

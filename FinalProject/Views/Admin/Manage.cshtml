@@ -1,13 +1,16 @@
 
 
 @{
-    
-
     ViewData["Title"] = "Manage";
 }
 
 <h2>@ViewData["Title"]</h2>
+<h4>@TempData["Message"]</h4>
 
 <h3>@Html.ActionLink("Add Course","AddCourse","Course")</h3>
 <h3>@Html.ActionLink("Add Event","AddEvent","Event")</h3>
 <h3>@Html.ActionLink("AskQuestion","AskQuestion","Question")</h3>
+<h3>@Html.ActionLink("DeleteAllQuestions","DeleteAllQuestion","Question")</h3>
+@*<h3>@Html.ActionLink("DeleteAllCourses","DeleteAllCourses","Course")</h3>*@
+<h3>@Html.ActionLink("DeleteAllEvents","DeleteAllEvents","Event")</h3>
+<h3>@Html.ActionLink("DeleteAllQuizzes","DeleteAllQuizzes","Quiz")</h3>

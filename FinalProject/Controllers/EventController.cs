@@ -64,6 +64,19 @@ namespace FinalProject.Controllers
             // ViewData["Message"]="Duplicate Enrollment!";
             return View(model);
         }
+        
+        [HttpGet]
+        public async Task<IActionResult> myEvent(string returnUrl = null){
+            var us = await GetCurrentUserAsync();
+            var model = 
+                (from e in db.Events
+                join se in db.StudentEvents on  e.EventId equals se.EventId
+                where se.ApplicationUser == us
+                select e).ToList();
+            // var model = db.Events.ToList();
+            // ViewData["Message"]="Duplicate Enrollment!";
+            return View(model);
+        }
 
         private Task<ApplicationUser> GetCurrentUserAsync() => _userManager.GetUserAsync(HttpContext.User);
         
@@ -110,6 +123,23 @@ namespace FinalProject.Controllers
             // return PartialView("part",_model);
             return RedirectToAction("ChooseEvent","Event");
             // return View(db.Events.ToList());
+        }
+        
+        public IActionResult DeleteAllEvents()
+        {
+            if(ModelState.IsValid){
+                foreach(var i in db.Events){
+                    db.Events.Remove(i);
+                }
+                
+                db.SaveChanges();
+                TempData["Message"]="Delete Succesfully!";
+                return RedirectToAction("Manage","Admin");
+            }
+            
+            TempData["Message"]="Delete Failed!";
+            return RedirectToAction("Manage","Admin");
+            
         }
 
         public async Task<IActionResult> part(string returnUrl = null){

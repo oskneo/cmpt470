@@ -26,6 +26,28 @@ namespace FinalProject.Controllers
         
         private Task<ApplicationUser> GetCurrentUserAsync() => _userManager.GetUserAsync(HttpContext.User);
         
+        
+        
+        
+        public IActionResult DeleteAllQuestions()
+        {
+            if(ModelState.IsValid){
+                foreach(var i in db.Answers){
+                    db.Answers.Remove(i);
+                }
+                foreach(var q in db.Questions){
+                    db.Questions.Remove(q);
+                }
+                db.SaveChanges();
+                TempData["Message"]="Delete Succesfully!";
+                return RedirectToAction("Manage","Admin");
+            }
+            
+            TempData["Message"]="Delete Failed!";
+            return RedirectToAction("Manage","Admin");
+            
+        }
+        
         public IActionResult Ask(CourseAndQuestions model,string returnUrl = null){
             
             return View(model);
@@ -40,6 +62,7 @@ namespace FinalProject.Controllers
             
             return PartialView("Ask",newmodel);
         }
+        
         
         [HttpGet]
         public async Task<IActionResult> AskQuestion(string returnUrl = null){

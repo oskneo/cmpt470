@@ -481,7 +481,7 @@ namespace FinalProject.Data.Migrations
 
             modelBuilder.Entity("FinalProject.Models.QuizViewModels.QuizQuestion", b =>
                 {
-                    b.HasOne("FinalProject.Models.CourseViewModels.CourseModel", "Quizs")
+                    b.HasOne("FinalProject.Models.QuizViewModels.QuizModel", "Quizs")
                         .WithMany()
                         .HasForeignKey("QuizId")
                         .OnDelete(DeleteBehavior.Cascade);

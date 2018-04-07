@@ -27,11 +27,11 @@
     <br>
     @if (SignInManager.IsSignedIn(User))
     {
-        <div id="nameinput" hidden>Username: <input type="text" id="username" value="@UserManager.GetUserName(User)"/></div>
+        <div id="nameinput" hidden>Username:<input type="text" id="username" value="@UserManager.GetUserName(User)"/></div>
     }
     else
     {
-        <div id="nameinput">Username: <input type="text" id="username" value=""/></div>
+        <div id="nameinput">Username:<input type="text" id="username" value=""/></div>
     
     }
 <p>
