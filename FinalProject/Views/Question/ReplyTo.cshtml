@@ -1,21 +1,21 @@
 @model FinalProject.Models.QuestionViewModels.AnswerModel
 @{
-    ViewData["Title"] = "Reply To";
+    ViewData["Title"] = "Reply Message";
 }
-<h2>@ViewData["Title"]</h2>
 
-<div class="row">
-    <div class="col-md-4">
+<div class="container">
+    <fieldset class="form-group">
+        <h2>@ViewData["Title"]</h2>
+        <hr />
         <form asp-route-returnUrl="@ViewData["ReturnUrl"]" method="post">
-            <h4>Reply To</h4>
-            <hr />
+            
             <div class="form-group">
-                <label asp-for="Reply"></label>
-                <input asp-for="Reply" class="form-control" />
+                <label asp-for="Reply" class="form-control-label">Message</label>
+                <textarea asp-for="Reply" class="form-control" rows="6"></textarea>
             </div>
             <input hidden name="RefAId" id="RefAId" value="@Model.RefAId">
             <input hidden name="QId" id="QId" value="@Model.QId">
-            <button type="submit" class="btn btn-default" id="repb">Reply</button>
+            <button type="submit" class="btn btn-primary float-right" id="repb">Reply</button>
         </form>
     </div>
 </div>
