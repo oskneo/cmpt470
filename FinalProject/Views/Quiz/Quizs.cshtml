@@ -1,38 +1,35 @@
 @using FinalProject.Models.QuizViewModels
 
 
-<div class="container mt-3">
-    <h2>Quiz List</h2>
-
-<br>
-@foreach (var item in TempData["quizs"] as List<QuizModel>){
-    <div class="card">
-        <div class ="card-header">
-            <h5>
-                Title:@Html.DisplayFor(modelItem => item.Title)  End at:@item.Date.ToString("yyyy-MM-dd")
-                @if (item.Date < DateTime.Now.AddDays(-1)){
-                
-                    <a class="btn btn-primary btn-sm float-right">Outdated Quiz</a>
-                }
-                else{
-                    @Html.ActionLink("Enter","QuestionPage", new {
-                    QuizId=@item.QuizId,
-                    Title=@item.Title,
-                    Description=@item.Description,
-                    //Date=@item.Date,
-                    //Time=@item.Time.ToString().Replace('/', '~').Replace(' ', '-')
-                
-                    },new { @class="btn btn-primary btn-sm float-right quizL", @style="display:inline;"   })
-                
-                }
-                
-                <h6 class="card-subtitle mb-2 text-muted">Question : @Html.DisplayFor(modelItem => item.Description)</h6>
-            </h5>
-        </div>
-        <div class="card-body">
-            <p class="card-text">@Html.DisplayFor(modelItem => item.Description)</p>
-        </div>
+<div class="card">
+    <div class="card-header">
+        <h5>Quiz List</h5>
     </div>
-    <br>
-}
+    <div class="container">
+        <br>
+        @foreach (var item in TempData["quizs"] as List<QuizModel>){
+            <div class="card">
+                <div class ="card-header">
+                    <h5>
+                        @Html.DisplayFor(modelItem => item.Title)
+                        
+                        @Html.ActionLink("Enter","QuestionPage", new {
+                            QuizId=@item.QuizId,
+                            Title=@item.Title,
+                            Description=@item.Description,
+                            //Date=@item.Date,
+                            //Time=@item.Time.ToString().Replace('/', '~').Replace(' ', '-')
+                        
+                        },new { @class="btn btn-primary btn-sm float-right quizL", @style="display:inline;"   })
+                    </h5>
+                    <h6 class="card-subtitle mb-2 text-muted">Available Until:@item.Date.ToString("yyyy-MM-dd")                    </h6>
+                </div>
+                <div class="card-body">
+                    <p class="card-text">@Html.DisplayFor(modelItem => item.Description)</p>
+                </div>
+            </div>
+            <br>
+        }
+    </div>
+    
 </div>
