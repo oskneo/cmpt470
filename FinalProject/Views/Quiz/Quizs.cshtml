@@ -12,7 +12,11 @@
                 <div class ="card-header">
                     <h5>
                         @Html.DisplayFor(modelItem => item.Title)
-                        
+                        @if (item.Date < DateTime.Now.AddDays(-1)){
+                
+                            <a class="btn btn-primary btn-sm float-right">Outdated Quiz</a>
+                        }
+                        else{
                         @Html.ActionLink("Enter","QuestionPage", new {
                             QuizId=@item.QuizId,
                             Title=@item.Title,
@@ -20,7 +24,7 @@
                             //Date=@item.Date,
                             //Time=@item.Time.ToString().Replace('/', '~').Replace(' ', '-')
                         
-                        },new { @class="btn btn-primary btn-sm float-right quizL", @style="display:inline;"   })
+                        },new { @class="btn btn-primary btn-sm float-right quizL", @style="display:inline;"   })}
                     </h5>
                     <h6 class="card-subtitle mb-2 text-muted">Available Until:@item.Date.ToString("yyyy-MM-dd")                    </h6>
                 </div>
