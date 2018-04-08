@@ -46,10 +46,11 @@ namespace FinalProject.Controllers
                     Description = model.Description
                 });
                 db.SaveChanges();
-                return RedirectToAction("AddEvent","Event");
+                ViewData["Message"]="Added!";
+                return View();
             }
-            
-            return View(model);
+            ViewData["Message"]="Failed!";
+            return View();
             
         }
         

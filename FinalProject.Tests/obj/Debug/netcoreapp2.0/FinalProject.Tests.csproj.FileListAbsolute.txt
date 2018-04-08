@@ -1,0 +1,16 @@
+/home/ubuntu/workspace/c470/cmpt470project/FinalProject.Tests/obj/Debug/netcoreapp2.0/FinalProject.Tests.csproj.CoreCompileInputs.cache
+/home/ubuntu/workspace/c470/cmpt470project/FinalProject.Tests/obj/Debug/netcoreapp2.0/FinalProject.Tests.AssemblyInfoInputs.cache
+/home/ubuntu/workspace/c470/cmpt470project/FinalProject.Tests/obj/Debug/netcoreapp2.0/FinalProject.Tests.AssemblyInfo.cs
+/home/ubuntu/workspace/c470/cmpt470project/FinalProject.Tests/bin/Debug/netcoreapp2.0/app.db
+/home/ubuntu/workspace/c470/cmpt470project/FinalProject.Tests/bin/Debug/netcoreapp2.0/xunit.runner.visualstudio.dotnetcore.testadapter.dll
+/home/ubuntu/workspace/c470/cmpt470project/FinalProject.Tests/bin/Debug/netcoreapp2.0/xunit.runner.reporters.netcoreapp10.dll
+/home/ubuntu/workspace/c470/cmpt470project/FinalProject.Tests/bin/Debug/netcoreapp2.0/xunit.runner.utility.netcoreapp10.dll
+/home/ubuntu/workspace/c470/cmpt470project/FinalProject.Tests/bin/Debug/netcoreapp2.0/FinalProject.Tests.deps.json
+/home/ubuntu/workspace/c470/cmpt470project/FinalProject.Tests/bin/Debug/netcoreapp2.0/FinalProject.Tests.runtimeconfig.json
+/home/ubuntu/workspace/c470/cmpt470project/FinalProject.Tests/bin/Debug/netcoreapp2.0/FinalProject.Tests.runtimeconfig.dev.json
+/home/ubuntu/workspace/c470/cmpt470project/FinalProject.Tests/bin/Debug/netcoreapp2.0/FinalProject.Tests.dll
+/home/ubuntu/workspace/c470/cmpt470project/FinalProject.Tests/bin/Debug/netcoreapp2.0/FinalProject.Tests.pdb
+/home/ubuntu/workspace/c470/cmpt470project/FinalProject.Tests/bin/Debug/netcoreapp2.0/FinalProject.dll
+/home/ubuntu/workspace/c470/cmpt470project/FinalProject.Tests/bin/Debug/netcoreapp2.0/FinalProject.pdb
+/home/ubuntu/workspace/c470/cmpt470project/FinalProject.Tests/obj/Debug/netcoreapp2.0/FinalProject.Tests.dll
+/home/ubuntu/workspace/c470/cmpt470project/FinalProject.Tests/obj/Debug/netcoreapp2.0/FinalProject.Tests.pdb

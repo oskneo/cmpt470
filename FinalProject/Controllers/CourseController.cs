@@ -45,11 +45,12 @@ namespace FinalProject.Controllers
                     Session = model.Session
                 });
                 db.SaveChanges();
-                ViewData["Message"]="Added!";
-                return View();
+                
+                TempData["Message"]="Added!";
+                return RedirectToAction("CourseList","Course");
             }
-            
-            return View(model);
+            ViewData["Message"]="Failed!";
+            return View();
             
         }
         

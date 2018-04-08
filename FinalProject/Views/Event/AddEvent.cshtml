@@ -3,7 +3,7 @@
     ViewData["Title"] = "Add New Event";
 }
 
-
+<h3>@ViewData["Message"]</h3>
 <div class="card">
     <div class="card-header">
         <h5>@ViewData["Title"]</h2>
@@ -38,9 +38,23 @@
                 <input asp-for="NumberOfSeats" class="form-control" />
             </div>
             
-            <button type="submit" class="btn btn-primary btn-block mt-5">Post event</button>
+            <button type="submit" class="btn btn-primary btn-block mt-5" id="btnPO">Post event</button>
         </form>
     </fieldset>
     </div>
     
 </div>
+@section js{
+<script type="text/javascript" src="~/lib/jquery/dist/jquery.js"></script>
+<script>
+
+    $(document).ready(function(){
+        // $("#btnPO").click(function(){
+            
+        
+        // });
+        $(".form-control").val("");
+    
+    });
+</script>
+}

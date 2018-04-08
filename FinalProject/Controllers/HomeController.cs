@@ -11,9 +11,14 @@ namespace FinalProject.Controllers
 {
     public class HomeController : Controller
     {
+        // private readonly string home;
+        // public HomeController(){
+        //     home="";
+        // }
+        
         public IActionResult Index()
         {
-            return View();
+            return View("Index");
         }
         
         public IActionResult Course()
