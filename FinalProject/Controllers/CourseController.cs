@@ -76,7 +76,7 @@ namespace FinalProject.Controllers
             var us = await GetCurrentUserAsync();
             var check=db.StudentCourses.SingleOrDefault(l=> l.CourseId==model.CourseId && l.ApplicationUser==us);
             if(check!=null){
-                ViewData["Message"]="Duplicate Enrollment!";
+                TempData["Message"]="Duplicated Enrollment!";
                 return RedirectToAction("CourseList","Course");
             }
 

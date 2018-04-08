@@ -38,12 +38,13 @@ namespace ScheduleEmailClass
 
         }
 
-        static async Task SendEm(string subject,string plainTextContent,string htmlContent,string UserName,string Email)
+        static async Task SendEm(string subject,string plainTextContent,string UserName,string Email)
         {
             var client = new SendGridClient(apiKey);
             var from = new EmailAddress(EmailAddressFrom, "Envision");
             // var subject = "Sending with SendGrid is Fun";
             var to = new EmailAddress(Email, UserName);
+            var htmlContent="<strong>" + plainTextContent + "</strong>";
             // var plainTextContent = "and easy to do anywhere, even with C#";
             // var htmlContent = "<strong>" + plainTextContent + "</strong>";
             var msg = MailHelper.CreateSingleEmail(from, to, subject, plainTextContent, htmlContent);
@@ -73,10 +74,13 @@ namespace ScheduleEmailClass
                 var content="You will have an event " + item.Title + " take place at " + item.Location + ".\n";
                 content+="The event will be at " + item.Time.ToString("yyyy-MM-dd HH:mm:ss") + ".\n";
                 content+="Event Description:" + item.Description +".\n";
-                var html="<strong>" + content + "</strong>";
+                // var html="<strong>" + content + "</strong>";
                 // SendEm(title,content,html,item.UserName,item.Email).Wait();
-                JobManager.AddJob(() => SendEm(title,content,html,item.UserName,item.Email).Wait(), s => s
+                if(item.Time>DateTime.Now){
+                    JobManager.AddJob(() => SendEm(title,content,item.UserName,item.Email).Wait(), s => s
                   .ToRunOnceAt(item.Time.AddHours(-1)));
+                }
+                
 
             }
 

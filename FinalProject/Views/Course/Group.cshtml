@@ -21,6 +21,11 @@
         document.getElementById("Members2").style.visibility='hidden';
         document.getElementById("Members").style.visibility='visible';
     }
+    
+    @*function AddGroupEvent(){
+        $('#courseContent').load('@Url.Action("GroupEvent", "Event")', { CourseId: @Model.CourseId,PId:3,GroupNumber:@Model.GroupNumber });
+    }*@
+    
 </script>
 
 
@@ -34,7 +39,8 @@
     <div class="card-body" id="Members">
         @if (Model.GroupNumber!=0){
             <div class="">
-                <h5 class="card-subtitle mb-2 text-muted"   >Members of in your Study Group <button onclick="changeMemberList()" class="btn btn-outline-primary">Invite new Members</button></h5>
+                <h5 class="card-subtitle mb-2 text-muted"   >Members of in your Study Group </h5>
+                
                 <table class="table">
                   <thead class="thead-light">
                     <tr>
@@ -60,6 +66,15 @@
                     }
                   </tbody>
                 </table>
+                <button onclick="changeMemberList()" class="btn btn-outline btn-primary float-right">Invite new Members</button>
+                @*<button onclick="AddGroupEvent" class="btn btn-outline btn-primary float-right">Add Group Event</button>*@
+                @Html.ActionLink("Add Group Event","GroupEvent", new { 
+                                            CourseId = Model.CourseId, 
+                                            GroupNumber=Model.GroupNumber
+                                         },new {
+                                            
+                                            @class="btn btn-outline btn-primary float-right AddGroupEvent"
+                                        })
             </div>
            
             <button id="Create" class="btn btn-outline-primary" hidden>Create your own study group</button>

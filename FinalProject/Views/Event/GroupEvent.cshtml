@@ -1,0 +1,39 @@
+@model FinalProject.Models.EventViewModels.GEvent
+@{
+    ViewData["Title"] = "Add Group Event";
+}
+
+
+<div class="container col-lg-8">
+    <fieldset class="form-group">
+        <h2>@ViewData["Title"]</h2>
+        <hr />
+        
+        <form asp-route-returnUrl="@ViewData["ReturnUrl"]" method="post" id="GEventForm" >
+            <div class="form-group">
+                <label class="form-control-label" asp-for="Title">Title</label>
+                <input asp-for="Title" class="form-control" />
+            </div>
+                        <div class="form-group">
+                <label class="form-control-label" asp-for="Description">Description</label>
+                <textarea asp-for="Description" class="form-control" rows="3"></textarea>
+            </div>
+            <div class="form-group">
+                <label class="form-control-label" asp-for="Date">Date</label>
+                <input asp-for="Date" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label class="form-control-label" asp-for="Time">Time</label>
+                <input asp-for="Time" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label class="form-control-label" asp-for="Location">Location</label>
+                <input asp-for="Location" class="form-control" />
+            </div>
+            <input hidden name="GroupNumber" value="@Model.GroupNumber">
+            <input hidden name="CourseId" value="@Model.CourseId">
+            
+            <button type="submit" class="btn btn-primary btn-block mt-5" id="btnGEvent">Post event</button>
+        </form>
+    </fieldset>
+</div>

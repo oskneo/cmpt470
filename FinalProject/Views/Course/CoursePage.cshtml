@@ -300,6 +300,28 @@
                 setTimeout(qnfn,50);
             }
         }
+        
+        function AGEventfn(){
+            if($('.AddGroupEvent').length){
+                
+                
+                $('.AddGroupEvent').on("click",function(e) {
+                    
+                    
+                    e.preventDefault();
+                    var url=$(this).attr("href");
+                    var str=spl(url);
+                    //console.log(str);
+                    if(str[3]=="0"){
+                        $(this).hide();
+                    }
+                    $('#courseContent').load('../Event/GroupEvent?'+$.param( { CourseId: str[1], GroupNumber:str[3] }));
+                });
+            }
+            else{
+                setTimeout(AGEventfn,50);
+            }
+        }
 
 
         function groupfn(){
@@ -320,6 +342,7 @@
                     }
                     $('#courseContent').load('../Course/AddToGroup', { CourseId: str[1], userid:str[3], GroupNumber:str[5] });
                 });
+                AGEventfn();
             }
             else{
                 setTimeout(groupfn,50);

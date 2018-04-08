@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using ScheduleEmailClass;
+using FinalProject.Models.CourseViewModels;
 
 
 namespace FinalProject.Controllers
@@ -49,6 +50,65 @@ namespace FinalProject.Controllers
             }
             
             return View(model);
+            
+        }
+        
+        public IActionResult GroupEvent(GEvent model)
+        {
+            
+            
+            return PartialView("GroupEvent",model);
+            
+        }
+        
+        
+        [HttpPost]
+        public IActionResult GroupEvent(GEvent model, string returnUrl = null)
+        {
+            if (ModelState.IsValid)
+            {
+                var GroupList = (from us in db.Users
+                                join sc in db.StudentCourses on us.Id equals sc.ApplicationUser.Id
+                                where sc.GroupNumber==model.GroupNumber && sc.CourseId==model.CourseId
+                                select us).ToList();
+                
+                
+                EventModel EM=new EventModel{
+                    Date = model.Date, 
+                    Time = model.Time,
+                    Location = model.Location,
+                    NumberOfSeats = GroupList.Count,
+                    OccupiedSeats = GroupList.Count,
+                    Title = model.Title,
+                    Description = model.Description
+                };
+                db.Events.Add(EM);
+                
+                foreach (var item in GroupList){
+                    StudentEvent scs = new StudentEvent();
+                    scs.EventId = EM.EventId;
+                    scs.ApplicationUser = item;
+            
+                    db.StudentEvents.Add(scs);
+                }
+                
+            
+            
+            
+            
+            
+                db.SaveChanges();
+                ScheduleEmail send= new ScheduleEmail(db);
+                send.getEvent();
+                TempData["Message"]="Group created successfully!";
+                
+            }
+            else{
+                TempData["Message"]="Group created failed!";
+            }
+            
+            
+            return RedirectToAction("ChooseEvent","Event");
             
         }
         
@@ -101,7 +161,7 @@ namespace FinalProject.Controllers
             var us = await GetCurrentUserAsync();
             var check=db.StudentEvents.SingleOrDefault(l=> l.EventId==model.EventId && l.ApplicationUser==us);
             if(check!=null){
-                TempData["Message"]="Duplicate Enrollment!";
+                TempData["Message"]="Duplicated Enrollment!";
                 // return View("ChooseEvent");
                 return RedirectToAction("ChooseEvent","Event");
             }
