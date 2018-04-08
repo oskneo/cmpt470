@@ -4,9 +4,12 @@
 }
 
 
-<div class="container col-lg-8">
-    <fieldset class="form-group">
-        <h2>@ViewData["Title"]</h2>
+<div class="card">
+    <div class="card-header">
+        <h5>@ViewData["Title"]</h2>
+    </div>
+    <div class="card-body">
+        <fieldset class="form-group">
         <hr />
         
         <form asp-route-returnUrl="@ViewData["ReturnUrl"]" method="post">
@@ -38,4 +41,6 @@
             <button type="submit" class="btn btn-primary btn-block mt-5">Post event</button>
         </form>
     </fieldset>
+    </div>
+    
 </div>

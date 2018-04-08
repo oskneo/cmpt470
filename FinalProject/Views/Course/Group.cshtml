@@ -66,16 +66,17 @@
                     }
                   </tbody>
                 </table>
-                <button onclick="changeMemberList()" class="btn btn-outline btn-primary float-right">Invite new Members</button>
+                <button onclick="changeMemberList()" class="btn btn-outline-primary float-right ml-1">Invite new Members</button>
+                
                 @*<button onclick="AddGroupEvent" class="btn btn-outline btn-primary float-right">Add Group Event</button>*@
                 @Html.ActionLink("Add Group Event","GroupEvent", new { 
                                             CourseId = Model.CourseId, 
                                             GroupNumber=Model.GroupNumber
                                          },new {
                                             
-                                            @class="btn btn-outline btn-primary float-right AddGroupEvent"
+                                            @class="btn btn-outline-primary float-right AddGroupEvent"
                                         })
-            </div>
+            </div><p></p>
            
             <button id="Create" class="btn btn-outline-primary" hidden>Create your own study group</button>
         }

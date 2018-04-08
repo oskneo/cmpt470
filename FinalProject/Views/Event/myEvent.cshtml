@@ -1,7 +1,9 @@
 @using System.Collections.Generic;
 @model List<FinalProject.Models.EventViewModels.EventModel>
 @inject SignInManager<ApplicationUser> SignInManager
-
+@using System.Linq
+@using FinalProject.Models
+@using FinalProject.Models.EventViewModels
 
 
 <div class="container">
@@ -34,6 +36,22 @@
             <div class="card-body">
                 <p class="card-text"> @Html.DisplayFor(modelItem => item.Description)</p>
             </div>
+            @*
+            <div class="card-footer">
+                    
+                Event member list:
+                @{
+                    var EMList= (from u in ViewData["Users"] as List<ApplicationUser> 
+                                join se in ViewData["SE"] as List<StudentEvent> on u.Id equals se.ApplicationUser.Id
+                                where se.EventId==item.EventId
+                                select u.UserName).ToList();
+                }
+                
+                @foreach (var it in EMList){
+                        <span>@it &nbsp;</span>
+                    }
+                
+            </div>*@
         </div>
         <br>
     }

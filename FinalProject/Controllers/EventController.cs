@@ -135,6 +135,8 @@ namespace FinalProject.Controllers
                 join se in db.StudentEvents on  e.EventId equals se.EventId
                 where se.ApplicationUser == us
                 select e).ToList();
+            ViewData["Users"]=db.Users.ToList();
+            ViewData["SE"]=db.StudentEvents.ToList();
             // var model = db.Events.ToList();
             // ViewData["Message"]="Duplicate Enrollment!";
             return View(model);

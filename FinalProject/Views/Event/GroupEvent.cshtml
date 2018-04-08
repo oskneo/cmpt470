@@ -4,11 +4,15 @@
 }
 
 
-<div class="container col-lg-8">
-    <fieldset class="form-group">
-        <h2>@ViewData["Title"]</h2>
-        <hr />
-        
+<div class="card">
+    <div class="card-header">
+        <h5>Create an Event for your Study Group</h5>
+        <h6 class="card-subtitle mb-2 text-muted">
+            All members of this group will automatically be invited to the event.
+        </h6>
+    </div>
+    <div class="card-body">
+        <fieldset class="form-group">
         <form asp-route-returnUrl="@ViewData["ReturnUrl"]" method="post" id="GEventForm" >
             <div class="form-group">
                 <label class="form-control-label" asp-for="Title">Title</label>
@@ -33,7 +37,8 @@
             <input hidden name="GroupNumber" value="@Model.GroupNumber">
             <input hidden name="CourseId" value="@Model.CourseId">
             
-            <button type="submit" class="btn btn-primary btn-block mt-5" id="btnGEvent">Post event</button>
+            <button type="submit" class="btn btn-outline-primary btn-block mt-5" id="btnGEvent">Post event</button>
         </form>
     </fieldset>
+    </div>
 </div>
