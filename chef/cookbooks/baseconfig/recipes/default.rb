@@ -25,6 +25,7 @@ execute 'mysql_restart' do
   # Share an additional folder to the guest VM. The first argument is
   command 'sudo mysql -uroot -ppassword -e "GRANT ALL PRIVILEGES ON *.* TO \'team16\'@\'localhost\' IDENTIFIED BY \'password\';"'
   command 'service mysql restart'
+  command 'apt-get install apt-transport-https'
   command 'apt-get update'
   command 'apt-get install -y --allow-unauthenticated dotnet-sdk-2.1.4'
 
@@ -35,7 +36,7 @@ end
 cookbook_file "example.com" do
   path "/etc/nginx/sites-available/example.com"
 end
-execute 'restart' do
+execute 'restart' dogi
   command 'service ntp restart'
   command 'sudo ln -s /etc/nginx/sites-available/example.com /etc/nginx/sites-enabled/example.com'
   command 'service nginx restart'
