@@ -19,6 +19,37 @@ Steps to run tests on this project
     1. cd .. and cd FinalProject.Tests to go to cmpt470project\FinalProject.Tests
     2. dotnet restore
     3. dotnet test
+    
+    
+You can also run it on Ubuntu enviorment
+I.Setting up database and nginx in your Ubuntu enviorment:
+    0. sudo apt-get install mysql-server    (if you didn't install MySQL)
+    1. mysql -u root -p
+    2. GRANT ALL PRIVILEGES ON *.* TO 'team16'@'localhost' IDENTIFIED BY 'password';
+    3. quit
+    4. sudo service mysql restart
+    5. sudo apt-get install nginx           (if you didn't install nginx)
+    6. sudo service nginx restart
+    
+II.Setting up asp.net in Ubuntu enviorment
+    1. curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.gpg
+    2. sudo mv microsoft.gpg /etc/apt/trusted.gpg.d/microsoft.gpg
+    3. sudo sh -c 'echo "deb [arch=amd64] https://packages.microsoft.com/repos/microsoft-ubuntu-xenial-prod xenial main" > /etc/apt/sources.list.d/dotnetdev.list'
+    4. sudo apt-get install apt-transport-https
+    5. sudo apt-get update
+    6. sudo apt-get install dotnet-sdk-2.1.4
+    7. git clone git@csil-git1.cs.surrey.sfu.ca:yuzhip/CMPT470_Project.git
+    
+III.Run the web
+    0. git clone git@csil-git1.cs.surrey.sfu.ca:yuzhip/CMPT470_Project.git
+    1. cd CMPT470_Project
+    2. cd FinalProject
+    3. dotnet restore
+    4. dotnet ef database update
+    5. dotnet run
+
+Access URL http://localhost:5000
+
 
 
 Premade User Accounts
