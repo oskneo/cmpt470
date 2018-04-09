@@ -7,10 +7,10 @@ FinalProject:
 
 Steps to setup the environment on a new virtual machine if the recipe does not work:
     1. sudo apt-get update
-    2. sudo apt-get nginx
-    3. sudo apt-get mysql-server
-    4. sudo apt-get ntp
-    5. sudo apt-get ack-grep
+    2. sudo apt-get install nginx
+    3. sudo apt-get install mysql-server
+    4. sudo apt-get install ntp
+    5. sudo apt-get install ack-grep
     6. curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.gpg
     7. mv microsoft.gpg /etc/apt/trusted.gpg.d/microsoft.gpg
     8. sh -c \'echo "deb [arch=amd64] https://packages.microsoft.com/repos/microsoft-ubuntu-xenial-prod xenial main" > /etc/apt/sources.list.d/dotnetdev.list\'
