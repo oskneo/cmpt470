@@ -22,7 +22,7 @@ Steps to run tests on this project
     
 You can also run it on Ubuntu enviorment
 
-vagrant up with the defult Vagrant file like the (E4 one).
+vagrant up with the defult Vagrant file like the (E3 one).
 SSH to the virtual machine.
 
 I.Setting up database and nginx in your Ubuntu enviorment:
