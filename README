@@ -20,8 +20,11 @@ Steps to run tests on this project
     2. dotnet restore
     3. dotnet test
     
-    
 You can also run it on Ubuntu enviorment
+
+vagrant up with the defult Vagrant file like the (E4 one).
+SSH to the virtual machine.
+
 I.Setting up database and nginx in your Ubuntu enviorment:
     0. sudo apt-get install mysql-server    (if you didn't install MySQL)
     1. mysql -u root -p
