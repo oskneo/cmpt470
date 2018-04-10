@@ -24,13 +24,16 @@ end
 
 execute 'mysql_restart' do
   # Share an additional folder to the guest VM. The first argument is
+  #command 'sudo mysql -u root -ppassword -e "GRANT ALL PRIVILEGES ON *.* TO \'team16\'@\'localhost\' IDENTIFIED BY \'password\';"'
+
   command 'sudo mysql -u root'
   command 'GRANT ALL PRIVILEGES ON *.* TO \'team16\'@\'localhost\' IDENTIFIED BY \'password\';'
   command 'quit'
+
   command 'sudo service mysql restart'
   command 'sudo apt-get install apt-transport-https'
   command 'apt-get update'
-  #command 'sudo apt-get install dotnet-sdk-2.1.4'
+  #command 'sudo apt-get install dotnet-sdk-2.1.'
   #command 'apt-get install -y --allow-unauthenticated dotnet-sdk-2.1.4'
 
 end
