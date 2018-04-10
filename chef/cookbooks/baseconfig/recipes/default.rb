@@ -33,7 +33,7 @@ execute 'mysql_restart' do
   command 'sudo service mysql restart'
   command 'sudo apt-get install apt-transport-https'
   command 'apt-get update'
-  #command 'sudo apt-get install dotnet-sdk-2.1.'
+  #command 'sudo apt-get install dotnet-sdk-2.1.4'
   #command 'apt-get install -y --allow-unauthenticated dotnet-sdk-2.1.4'
 
 end
