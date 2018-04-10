@@ -5,6 +5,27 @@ Membesr: Francesco Zhang, Daniel Peng, Agassi Cheung
 
 FinalProject:
 
+Steps to run the final project on the vagrant:
+    0. git clone git@csil-git1.cs.surrey.sfu.ca:yuzhip/CMPT470_Project.git
+    1. cd CMPT470_Project
+    2. vagrant up 
+    3. vagrant
+    4. cd FinalProject
+    5. sudo mysql -u root
+    6. GRANT ALL PRIVILEGES ON *.* TO 'team16'@'localhost' IDENTIFIED BY 'password';
+    7. quit
+    8. sudo apt-get install dotnet-sdk-2.1.4
+    4. sudo service nginx restart
+    5. sudo service mysql restart
+    6. dotnet restore
+    7. dotnet ef database update
+    8. dotnet run
+
+Steps to run tests on this project
+    1. cd .. and cd FinalProject.Tests to go to cmpt470project\FinalProject.Tests
+    2. dotnet restore
+    3. dotnet test
+
 Steps to setup the environment on a new virtual machine if the recipe does not work:
     1. sudo apt-get update
     2. sudo apt-get install nginx
@@ -31,20 +52,7 @@ Steps to setup the environment on a new virtual machine if the recipe does not w
     23. dotnet run
 
 
-Steps to run the final project on the vagrant:
-    1. vagrant up and vagrant ssh into the virtual machine
-    2. cd ..
-    3. cd ubuntu\project\cmpt470project\FinalProject
-    4. sudo service nginx restart
-    5. sudo service mysql restart
-    6. dotnet restore
-    7. dotnet ef database update
-    8. dotnet run
 
-Steps to run tests on this project
-    1. cd .. and cd FinalProject.Tests to go to cmpt470project\FinalProject.Tests
-    2. dotnet restore
-    3. dotnet test
     
     
 URL: http://csil-cpu470.csil.sfu.ca:3976/
