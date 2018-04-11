@@ -5,6 +5,13 @@ Membesr: Francesco Zhang, Daniel Peng, Agassi Cheung
 
 FinalProject:
 
+Run it by Vagrant
+    0. git clone git@csil-git1.cs.surrey.sfu.ca:yuzhip/CMPT470_Project.git
+    1. cd CMPT470_Project
+    2. vagrant up 
+    3. url: localhost:5087
+
+
 Steps to run the final project on the vagrant:
     0. git clone git@csil-git1.cs.surrey.sfu.ca:yuzhip/CMPT470_Project.git
     1. cd CMPT470_Project
