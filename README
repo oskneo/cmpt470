@@ -9,29 +9,23 @@ Run it by Vagrant
     0. git clone git@csil-git1.cs.surrey.sfu.ca:yuzhip/CMPT470_Project.git
     1. cd CMPT470_Project
     2. vagrant up 
-    3. url: localhost:5087
+    (When it shows "default: Application started. Press Ctrl+C to shut down.")
+    (You can access the website in the following URL)
+    3. url: localhost:5087(if on local machine)
+    4. URL: http://csil-cpu470.csil.sfu.ca:5087/ 
+        or : http://csil-cpu00.cs.surrey.sfu.ca:5087/
+        (if on sfu server ps:if it work!!!)
 
 
-Steps to run the final project on the vagrant:
-    0. git clone git@csil-git1.cs.surrey.sfu.ca:yuzhip/CMPT470_Project.git
-    1. cd CMPT470_Project
-    2. vagrant up 
-    3. vagrant
-    4. cd FinalProject
-    5. sudo mysql -u root
-    6. GRANT ALL PRIVILEGES ON *.* TO 'team16'@'localhost' IDENTIFIED BY 'password';
-    7. quit
-    8. sudo apt-get install dotnet-sdk-2.1.4
-    4. sudo service nginx restart
-    5. sudo service mysql restart
-    6. dotnet restore
-    7. dotnet ef database update
-    8. dotnet run
 
-Steps to run tests on this project
-    1. cd .. and cd FinalProject.Tests to go to cmpt470project\FinalProject.Tests
+Steps to run tests on this project (after Vagrant up)
+    0. vagrant ssh
+    1. cd FinalProject.Tests
     2. dotnet restore
     3. dotnet test
+
+
+
 
 Steps to setup the environment on a new virtual machine if the recipe does not work:
     1. sudo apt-get update
@@ -57,9 +51,6 @@ Steps to setup the environment on a new virtual machine if the recipe does not w
     21. dotnet restore
     22. dotnet ef database update
     23. dotnet run
-
-
-
     
     
 URL: http://csil-cpu470.csil.sfu.ca:3976/
@@ -102,25 +93,27 @@ Access URL http://localhost:5000
 
 Premade User Accounts
 
-    Username: Admin
-    Password: Admin!12345
+    Username: daniel
+    Password: Cmpt470!
+    Role: Admin
+    Details: Account with administrative functions. Ability to add/remove courses, add/remove, questions, add/remove events
+
+    Username: a111
+    Password: Abcd_1234
     Role: Admin
     Details: Account with administrative functions. Ability to add/remove courses, add/remove, questions, add/remove events
     
-    Username: User1
-    Password: User1!12345
+    Username: m111
+    Password: Abcd_4321
     Role: Regular User
     Details: Simulated Experience of an Average User
     
-    Username: User2
-    Password: User2!12345
+    Username: DP-NA
+    Password: Cmpt470!
     Role: Regular User
     Details: Simulated Experience of an Average User
     
-    Username: User3
-    Password: User3!12345
-    Role: Regular User
-    Details: Simulated Experience of an Average User
+
 
 
 Features Demonstrated

@@ -21,4 +21,5 @@ sudo service ntp restart
 cd /home/vagrant/FinalProject
 dotnet restore
 dotnet ef database update
+mysql -u team16 -ppassword -h localhost cmpt470finaldb < /home/vagrant/FinalProject/db_backup.sql
 dotnet run
