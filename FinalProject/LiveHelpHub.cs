@@ -5,8 +5,7 @@ using System.Web;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.SignalR;
 
-namespace ExploreCalifornia
-{
+
     public class LiveHelpHub : Hub
     {      
         public async Task Send(string name, string message)
@@ -14,4 +13,3 @@ namespace ExploreCalifornia
             await Clients.All.InvokeAsync("Send", name, message);
         }
     }
-}
